@@ -1,6 +1,6 @@
 ---
 name: spn
-description: A complete set of collaboration rules for people with zero programming background working with AI Agents / AI coding tools (SPN · Self-precipitation). For users who can't read code but want to turn ideas into runnable things (web pages, web apps, PWAs, full-stack apps with backend and database) using AI. Covers judgment ownership, jargon translation, three authorization tiers, irreversible red lines, engineering discipline, limitation disclosure, and pre-ship security self-checks. Use when the user says "I don't code but want to build something," "help me make an app with AI," "set rules for the AI," or "the AI keeps messing up my code."
+description: Use when a non-coder wants AI to build an app or site and needs rules for when it must ask, what it must never do, and how it reports. Covers authorization tiers, red lines, pre-ship checks.
 license: CC-BY-4.0
 metadata:
   author: xiaoyu-hue
@@ -187,8 +187,6 @@ These rules obey their own principles:
 
 ## Reference files (universal layer)
 
-> ⚠️ The `personal/` directory is the author's own supplementary layer, **not part of the universal rules**; skip it for general tasks.
-
 | What you're doing | Read this |
 |---|---|
 | Understand judgment ownership, the try-vs-ask test | [`references/01-collaboration-philosophy.md`](references/01-collaboration-philosophy.md) |
@@ -197,6 +195,8 @@ These rules obey their own principles:
 | Don't know how to phrase a request to the AI | [`references/04-prompt-library.md`](references/04-prompt-library.md) |
 | See real good/bad collaboration examples | [`references/05-collaboration-examples.md`](references/05-collaboration-examples.md) |
 | Curated external projects / Skills / plugins | [`references/06-ecosystem-and-integrations.md`](references/06-ecosystem-and-integrations.md) |
+| Review before an irreversible / costly / public decision | [`references/07-decision-review.md`](references/07-decision-review.md) |
+| Keep docs consistent with code after changes | [`references/08-doc-sync.md`](references/08-doc-sync.md) |
 
 `AGENTS.md` (root) is the trimmed version you can drop straight into any project; its content matches this file but is shorter, and is the version the AI actually loads and executes.
 
@@ -208,4 +208,4 @@ These rules obey their own principles:
 - The SQL and commands in `02` use Supabase / Postgres as examples; Firebase, Cloudflare D1, and other backends need adjustment (adaptation notes at the end of that doc).
 - Security incidents and platform free-tier figures cited here were verified in 2026-10 and will drift over time; re-check before relying on them.
 - These rules are not a substitute for a professional security audit. Apps handling others' genuinely sensitive data (medical, financial, identity) should still seek professional review.
-- All references (01–06) now have English versions in this `docs/` folder.
+- All eight references are available in both English (`docs/references/`) and Chinese (`references/`).

@@ -64,7 +64,7 @@ AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效
 
 - 克隆仓库后，`skills/spn/` 是一个自包含、可安装的技能包，详见 [`skills/spn/INSTALL.md`](./skills/spn/INSTALL.md)。
 - 本仓库的文档与质量保障已落地为 CI：密钥扫描 **gitleaks**、死链检查 **lychee**、术语一致 **vale**、数字写死检查 **doc-lint**（详见 `.github/workflows/`）。
-- 想修改规则：请回到**根目录**（规范源）编辑，再由发布流程同步到 `docs/`（英文镜像）与 `skills/spn/`（发布包）。
+- 想修改规则：请回到**根目录**（规范源）编辑，再由发布流程同步到 `docs/`（英文镜像）与 `skills/spn/`、`skills/spn-en/`（发布包）。
 - 想引入本规则到自己的 Agent：直接加载 `skills/spn/`，或把根目录 `AGENTS.md` 拷进项目。
 - **想发版**：先在 `CHANGELOG.md` 的 `[Unreleased]` 写下改动，再执行 `python3 scripts/release.py <版本号>`（预览 diff），确认无误后加 `--yes`。脚本会自动同步徽章、版本号、技能包链接，跑完校验再打 tag、建 Release。
 - **想自查链接**：`python3 scripts/check_links.py`，检查全仓库 Markdown 的相对链接与锚点。
@@ -88,7 +88,7 @@ AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效
 
 SPN 采用**通用层 + 个人层**两层结构，并配有英文镜像与可直接加载的技能包。
 
-> **约定（防止改错地方）**：**根目录是唯一规范源**（可修改的真相）；`docs/` 是英文镜像、`skills/spn/` 是可安装发布包——这两者都是根目录的**发布副本**，修改规则请回到根目录，再由发布流程同步。
+> **约定（防止改错地方）**：**根目录是唯一规范源**（可修改的真相）；`docs/` 是英文镜像、`skills/spn/` 与 `skills/spn-en/` 是可安装发布包——这两者都是根目录的**发布副本**，修改规则请回到根目录，再由发布流程同步。
 
 ```
 SPN/
@@ -105,7 +105,9 @@ SPN/
 │   ├── 07-决策审查清单.md        ← 工作流规范：决策前反问
 │   └── 08-文档同步规范.md        ← 工作流规范：发布前同步
 ├── docs/                  ← 英文完整镜像（README + AGENTS + SKILL + references）★发布副本
-├── skills/spn/            ← 自包含、可安装的技能包（含 INSTALL.md）★发布副本
+├── skills/
+│   ├── spn/               ← 可安装技能包（中文，含 INSTALL.md）★发布副本
+│   └── spn-en/            ← 可安装技能包（英文）★发布副本
 ├── scripts/               ← release.py（一键发版）/ check_links.py（链接自检）
 ├── personal/              ← 作者自用层，可跳过（非通用规则，已脱敏）
 └── LICENSE-DOCS.md        ← 文档 CC BY 4.0 许可
@@ -114,6 +116,7 @@ SPN/
 - 只想使用规则：只看根目录，忽略 `personal/`。
 - 想看英文版：全部内容已镜像到 `docs/`。
 - 想把规则直接加载进 AI Agent：用 `skills/spn/`，详见 [`skills/spn/INSTALL.md`](./skills/spn/INSTALL.md)。
+- 需要英文技能包：用 `skills/spn-en/`，详见 [`skills/spn-en/INSTALL.md`](./skills/spn-en/INSTALL.md)。
 - 想复制一份自己的：复制 `personal/` 改成你的内容，`AGENTS.md` 继承根目录通用规则，只叠加你自己的上下文。详见 `personal/README.md`。
 
 ## 核心规则速览
@@ -183,7 +186,7 @@ SPN/
 
 SPN 站在许多开源规范、工具与社区的肩膀上。以下内容为本仓库**直接引用、对齐或受其启发**，均按其各自许可证使用，且**未复制其源代码**（遵循 `references/06` 的"引用不复制"原则）：
 
-- **Anthropic Agent Skills** — `skills/spn/` 的 `SKILL.md` 采用其官方 Agent Skills 规范（frontmatter + 描述式触发）。规范见 [`anthropics/skills`](https://github.com/anthropics/skills)。
+- **Anthropic Agent Skills** — `skills/spn/` 与 `skills/spn-en/` 的 `SKILL.md` 采用其官方 Agent Skills 规范（frontmatter + 描述式触发）。规范见 [`anthropics/skills`](https://github.com/anthropics/skills)。
 - **知识共享（Creative Commons）** — 全部文档采用 **CC BY 4.0**（署名 4.0 国际）许可，许可文本由 CC 官方发布。
 - **Keep a Changelog / Semantic Versioning** — `CHANGELOG.md` 与版本号遵循其约定。
 - **策展式生态索引（`references/06`）** — 其中列出的同类项目、技能集合、安全与文档工具、插件与 MCP，均为本仓库调研与延伸阅读的源头，详见该文。

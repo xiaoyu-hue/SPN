@@ -8,18 +8,21 @@
 
 ### 新增
 
-- `scripts/release.py` —— 一键发版：把 `[Unreleased]` 提升为版本小节、同步中英 README 徽章与链接、同步三个 `SKILL.md` 的版本号、把技能包链接锁定到新 tag、刷新技能包快照，跑完校验再提交、打 tag、建 Release。默认 dry-run，加 `--yes` 才写盘推送
+- `skills/spn-en/` —— 英文可安装技能包（技能规范要求 `name` 与父目录同名，故目录名为 `spn-en`）：`SKILL.md` 通过官方校验器，`AGENTS.md` 同步自 `docs/AGENTS.md`，`INSTALL.md` 为英文安装指南
+- `scripts/release.py` —— 一键发版：把 `[Unreleased]` 提升为版本小节、同步中英 README 徽章与链接、同步四个 `SKILL.md` 的版本号、把两个技能包的链接锁定到新 tag、刷新两份快照，跑完校验再提交、打 tag、建 Release。默认 dry-run，加 `--yes` 才写盘推送
 - `scripts/check_links.py` —— 全仓库 Markdown 相对链接与锚点自检（纯本地、不联网），可单独运行
 
 ### 变更
 
-- 技能包 `skills/spn/` 专业化：通过 Agent Skills 官方校验器；深度参考链接由 `blob/main` 锁定到当前 tag（保证装到的内容可复现）；补齐 05、06 两篇索引并统一"含英文版"标注；移除对外部使用者无意义的内部历史措辞与 `personal/` 提示
-- `skills/spn/INSTALL.md` 重写：包内容说明、按工具选方式的决策表、Claude Code / CodeBuddy 已验证路径、生效验证三信号、升级与卸载、常见问题
-- `skills/spn/SKILL.md` 顶部新增"30 秒版本"，便于快速判断规则是否被加载
+- 四个 `SKILL.md` 的 `description` 改为「触发句式优先」并压到 200 字符以内（中文 107、英文 190），提升 Agent 的识别率
+- 技能包 `skills/spn/` 专业化：通过 Agent Skills 官方校验器；深度参考链接由 `blob/main` 锁定到当前 tag；补齐 05、06 两篇索引并统一"含英文版"标注；移除对使用者无意义的内部历史措辞与 `personal/` 提示
+- `skills/spn/INSTALL.md` 重写：包内容说明、按工具选方式的决策表、已核实的路径、生效验证三信号、升级与卸载、常见问题
+- 两个技能包顶部均新增"30 秒版本"，便于快速判断规则是否被加载
+- 英文 `docs/SKILL.md` 索引补齐 `07` 决策审查、`08` 文档同步（原先只列到 `06`）
 
 ### 工程化
 
-- `doc-lint` 新增「技能包快照与根目录一致」检查：`skills/spn/AGENTS.md` 偏离根目录 `AGENTS.md` 时 CI 失败，防止两份副本漂移
+- `doc-lint` 的「技能包快照」检查扩展到中英两个包：`skills/spn/AGENTS.md` 对应根目录 `AGENTS.md`，`skills/spn-en/AGENTS.md` 对应 `docs/AGENTS.md`
 - `doc-lint` 排除规则由硬编码 `v1.0.0` 改为排除含 `http(s)://` 的行：发版后 Release 链接中的版本号不再误报（原先升到 1.0.1 就会让 CI 变红）
 - `doc-quality` 的 `actions/checkout` 由 v4 升到 v7，与 `doc-lint` 对齐
 

@@ -12,6 +12,8 @@
 
 `SKILL.md` 已通过 Agent Skills 官方校验器（`agentskills validate`）。
 
+> **需要英文版？** 见 [`skills/spn-en/`](../spn-en/INSTALL.md)。技能规范要求 `name` 与父目录同名，所以英文包目录名只能是 `spn-en`，不能两个都叫 `spn`。
+
 ## 先选一种方式
 
 | 你的情况 | 用哪种 | 用时 |

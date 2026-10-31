@@ -32,11 +32,25 @@ import tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 BADGE_FILES = ["README.md", "docs/README.md"]
-SKILL_FILES = ["SKILL.md", "docs/SKILL.md", "skills/spn/SKILL.md"]
-SNAPSHOT = "skills/spn/AGENTS.md"
-SNAPSHOT_NOTICE = (
-    "<!-- 发布快照：本文件同步自仓库根目录 AGENTS.md。修改规则请改根目录源，再同步到此。 -->\n\n"
-)
+SKILL_FILES = ["SKILL.md", "docs/SKILL.md", "skills/spn/SKILL.md", "skills/spn-en/SKILL.md"]
+
+# 技能包三件套：(包内 SKILL.md, 包内 AGENTS.md 快照, 快照来源, 快照注释)
+# 规范要求 name 与父目录同名，所以中英两个包只能分别叫 spn / spn-en。
+PACKAGES = [
+    (
+        "skills/spn/SKILL.md",
+        "skills/spn/AGENTS.md",
+        "AGENTS.md",
+        "<!-- 发布快照：本文件同步自仓库根目录 AGENTS.md。修改规则请改根目录源，再同步到此。 -->\n\n",
+    ),
+    (
+        "skills/spn-en/SKILL.md",
+        "skills/spn-en/AGENTS.md",
+        "docs/AGENTS.md",
+        "<!-- Release snapshot: synced from docs/AGENTS.md in the repository root. "
+        "Edit the source there, then re-sync here. -->\n\n",
+    ),
+]
 
 # 与 .github/workflows/doc-lint.yml 保持一致
 LINT_FILES = ["README.md", "AGENTS.md", "SKILL.md"]
@@ -177,8 +191,9 @@ def main() -> int:
         plan[f] = bump_readme(read(f), old, version)
     for f in SKILL_FILES:
         plan[f] = bump_skill(read(f), old, version)
-    plan["skills/spn/SKILL.md"] = pin_links(plan["skills/spn/SKILL.md"], old, version)
-    plan[SNAPSHOT] = SNAPSHOT_NOTICE + read("AGENTS.md")
+    for skill_md, snapshot_md, source_md, notice in PACKAGES:
+        plan[skill_md] = pin_links(plan[skill_md], old, version)
+        plan[snapshot_md] = notice + read(source_md)
 
     changed = {f: c for f, c in plan.items() if c != read(f)}
     if not changed:

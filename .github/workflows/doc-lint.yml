@@ -42,20 +42,31 @@ jobs:
           fi
           echo "OK: 未发现写死数字"
 
-      - name: 检查技能包快照与根目录一致
+      - name: 检查技能包快照与源文件一致
         run: |
-          # skills/spn/AGENTS.md 是根目录 AGENTS.md 的发布快照（仅多一段说明注释）。
-          # 规则只允许在根目录改，改完同步到技能包，避免两份副本各说各话。
+          # 技能包内的 AGENTS.md 是快照（仅多一行说明注释）。
+          # 规则只允许在源文件改，改完同步到技能包，避免两份副本各说各话。
           python3 - <<'PY'
           import re
           import sys
 
-          root = open("AGENTS.md", encoding="utf-8").read()
-          snap = open("skills/spn/AGENTS.md", encoding="utf-8").read()
-          snap = re.sub(r"\A<!--.*?-->\n\n", "", snap, count=1, flags=re.S)
-          if root != snap:
-              print("::error file=skills/spn/AGENTS.md::与根目录 AGENTS.md 不同步")
-              print("修复：把根目录 AGENTS.md 内容重新复制到 skills/spn/AGENTS.md（保留首行快照注释）")
+          PAIRS = [
+              ("AGENTS.md", "skills/spn/AGENTS.md"),
+              ("docs/AGENTS.md", "skills/spn-en/AGENTS.md"),
+          ]
+
+          bad = []
+          for src, snap in PAIRS:
+              a = open(src, encoding="utf-8").read()
+              b = open(snap, encoding="utf-8").read()
+              b = re.sub(r"\A<!--.*?-->\n\n", "", b, count=1, flags=re.S)
+              if a != b:
+                  bad.append((src, snap))
+
+          if bad:
+              for src, snap in bad:
+                  print(f"::error file={snap}::与 {src} 不同步")
+              print("修复：把源文件内容重新复制到快照（保留首行快照注释）")
               sys.exit(1)
-          print("OK: 技能包快照与根目录一致")
+          print("OK: 两个技能包快照均与源文件一致")
           PY
