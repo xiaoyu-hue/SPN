@@ -1,0 +1,11 @@
+# SPN 自定义 vale 风格：统一英文文档里的关键术语写法（建议级，不阻断）
+extends: substitution
+message: "建议统一为 '%s'"
+level: suggestion
+action:
+  name: replace
+swap:
+  "AI agent": "AI Agent"
+  "ai agent": "AI Agent"
+  "AI agents": "AI Agents"
+  "ai agents": "AI Agents"

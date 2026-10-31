@@ -53,3 +53,8 @@
 - **Dependabot**（依赖自动更新）
 
 本仓库根目录的 `.github/workflows/doc-lint.yml` 也会在每次推送时检查文档里是否混入了疑似硬编码的敏感数字。
+
+此外，本仓库已接入自动化扫描（均为**非阻塞**，先观察再逐步收紧）：
+- **`secret-scan.yml`**（gitleaks）—— 扫描提交中是否混入真实密钥；文档里作为反例出现的密钥名已加入 allowlist，不会误报。
+- **`doc-quality.yml`**（lychee + vale）—— 检查英文镜像 `docs/` 的死链与术语一致。
+- 如你发现误报，欢迎在 issue 中反馈，我们再调紧配置。

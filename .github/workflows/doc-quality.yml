@@ -1,0 +1,30 @@
+name: doc-quality
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: lychee 死链检查（护英文镜像）
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --config lychee.toml './**/*.md'
+        continue-on-error: true   # 非阻塞：先观察外链可达性，避免误杀
+
+  prose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: vale 术语一致（仅英文 docs/）
+        uses: errata-ai/vale-action@v2
+        with:
+          files: docs
+        continue-on-error: true   # 非阻塞：建议级检查

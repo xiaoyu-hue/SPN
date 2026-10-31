@@ -17,6 +17,10 @@
 - `.github/dependabot.yml` — 针对仓库唯一的"依赖"（GitHub Actions）开启版本更新
 - `doc-lint.yml` 扫描范围由 `README.md` / `AGENTS.md` 扩展至 `SKILL.md`、`references/` 与英文镜像 `docs/`（教学文档 `03` 与"写死值 → 相对描述"反例句式按约定排除）
 
+### 安全与文档质量 CI（P0）
+- `.github/workflows/secret-scan.yml` + `.gitleaks.toml` — gitleaks 密钥扫描（非阻塞，确认无误报后改为阻断）；文档中作为反例出现的密钥名（`sk_live` / `service_role` / `YOUR_ANON_KEY` / `anon key`）已加入 allowlist
+- `.github/workflows/doc-quality.yml` + `lychee.toml` / `.vale.ini` / `styles/SPN/` — 英文镜像死链检查（lychee）与术语一致（vale，仅 `docs/`，建议级），均非阻塞，避免误杀文档
+
 ---
 
 ## [1.0.0] - 2026-10-31
