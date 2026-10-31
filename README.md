@@ -41,6 +41,7 @@ AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效
 | 写 README、选许可证、避免数字写死 | `references/03-文档、局限披露与事实维护.md` |
 | 不知道怎么跟 AI 表达需求 | `references/04-提示词库.md` |
 | 看真实场景的"好/坏协作"对照 | `references/05-协作示例画廊.md` |
+| 想了解同类项目 / 优秀 skill / 插件怎么整合 | `references/06-生态与整合.md` |
 
 > 以上四篇参考资料及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 的**英文完整版**均可在 [`docs/`](./docs/) 找到。
 
