@@ -103,6 +103,8 @@ def bump_changelog(text: str, version: str, date: str) -> str:
 
 def bump_readme(text: str, old: str, new: str) -> str:
     text = text.replace(f"version-{old}-blue", f"version-{new}-blue")
+    text = text.replace(f"版本 {old}", f"版本 {new}")      # 中文徽章的显示文字
+    text = text.replace(f"version {old}", f"version {new}")  # 英文徽章的显示文字
     text = text.replace(f"releases/tag/v{old}", f"releases/tag/v{new}")
     text = text.replace(f"`v{old}`", f"`v{new}`")
     return text
