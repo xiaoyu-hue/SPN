@@ -23,7 +23,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## 二、授权
 
-本作品依据 **Creative Commons 署名 4.0 国际许可协议**（CC BY 4.0）授权。
+本作品依据 **知识共享署名 4.0 国际许可协议**（英文名：Creative Commons Attribution 4.0 International；缩写：CC BY 4.0；SPDX：`CC-BY-4.0`）授权。
 
 您可自由地：
 - **共享** —— 以任何媒介或格式复制、发行本作品
