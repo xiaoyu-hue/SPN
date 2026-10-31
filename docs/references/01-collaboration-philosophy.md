@@ -1,6 +1,6 @@
 # Collaboration Philosophy & Who Decides (English)
 
-> Companion to `01-协作哲学与判断归属.md`. Translation kept in the same plain-language, no-jargon-first style as the original.
+> Companion to `01-collaboration-philosophy.md`. Translation kept in the same plain-language, no-jargon-first style as the original.
 
 ## 1. The core boundary
 
@@ -124,5 +124,5 @@ The moment you add a backend and database, you go from **tool author** to **data
 Three new responsibilities:
 
 1. Others' data sits on a server you rent — you're responsible for its safety
-2. Permission errors are invisible in a demo — you must attack yourself (see `02-上线前安全自查.md`)
+2. Permission errors are invisible in a demo — you must attack yourself (see `02-pre-launch-security-checklist.md`)
 3. The AI can write working code, but **you must draw the security boundary**

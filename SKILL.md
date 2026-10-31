@@ -205,4 +205,4 @@ AI 会话一定会失忆，这是硬限制。**HANDOFF.md 是最轻量的跨会�
 - `02-上线前安全自查.md` 中的 SQL 与命令以 Supabase / Postgres 为例，Firebase、Cloudflare D1 等其他后端需自行调整（适配思路见该文结尾附录）
 - 文中引用的安全事件与平台免费额度核实于 2026-10，会随时间变化，使用前请复核
 - 本规则不能替代专业安全审计。涉及他人真实敏感数据（医疗、金融、身份信息）的应用，仍建议寻求专业审查
-- 参考资料 `01`–`04` 及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 的英文版已统一放在 `docs/`；`personal/` 仍仅中文
+- 参考资料 `01`–`06` 及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 的英文版已统一放在 `docs/`；`personal/` 仍仅中文

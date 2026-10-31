@@ -8,7 +8,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 - `README.md`（简体中文，规范源）、`CHANGELOG.md`
 - `AGENTS.md`、`SKILL.md`（通用规则，AI 实际加载执行）
-- `references/` 目录下的全部文件（通用规则详解，4 篇）
+- `references/` 目录下的全部文件（通用规则详解，共 6 篇）
 - `SECURITY.md`、`CONTRIBUTING.md`
 - `docs/` 目录下的全部文件（英文版，与中文版内容对应）
 - `skills/` 目录下的全部文件（可分发的技能包，含 `SKILL.md`、`AGENTS.md` 及随包说明）
@@ -40,10 +40,12 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## 三、署名方式
 
-再分发时，请**保留本文件中的版权声明、许可声明与免责声明**，并以合理方式注明：
+再分发时，请**保留本文件中的版权声明、许可声明与免责声明**，并依据 CC BY 4.0 的署名要求，以合理方式注明作者、作品名称、许可链接，以及是否作过修改：
 
-    Sonder520 · xiaoyu-hue · CC BY 4.0
-    https://github.com/xiaoyu-hue/sonder520
+    SPN · AI 协作规则（零基础版）
+    作者：xiaoyu-hue
+    许可：CC BY 4.0 · https://creativecommons.org/licenses/by/4.0/
+    来源：https://github.com/xiaoyu-hue/SPN
 
 若对本作品作了修改，请一并注明「已修改」及修改日期。
 

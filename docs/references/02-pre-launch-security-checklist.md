@@ -1,6 +1,6 @@
 # Pre-Ship Security Self-Check (English)
 
-> Companion to `02-上线前安全自查.md`.
+> Companion to `02-pre-launch-security-checklist.md`.
 > For any project with a backend, database, or user login.
 > **Why this list exists: permission errors are completely invisible in a demo.** A locked table and an open table render the exact same page — so you must attack yourself on purpose.
 
@@ -117,7 +117,7 @@ Public audits show ~24% of AI-generated apps have reversed auth logic: anonymous
 | GitHub Dependabot | dep auto-update + alerts | free |
 | Supabase linter | RLS off / over-broad policy | free (Supabase only) |
 
-**⚠️ Important limit**: these are **static** checks. They can't catch runtime logic like "user A reads user B's data" — that requires the E1 prompt in `04-提示词库.md` to attack yourself, or dynamic tests.
+**⚠️ Important limit**: these are **static** checks. They can't catch runtime logic like "user A reads user B's data" — that requires the E1 prompt in `04-prompt-library.md` to attack yourself, or dynamic tests.
 
 ---
 

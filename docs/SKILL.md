@@ -23,7 +23,7 @@ These rules keep **the judgment with the human**, without requiring the human to
 
 ## Where these rules come from
 
-Not a template — three real judgments (from one non-coder shipping multiple launched projects). The full narrative and reusable points are in [`references/01-协作哲学与判断归属.md`](references/01-协作哲学与判断归属.md):
+Not a template — three real judgments (from one non-coder shipping multiple launched projects). The full narrative and reusable points are in [`references/01-collaboration-philosophy.md`](references/01-collaboration-philosophy.md):
 
 1. **First time shipping a project** — AI gives a candidate list, human makes the pick (AI lists options, human decides)
 2. **Whether two visual styles can merge** — for reversible things, trying beats asking (test: can it be undone with one click?)
@@ -139,7 +139,7 @@ AI sessions will lose memory — that's a hard limit. **HANDOFF.md is the lighte
 - Before a long session ends: "this session is ending, please write a handoff doc to HANDOFF.md"
 - First line of the next session: "read HANDOFF.md first"
 
-Template in [`references/04-提示词库.md`](references/04-提示词库.md) G3.
+Template in [`references/04-prompt-library.md`](references/04-prompt-library.md) G3.
 
 ---
 
@@ -157,7 +157,7 @@ Three ways to write it, from rough to good:
 
 **Start with #1; it's enough for a long time.** Full automation needs CI, and the config itself is maintenance cost.
 
-See [`references/03-文档、局限披露与事实维护.md`](references/03-文档、局限披露与事实维护.md), section zero.
+See [`references/03-documentation-disclosure-maintenance.md`](references/03-documentation-disclosure-maintenance.md), section zero.
 
 ---
 
@@ -187,10 +187,12 @@ These rules obey their own principles:
 
 | What you're doing | Read this |
 |---|---|
-| Understand judgment ownership, the try-vs-ask test | [`references/01-协作哲学与判断归属.md`](references/01-协作哲学与判断归属.md) |
-| About to ship | [`references/02-上线前安全自查.md`](references/02-上线前安全自查.md) |
-| Write a README / pick a license / keep numbers from going stale | [`references/03-文档、局限披露与事实维护.md`](references/03-文档、局限披露与事实维护.md) |
-| Don't know how to phrase a request to the AI | [`references/04-提示词库.md`](references/04-提示词库.md) |
+| Understand judgment ownership, the try-vs-ask test | [`references/01-collaboration-philosophy.md`](references/01-collaboration-philosophy.md) |
+| About to ship | [`references/02-pre-launch-security-checklist.md`](references/02-pre-launch-security-checklist.md) |
+| Write a README / pick a license / keep numbers from going stale | [`references/03-documentation-disclosure-maintenance.md`](references/03-documentation-disclosure-maintenance.md) |
+| Don't know how to phrase a request to the AI | [`references/04-prompt-library.md`](references/04-prompt-library.md) |
+| See real good/bad collaboration examples | [`references/05-collaboration-examples.md`](references/05-collaboration-examples.md) |
+| Curated external projects / Skills / plugins | [`references/06-ecosystem-and-integrations.md`](references/06-ecosystem-and-integrations.md) |
 
 `AGENTS.md` (root) is the trimmed version you can drop straight into any project; its content matches this file but is shorter, and is the version the AI actually loads and executes.
 
@@ -202,4 +204,4 @@ These rules obey their own principles:
 - The SQL and commands in `02` use Supabase / Postgres as examples; Firebase, Cloudflare D1, and other backends need adjustment (adaptation notes at the end of that doc).
 - Security incidents and platform free-tier figures cited here were verified in 2026-10 and will drift over time; re-check before relying on them.
 - These rules are not a substitute for a professional security audit. Apps handling others' genuinely sensitive data (medical, financial, identity) should still seek professional review.
-- All four references now have English versions in this `docs/` folder.
+- All references (01–06) now have English versions in this `docs/` folder.

@@ -56,7 +56,7 @@ SPN/
 ├── README.md              ← 本文件（简体中文，规范源）
 ├── AGENTS.md              ← 通用规则，所有人均可使用（AI 实际加载执行）
 ├── SKILL.md               ← 技能入口与完整说明（规范源）
-├── references/            ← 通用规则详解（4 篇，规范源）
+├── references/            ← 通用规则详解（共 6 篇，规范源）
 ├── docs/                  ← 英文完整镜像（README + AGENTS + SKILL + references）★发布副本
 ├── skills/spn/            ← 自包含、可安装的技能包（含 INSTALL.md）★发布副本
 ├── personal/              ← 作者自用层，可跳过（非通用规则，已脱敏）
@@ -130,7 +130,7 @@ SPN/
 - `references/02-上线前安全自查.md` 中的 SQL 与命令以 Supabase / Postgres 为例，Firebase、Cloudflare D1 等其他后端需自行调整。
 - 文中引用的安全事件与平台免费额度核实于 2026 年 10 月，会随时间变化，使用前请复核。
 - **本规则不能替代专业安全审计。** 涉及他人真实敏感数据（医疗、金融、身份信息）的应用，仍建议寻求专业审查。
-- 参考资料 `01`–`04` 及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 均已提供英文版，见 `docs/`；`personal/` 仍仅中文。
+- 参考资料 `01`–`06` 及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 均已提供英文版，见 `docs/`；`personal/` 仍仅中文。
 
 ## 贡献
 

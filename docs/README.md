@@ -40,10 +40,12 @@ Drop the root `AGENTS.md` into your project directory. Tools that support AGENTS
 
 | What you're doing | Read this (English, this folder) |
 |---|---|
-| Who decides what; the try-vs-ask test | [`references/01-协作哲学与判断归属.md`](references/01-协作哲学与判断归属.md) |
-| About to ship | [`references/02-上线前安全自查.md`](references/02-上线前安全自查.md) |
-| Writing a README / picking a license / keeping numbers from going stale | [`references/03-文档、局限披露与事实维护.md`](references/03-文档、局限披露与事实维护.md) |
-| Not sure how to phrase a request | [`references/04-提示词库.md`](references/04-提示词库.md) |
+| Who decides what; the try-vs-ask test | [`references/01-collaboration-philosophy.md`](references/01-collaboration-philosophy.md) |
+| About to ship | [`references/02-pre-launch-security-checklist.md`](references/02-pre-launch-security-checklist.md) |
+| Writing a README / picking a license / keeping numbers from going stale | [`references/03-documentation-disclosure-maintenance.md`](references/03-documentation-disclosure-maintenance.md) |
+| Not sure how to phrase a request | [`references/04-prompt-library.md`](references/04-prompt-library.md) |
+| See real good/bad collaboration examples | [`references/05-collaboration-examples.md`](references/05-collaboration-examples.md) |
+| Curated external projects / Skills / plugins | [`references/06-ecosystem-and-integrations.md`](references/06-ecosystem-and-integrations.md) |
 | Full rules, ready to load into an agent | [`../skills/spn/`](../skills/spn/) |
 
 ## Repository structure
@@ -55,7 +57,7 @@ SPN/
 ├── README.md              ← 简体中文，规范源 (this file's Chinese original)
 ├── AGENTS.md              ← universal rules, for everyone (what the AI actually loads)
 ├── SKILL.md               ← skill entry point and full documentation (Chinese)
-├── references/            ← universal rules in detail (4 docs, Chinese)
+├── references/            ← universal rules in detail (6 docs, Chinese)
 ├── docs/                  ← English edition: full mirror (README + AGENTS + SKILL + references)
 ├── skills/spn/            ← self-contained, installable skill package (Chinese)
 ├── personal/              ← the author's own layer, safe to skip
@@ -81,7 +83,7 @@ This isn't a template. Behind every rule is a real failure, drawn from a non-cod
 
 The common thread: **the AI supplies capability and options; the human makes the call and draws the boundary.**
 
-The full narrative and the try-vs-ask test are in [`references/01-协作哲学与判断归属.md`](references/01-协作哲学与判断归属.md).
+The full narrative and the try-vs-ask test are in [`references/01-collaboration-philosophy.md`](references/01-collaboration-philosophy.md).
 
 ## Core content
 
@@ -129,7 +131,7 @@ Paired with the **debug three-step rule**: describe the error → explain the ca
 - The SQL and shell commands in `02` target Supabase/Postgres. Firebase, Cloudflare D1, and other backends need adjustment (adaptation notes are in that doc).
 - Security incidents and free-tier figures cited here were verified in October 2026 and will drift. Re-check before relying on them.
 - **These rules are not a substitute for a professional security audit.** Apps handling other people's genuinely sensitive data (medical, financial, identity) should still get one.
-- All four references, plus `AGENTS.md`, `SKILL.md`, `SECURITY.md`, and `CONTRIBUTING.md`, are available in English under `docs/`. `personal/` remains Chinese-only.
+- All references (01–06), plus `AGENTS.md`, `SKILL.md`, `SECURITY.md`, and `CONTRIBUTING.md`, are available in English under `docs/`. `personal/` remains Chinese-only.
 
 ## Contributing
 

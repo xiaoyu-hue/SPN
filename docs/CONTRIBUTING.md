@@ -10,7 +10,7 @@ Thanks for wanting to make SPN better. This guide explains the repo's structure 
 SPN/
 ├── AGENTS.md        ← universal rules, for everyone (what the AI actually loads)
 ├── SKILL.md         ← skill entry point / full documentation
-├── references/      ← universal rules (4 docs)
+├── references/      ← universal rules (6 docs)
 └── personal/        ← the author's own layer, ⚠️ NOT part of the universal rules
 ```
 
@@ -46,7 +46,7 @@ The repo's own principles apply here too:
 
 The same passage (e.g. the three real cases, the pre-done self-check five) should keep **one authoritative narrative**:
 
-- The full narrative of the three cases → only in `references/01-协作哲学与判断归属.md`
+- The full narrative of the three cases → only in `references/01-collaboration-philosophy.md`
 - Pre-done self-check / honest reporting → authoritative in `AGENTS.md`; `SKILL.md` and `references/04` link or point to it
 - When other files mention it, **link to it**, don't re-copy the whole passage
 
@@ -63,7 +63,7 @@ By contributing, you agree your contribution is published under the same layered
 
 ## 6. Translation
 
-All four references, plus `AGENTS.md`, `SKILL.md`, `SECURITY.md`, and `CONTRIBUTING.md`, now have English versions under `docs/`. Translations should preserve the original style: plain-language-first, bracket-explained jargon, honest disclosure.
+All references (01–06), plus `AGENTS.md`, `SKILL.md`, `SECURITY.md`, and `CONTRIBUTING.md`, now have English versions under `docs/`. Translations should preserve the original style: plain-language-first, bracket-explained jargon, honest disclosure.
 
 ---
 
