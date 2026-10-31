@@ -5,6 +5,5 @@ title = "SPN gitleaks config"
 [extend]
 path = "default"
 
-[[allowlist.regexes]]
-description = "文档里作为反例/占位符出现的密钥名（sk_live / service_role / anon key 占位符），非真实凭证"
-regex = '''(?i)(sk_live\b|service_role|YOUR_ANON_KEY|anon key)'''
+[allowlist]
+regexes = [ '''(?i)(sk_live\b|service_role|YOUR_ANON_KEY|anon key)''' ]

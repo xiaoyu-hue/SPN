@@ -66,7 +66,7 @@ SPN/
 
 - Only want the rules? Read the root directory and ignore `personal/`.
 - Want the English version? Everything is mirrored under `docs/`.
-- Want to load the rules into an AI agent directly? Use `skills/spn/` — see [`skills/spn/INSTALL.md`](../skills/spn/INSTALL.md).
+- Want to load the rules into an AI Agent directly? Use `skills/spn/` — see [`skills/spn/INSTALL.md`](../skills/spn/INSTALL.md).
 - Want your own copy? Duplicate `personal/`, fill in your context, and let `AGENTS.md` inherit the universal rules — you only add your own layer. See `personal/README.md`.
 
 ## Where the rules come from
