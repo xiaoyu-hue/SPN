@@ -6,7 +6,7 @@
 ## [Unreleased]
 
 ### 新增
-- `docs/` — 英文完整镜像：README、AGENTS、SKILL、SECURITY、CONTRIBUTING 及全部 4 篇 references 的英文版，与中文版结构一一对应
+- `docs/` — 英文完整镜像：README、AGENTS、SKILL、SECURITY、CONTRIBUTING 及全部 references 的英文版，与中文版结构一一对应
 - `templates/` — 通用工作流模板（已去除 sonder520 项目专属痕迹，可作任意项目可复用模板）：`决策审查清单`（DECISION_REVIEW，不可逆/花钱/发布/影响走向决定前的「决策三问 + 五层追问 + 反悔场景速查 + 拍板记录模板」）、`文档同步规范`（DOC_SYNC，「唯一真源原则」+ 同步清单 + SemVer 判定 + 发布前验证 + 同步检查模板）；英文镜像见 `docs/templates/`
 - `skills/spn/` — 自包含、可安装的技能包（Anthropic Agent Skills 格式）：带 frontmatter 的 `SKILL.md`、可直接加载的 `AGENTS.md` 副本、各平台安装说明 `INSTALL.md`；深度参考走 GitHub 链接避免重复
 
@@ -34,6 +34,11 @@
 - 根 `README.md` 全面重构：新增徽章与目录、按「使用者 / 开发者」双视角重组导航、新增「工作流模板」与「致敬与致谢」段，保留全部规则实质内容；`docs/README.md` 同步重构（英文镜像，含 Acknowledgments）
 - 全仓库导航引用同步：`SKILL.md` / `skills/spn/SKILL.md` / `CONTRIBUTING.md` / `LICENSE-DOCS.md` 中 `templates/` 引用改为 `references/07`·`08`，「共 6 篇」更新为「共 8 篇」
 - `references/07`·`08` 已确认不触发 doc-lint（仅含 SemVer 示例，不命中「3+ 连续数字 / vX.Y.Z」规则）
+
+### 措辞与链接修正
+- 中英 README 的段名「工作流模板 / Workflow templates」统一改为「工作流规范 / Workflow standards」，与 `references/` 的「规则详解」定位保持一致，避免名实不符
+- 修复中英 README 目录两处失效锚点：`#与常见模板的区别` → `#与常见-agentsmd-模板的区别`（英文同步）
+- 全仓库 Markdown 相对链接与锚点自检通过：37 个文件、59 条相对链接全部有效
 
 ---
 

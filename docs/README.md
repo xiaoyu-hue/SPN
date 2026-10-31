@@ -22,8 +22,8 @@
 - [Look things up as needed](#look-things-up-as-needed)
 - [Repository structure](#repository-structure)
 - [Core content](#core-content)
-- [Workflow templates](#workflow-templates)
-- [How this differs from typical templates](#how-this-differs-from-typical-templates)
+- [Workflow standards](#workflow-standards)
+- [How this differs from typical AGENTS.md templates](#how-this-differs-from-typical-agentsmd-templates)
 - [Three things most worth remembering](#three-things-most-worth-remembering)
 - [Where the rules come from](#where-the-rules-come-from)
 - [Acknowledgments](#acknowledgments)
@@ -134,9 +134,9 @@ For important calls (architecture, whether to ship, etc.), require the AI to ana
 
 Paired with the **debug three-step rule**: describe the error → explain the cause in plain language → give fix steps; no rewriting blindly before the root cause is found.
 
-## Workflow templates
+## Workflow standards
 
-Two reusable workflow templates you can drop into any project (de-project-ified):
+Two reusable workflow standards you can drop into any project (each ships with fill-in checklists and log templates):
 
 - **`references/07-decision-review.md`** — a pre-decision questioning tool: the three decision questions (downsides / cost of not doing it / regret conditions) + five layers of follow-up + regret-scenario quick reference + a decision-log template. Complements post-decision records like ADR / CHANGELOG.
 - **`references/08-doc-sync.md`** — an execution checklist to keep "what the docs say" consistent with "what the code actually does" after code / CI / feature changes: the Single Source of Truth principle + sync checklist + SemVer rules + pre-release verification + a sync-check template.
@@ -183,7 +183,7 @@ SPN stands on the shoulders of many open-source specs, tools, and communities. T
 - **Curated ecosystem index (`references/06`)** — the same-type projects, skill collections, security/doc tools, and plugins/MCPs listed there are the sources of this repo's research and further reading; see that doc.
 - **CI tooling** — secret scanning [`gitleaks`](https://github.com/gitleaks/gitleaks), dead-link checking [`lychee`](https://github.com/lycheeverse/lychee), and terminology checking [`vale`](https://github.com/errata-ai/vale) back this repo's quality gates.
 
-> The rules themselves (including the two workflow templates `references/07` and `references/08`) are the author's original work, shared under CC BY 4.0. If we've used your work, open an issue and we'll add proper attribution.
+> The rules themselves (including the two workflow standards `references/07` and `references/08`) are the author's original work, shared under CC BY 4.0. If we've used your work, open an issue and we'll add proper attribution.
 
 ## Known limitations
 
