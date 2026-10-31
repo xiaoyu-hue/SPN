@@ -4,7 +4,7 @@ SPN（Self-precipitation，自我析出）是一套面向**零编程基础用户
 
 核心理念只有一句话：**代码是 AI 写的，判断是你做的。**
 
-[English](./README.en.md) · 简体中文
+[English](./docs/README.md) · 简体中文
 
 ---
 
@@ -34,28 +34,36 @@ AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效
 
 **按需查阅**
 
-| 你想做的事 | 对应的文件 |
+| 你想做的事 | 对应的文件（中文，根目录） |
 |---|---|
-| 理解判断归属、"先试再问"的判据 | `references/01-协作哲学与判断归属.md`（含英文版） |
-| 准备上线 | `references/02-上线前安全自查.md`（含英文版） |
+| 理解判断归属、"先试再问"的判据 | `references/01-协作哲学与判断归属.md` |
+| 准备上线 | `references/02-上线前安全自查.md` |
 | 写 README、选许可证、避免数字写死 | `references/03-文档、局限披露与事实维护.md` |
 | 不知道怎么跟 AI 表达需求 | `references/04-提示词库.md` |
 
+> 以上四篇参考资料及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 的**英文完整版**均可在 [`docs/`](./docs/) 找到。
+
 ## 仓库结构
 
-SPN 采用**通用层 + 个人层**两层结构：
+SPN 采用**通用层 + 个人层**两层结构，并配有英文镜像与可直接加载的技能包：
 
 ```
 SPN/
-├── AGENTS.md        ← 通用规则，所有人均可使用（AI 实际加载执行）
-├── SKILL.md         ← 技能入口与完整说明
-├── references/      ← 通用规则详解（4 篇，01/02 已提供英文版）
-└── personal/        ← 作者自用层，可跳过
+├── README.md              ← 本文件（简体中文，规范源）
+├── AGENTS.md              ← 通用规则，所有人均可使用（AI 实际加载执行）
+├── SKILL.md               ← 技能入口与完整说明
+├── references/            ← 通用规则详解（4 篇）
+├── docs/                  ← 英文完整镜像（README + AGENTS + SKILL + references）
+├── skills/spn/            ← 自包含、可安装的技能包（含 INSTALL.md 安装说明）
+├── personal/              ← 作者自用层，可跳过
+└── LICENSE-DOCS.md        ← 文档 CC BY 4.0 许可
 ```
 
 `personal/` **不是**这套规则的一部分，只是作者把自用上下文放在同一仓库中，便于一次推送、统一版本，也让规则中的案例能追溯到出处。
 
 - 只想使用规则：只看根目录，忽略 `personal/`。
+- 想看英文版：全部内容已镜像到 `docs/`。
+- 想把规则直接加载进 AI Agent：用 `skills/spn/`，详见 [`skills/spn/INSTALL.md`](./skills/spn/INSTALL.md)。
 - 想复制一份自己的：复制 `personal/` 改成你的内容，`AGENTS.md` 继承根目录通用规则，只叠加你自己的上下文。详见 `personal/README.md`。
 
 ## 规则从何而来
@@ -118,7 +126,7 @@ SPN/
 - `references/02-上线前安全自查.md` 中的 SQL 与命令以 Supabase / Postgres 为例，Firebase、Cloudflare D1 等其他后端需自行调整。
 - 文中引用的安全事件与平台免费额度核实于 2026 年 10 月，会随时间变化，使用前请复核。
 - **本规则不能替代专业安全审计。** 涉及他人真实敏感数据（医疗、金融、身份信息）的应用，仍建议寻求专业审查。
-- 参考资料 `01`、`02` 已有英文版；`03`、`04` 及 `personal/` 目前仅中文，欢迎贡献翻译。
+- 参考资料 `01`–`04` 及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 均已提供英文版，见 `docs/`；`personal/` 仍仅中文。
 
 ## 贡献
 

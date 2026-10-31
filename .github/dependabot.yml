@@ -1,0 +1,11 @@
+version: 2
+updates:
+  # 本仓库唯一的"依赖"是 CI 工作流里引用的 GitHub Actions，
+  # 用 Dependabot 把它们保持在较新版本，避免 checkout@v3 这类陈旧引用。
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 1
+    commit-message:
+      prefix: "chore"

@@ -5,7 +5,17 @@
 
 ## [Unreleased]
 
-（暂无。所有已落地改动均在下方 `[1.0.0]` 中记录。）
+### 新增
+- `docs/` — 英文完整镜像：README、AGENTS、SKILL、SECURITY、CONTRIBUTING 及全部 4 篇 references 的英文版，与中文版结构一一对应
+- `skills/spn/` — 自包含、可安装的技能包（Anthropic Agent Skills 格式）：带 frontmatter 的 `SKILL.md`、可直接加载的 `AGENTS.md` 副本、各平台安装说明 `INSTALL.md`；深度参考走 GitHub 链接避免重复
+
+### 修复
+- `LICENSE-DOCS.md` 覆盖范围与仓库实际结构对齐：删除不存在的文件引用（`SECURITY.en` / `CODE_OF_CONDUCT` / `GLOBAL.md`），修正"纯文档仓库却列出 js/css/tests 等代码"的 MIT 范围误述，新增 `docs/` 与 `skills/` 的 CC BY 4.0 覆盖
+- 根 README / CONTRIBUTING 的仓库结构与翻译说明同步到新增的 `docs/`、`skills/`
+
+### 工程化
+- `.github/dependabot.yml` — 针对仓库唯一的"依赖"（GitHub Actions）开启版本更新
+- `doc-lint.yml` 扫描范围由 `README.md` / `AGENTS.md` 扩展至 `SKILL.md`、`references/` 与英文镜像 `docs/`（教学文档 `03` 与"写死值 → 相对描述"反例句式按约定排除）
 
 ---
 

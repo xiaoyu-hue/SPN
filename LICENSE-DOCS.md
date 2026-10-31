@@ -6,18 +6,19 @@ SPDX-License-Identifier: CC-BY-4.0
 
 本许可适用于下列文件（以下合称「本作品」）：
 
-- `README.md`、`README.en.md`
-- `CHANGELOG.md`
-- `CONTRIBUTING.md`、`SECURITY.md`、`SECURITY.en.md`
-- `CODE_OF_CONDUCT.md`、`CODE_OF_CONDUCT.en.md`
-- `AGENTS.md`、`GLOBAL.md`
-- `docs/` 目录下的全部文件
+- `README.md`（简体中文，规范源）、`CHANGELOG.md`
+- `AGENTS.md`、`SKILL.md`（通用规则，AI 实际加载执行）
+- `references/` 目录下的全部文件（通用规则详解，4 篇）
+- `SECURITY.md`、`CONTRIBUTING.md`
+- `docs/` 目录下的全部文件（英文版，与中文版内容对应）
+- `skills/` 目录下的全部文件（可分发的技能包，含 `SKILL.md`、`AGENTS.md` 及随包说明）
+- `personal/` 目录下的全部文件（作者自用层，随仓库一同以 CC BY 4.0 提供）
 - 本文件（`LICENSE-DOCS.md`）本身
 
 以下内容**不适用**本许可：
 
-- **源代码与构建配置** —— 适用仓库根目录 [`LICENSE`](./LICENSE)（MIT 许可证），范围：`js/`、`css/`、`assets/`、`img/`、`tests/`、`e2e/`、`scripts/`、`index.html`、`sw.js`、`manifest.json`、`_headers`、`package.json`、`package-lock.json`、`tsconfig.json`、`eslint.config.js`、`playwright.config.js`、`.github/`；
-- **第三方组件与素材** —— 依赖与素材的版权归各自权利人（见 `package.json` 与上游项目），本仓库未复制其源代码；
+- **代码与构建配置** —— 适用仓库根目录 [`LICENSE`](./LICENSE)（MIT 许可证）。本仓库目前为**纯文档仓库**，不含可执行的源代码；MIT 许可证保留给未来可能新增的脚本或工具（例如 CI 工作流、辅助脚本）。当前实际存在的代码仅 `.github/workflows/` 下的工作流定义。
+- **第三方组件与素材** —— 依赖与素材的版权归各自权利人（见上游项目），本仓库未复制其源代码。
 - **本作品中引用的第三方内容** —— 见第四节。
 
 ## 二、授权

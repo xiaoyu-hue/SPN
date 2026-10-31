@@ -18,13 +18,17 @@ jobs:
         run: |
           # 本仓库核心原则：会随代码变化的数字（测试数、版本号、条目数、模块数）
           # 不要手写进文档，否则一改代码就失真。
-          # 这里只扫描两个最常被直接拷走、必须保持干净的文件：README.md 与 AGENTS.md。
-          # references/03 故意用"573 项测试"等作为反面教学示例，故不在扫描范围。
+          # 扫描最常被直接拷走、必须保持干净的文件：README.md、AGENTS.md、SKILL.md、
+          # references/ 与英文镜像 docs/ 下的对应文件。
+          # references/03（含 docs/references/03）是专门讲"别写死数字"的教学文档，
+          # 整篇都是反面示例，排除；SKILL.md 等里"写死值 → 相对描述"的教学句式（含 →）也排除。
           fail=0
-          for f in README.md AGENTS.md; do
+          for f in README.md AGENTS.md SKILL.md references/*.md docs/README.md docs/AGENTS.md docs/SKILL.md docs/SECURITY.md docs/CONTRIBUTING.md docs/references/*.md; do
             [ -f "$f" ] || continue
-            # 跳过：含 ❌ 的教学示例行、反面示例（"而不是…"）、项目自身版本号（v1.0.0）
-            matches=$(grep -nE '[0-9]{3,}[[:space:]]*(项测试|个模块|条测试|测试|模块|时间线|工具|书)|v[0-9]+\.[0-9]+\.[0-9]+' "$f" | grep -vE '❌|而不是|v1\.0\.0' || true)
+            case "$f" in
+              *"03-文档、局限披露与事实维护.md") continue ;;
+            esac
+            matches=$(grep -nE '[0-9]{3,}[[:space:]]*(项测试|个模块|条测试|测试|模块|时间线|工具|书)|v[0-9]+\.[0-9]+\.[0-9]+' "$f" | grep -vE '❌|而不是|v1\.0\.0|→' || true)
             if [ -n "$matches" ]; then
               echo "::error file=$f::发现疑似写死的数字，请改为相对描述或标注'截至某版本'："
               echo "$matches"

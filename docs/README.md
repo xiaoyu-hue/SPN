@@ -1,10 +1,10 @@
-# SPN · AI Collaboration Rules for Non-Coders
+# SPN · AI Collaboration Rules for Non-Coders (English)
 
 SPN (Self-precipitation) is a set of AI collaboration rules for people with **zero programming background**: amid the many options the AI hands you, let your own judgment precipitate and take shape.
 
 The whole idea fits in one line: **the AI writes the code; you make the calls.**
 
-[简体中文](./README.md) · English
+[简体中文](../README.md) · English
 
 ---
 
@@ -32,30 +32,41 @@ Drop the root `AGENTS.md` into your project directory. Tools that support AGENTS
 
 > Note: Claude Code doesn't read AGENTS.md by default when its own config file exists — you need to import it. A safe pattern is to use AGENTS.md as the shared baseline, then add a thin tool-specific file (e.g. put `@AGENTS.md` inside `CLAUDE.md`).
 
+**Load it as a skill (recommended for agents)**
+
+`skills/spn/` is a self-contained, installable skill package. See [`skills/spn/INSTALL.md`](../skills/spn/INSTALL.md) for per-agent install steps (Claude Code / Cursor / CodeBuddy / etc.).
+
 **Look things up as needed**
 
-| What you're doing | Read this |
+| What you're doing | Read this (English, this folder) |
 |---|---|
-| Who decides what; the try-vs-ask test | `references/01-协作哲学与判断归属.md` (English: `.en.md`) |
-| About to ship | `references/02-上线前安全自查.md` (English: `.en.md`) |
-| Writing a README / picking a license / keeping numbers from going stale | `references/03-文档、局限披露与事实维护.md` |
-| Not sure how to phrase a request | `references/04-提示词库.md` |
+| Who decides what; the try-vs-ask test | [`references/01-协作哲学与判断归属.md`](references/01-协作哲学与判断归属.md) |
+| About to ship | [`references/02-上线前安全自查.md`](references/02-上线前安全自查.md) |
+| Writing a README / picking a license / keeping numbers from going stale | [`references/03-文档、局限披露与事实维护.md`](references/03-文档、局限披露与事实维护.md) |
+| Not sure how to phrase a request | [`references/04-提示词库.md`](references/04-提示词库.md) |
+| Full rules, ready to load into an agent | [`../skills/spn/`](../skills/spn/) |
 
 ## Repository structure
 
-SPN uses a **universal layer + personal layer** structure:
+SPN uses a **universal layer + personal layer** structure, plus an English edition and a ready-to-load skill package:
 
 ```
 SPN/
-├── AGENTS.md        ← universal rules, for everyone (what the AI actually loads)
-├── SKILL.md         ← skill entry point and full documentation
-├── references/      ← universal rules in detail (4 docs; 01/02 also in English)
-└── personal/        ← the author's own layer, safe to skip
+├── README.md              ← 简体中文，规范源 (this file's Chinese original)
+├── AGENTS.md              ← universal rules, for everyone (what the AI actually loads)
+├── SKILL.md               ← skill entry point and full documentation (Chinese)
+├── references/            ← universal rules in detail (4 docs, Chinese)
+├── docs/                  ← English edition: full mirror (README + AGENTS + SKILL + references)
+├── skills/spn/            ← self-contained, installable skill package (Chinese)
+├── personal/              ← the author's own layer, safe to skip
+└── LICENSE-DOCS.md        ← CC BY 4.0 terms for all documentation
 ```
 
 `personal/` is **not** part of the rules. It's just the author keeping private context in the same repo — one push, one version, and the case studies above stay traceable.
 
 - Only want the rules? Read the root directory and ignore `personal/`.
+- Want the English version? Everything is mirrored under `docs/`.
+- Want to load the rules into an AI agent directly? Use `skills/spn/` — see [`skills/spn/INSTALL.md`](../skills/spn/INSTALL.md).
 - Want your own copy? Duplicate `personal/`, fill in your context, and let `AGENTS.md` inherit the universal rules — you only add your own layer. See `personal/README.md`.
 
 ## Where the rules come from
@@ -70,7 +81,7 @@ This isn't a template. Behind every rule is a real failure, drawn from a non-cod
 
 The common thread: **the AI supplies capability and options; the human makes the call and draws the boundary.**
 
-The full narrative and the try-vs-ask test are in `references/01-协作哲学与判断归属.md`.
+The full narrative and the try-vs-ask test are in [`references/01-协作哲学与判断归属.md`](references/01-协作哲学与判断归属.md).
 
 ## Core content
 
@@ -118,7 +129,7 @@ Paired with the **debug three-step rule**: describe the error → explain the ca
 - The SQL and shell commands in `02` target Supabase/Postgres. Firebase, Cloudflare D1, and other backends need adjustment (adaptation notes are in that doc).
 - Security incidents and free-tier figures cited here were verified in October 2026 and will drift. Re-check before relying on them.
 - **These rules are not a substitute for a professional security audit.** Apps handling other people's genuinely sensitive data (medical, financial, identity) should still get one.
-- References `01` and `02` are available in English. `03`, `04`, and `personal/` are Chinese-only for now — translations welcome.
+- All four references, plus `AGENTS.md`, `SKILL.md`, `SECURITY.md`, and `CONTRIBUTING.md`, are available in English under `docs/`. `personal/` remains Chinese-only.
 
 ## Contributing
 
