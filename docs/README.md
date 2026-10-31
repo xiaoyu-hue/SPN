@@ -6,6 +6,7 @@
 [![docs CC BY 4.0](https://img.shields.io/badge/docs-CC%20BY%204.0-blue)](../LICENSE-DOCS.md)
 [![code MIT](https://img.shields.io/badge/code-MIT-green)](../LICENSE)
 [![lang 中文 / English](https://img.shields.io/badge/lang-中文%20%2F%20English-orange)](./README.md)
+[![version 1.0.0](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/xiaoyu-hue/SPN/releases/tag/v1.0.0)
 [![doc-lint](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-lint.yml/badge.svg)](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-lint.yml)
 [![doc-quality](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-quality.yml/badge.svg)](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-quality.yml)
 [![secret-scan](https://github.com/xiaoyu-hue/SPN/actions/workflows/secret-scan.yml/badge.svg)](https://github.com/xiaoyu-hue/SPN/actions/workflows/secret-scan.yml)
@@ -214,3 +215,7 @@ Issues and pull requests are welcome.
 - For structural changes (architecture, dependencies, security): open an issue first to align on direction.
 - Chinese or English both work; simple English is fine.
 - For the boundary between universal and personal rules, and how to add a new rule, see `CONTRIBUTING.md`.
+
+---
+
+**Version** [`v1.0.0`](https://github.com/xiaoyu-hue/SPN/releases/tag/v1.0.0) · **Changelog** [`CHANGELOG.md`](../CHANGELOG.md) · **License** [`CC BY 4.0`](../LICENSE-DOCS.md) / [`MIT`](../LICENSE)

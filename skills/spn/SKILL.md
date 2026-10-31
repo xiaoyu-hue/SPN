@@ -1,6 +1,10 @@
 ---
 name: spn
 description: 零编程基础者与 AI Agent/AI 编程工具协作的成套规则（SPN · Self-precipitation）。适用于不懂代码、要靠 AI 把想法做成能跑的东西（网页、Web 应用、PWA、带后端与数据库的全栈应用）的场景。覆盖判断归属、术语翻译、三档授权、不可逆红线、工程纪律、局限披露、上线前安全自查。当使用者说"我不懂代码但想做个东西"、"帮我用 AI 做个应用"、"给 AI 定规矩"、"AI 乱改我的代码"时使用。
+license: CC-BY-4.0
+metadata:
+  author: xiaoyu-hue
+  version: "1.0.0"
 ---
 
 > 这是 SPN 的**可安装技能包版本**（自包含，可直接被 Agent 加载）。

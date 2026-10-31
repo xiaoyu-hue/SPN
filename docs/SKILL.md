@@ -1,6 +1,10 @@
 ---
 name: spn
 description: A complete set of collaboration rules for people with zero programming background working with AI Agents / AI coding tools (SPN · Self-precipitation). For users who can't read code but want to turn ideas into runnable things (web pages, web apps, PWAs, full-stack apps with backend and database) using AI. Covers judgment ownership, jargon translation, three authorization tiers, irreversible red lines, engineering discipline, limitation disclosure, and pre-ship security self-checks. Use when the user says "I don't code but want to build something," "help me make an app with AI," "set rules for the AI," or "the AI keeps messing up my code."
+license: CC-BY-4.0
+metadata:
+  author: xiaoyu-hue
+  version: "1.0.0"
 ---
 
 # SPN · AI Collaboration Rules (Non-Coder Edition)

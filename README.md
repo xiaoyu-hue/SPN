@@ -6,6 +6,7 @@
 [![文档许可 CC BY 4.0](https://img.shields.io/badge/docs-CC%20BY%204.0-blue)](./LICENSE-DOCS.md)
 [![代码许可 MIT](https://img.shields.io/badge/code-MIT-green)](./LICENSE)
 [![语言 中文 / English](https://img.shields.io/badge/lang-中文%20%2F%20English-orange)](./docs/README.md)
+[![版本 1.0.0](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/xiaoyu-hue/SPN/releases/tag/v1.0.0)
 [![doc-lint](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-lint.yml/badge.svg)](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-lint.yml)
 [![doc-quality](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-quality.yml/badge.svg)](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-quality.yml)
 [![secret-scan](https://github.com/xiaoyu-hue/SPN/actions/workflows/secret-scan.yml/badge.svg)](https://github.com/xiaoyu-hue/SPN/actions/workflows/secret-scan.yml)
@@ -216,3 +217,7 @@ SPN 站在许多开源规范、工具与社区的肩膀上。以下内容为本�
 - 结构性改动（架构、依赖、安全相关）请先开 issue 对齐方向。
 - 中英文均可，英文写得简单也没关系。
 - 通用规则与作者自用规则的分界、如何新增一条规则，见 `CONTRIBUTING.md`。
+
+---
+
+**版本** [`v1.0.0`](https://github.com/xiaoyu-hue/SPN/releases/tag/v1.0.0) · **更新日志** [`CHANGELOG.md`](./CHANGELOG.md) · **许可证** [`CC BY 4.0`](./LICENSE-DOCS.md) / [`MIT`](./LICENSE)
