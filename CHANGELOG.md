@@ -21,6 +21,10 @@
 - `.github/workflows/secret-scan.yml` — gitleaks 密钥扫描（非阻塞，确认无误报后改为阻断）；使用 gitleaks 内建默认规则，文档里作为反例出现的密钥名（`sk_live` 等）不会误报
 - `.github/workflows/doc-quality.yml` + `lychee.toml` / `.vale.ini` / `styles/SPN/` — 英文镜像死链检查（lychee）与术语一致（vale，仅 `docs/`，建议级），均非阻塞，避免误杀文档
 
+### 示例与适配（P1）
+- `references/05-协作示例画廊.md` — 新增好/坏协作对照案例（上线前确认、完成前验证、术语先翻译），对齐 AI-4U 的示例画廊短板
+- `skills/spn/INSTALL.md` 新增「方式四」—— Gemini CLI（`GEMINI.md`）与 GitHub Copilot（`.github/copilot-instructions.md`）的薄适配文件，补齐多 harness 覆盖
+
 ---
 
 ## [1.0.0] - 2026-10-31

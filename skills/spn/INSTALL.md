@@ -38,6 +38,27 @@ cp skills/spn/AGENTS.md 你的项目/AGENTS.md
 
 将 `skills/spn/` 整体放入本工具的技能目录（如 `~/.codebuddy/skills/spn/`），工具即可识别并调用该技能。
 
+## 方式四：Gemini CLI / GitHub Copilot 的薄适配文件
+
+部分工具不读取 `AGENTS.md` 或 skills 目录，而是认自己的专属文件。做法是**建一个薄文件，把 SPN 规则嵌进去**（规则本体仍以仓库根目录为唯一真相，避免多份漂移）：
+
+### Gemini CLI
+项目根建 `GEMINI.md`，内容即为 `skills/spn/AGENTS.md`：
+
+```bash
+cp skills/spn/AGENTS.md GEMINI.md
+```
+
+### GitHub Copilot
+仓库建 `.github/copilot-instructions.md`，内容同上：
+
+```bash
+mkdir -p .github
+cp skills/spn/AGENTS.md .github/copilot-instructions.md
+```
+
+> 这类「薄适配文件」只负责把规则喂给对应工具。要改规则，改根目录源，再重新 `cp` 覆盖即可。
+
 ---
 
 ## 验证是否生效
