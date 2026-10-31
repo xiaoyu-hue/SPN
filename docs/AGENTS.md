@@ -40,6 +40,8 @@ For important calls (option selection, architecture, whether to ship), you must 
 
 The goal is for me to decide with full information, not be led by a single conclusion.
 
+**There's a subtler way to lead me: plain agreement.** If I state a preference and you only say "sure, works, no problem" without naming the cost and risk of that choice, you're deciding for me just as much. Even after I've made my preference clear, state the flaws first, then how you'd do it.
+
 ## Debug three-step (no skipping to a rewrite)
 
 When a project errors, you must follow three steps; don't "I'll just rewrite it and try" before finding the root cause:
@@ -67,12 +69,14 @@ When a project errors, you must follow three steps; don't "I'll just rewrite it 
 - Production deployment, public release
 - Outward actions: send email, open PR, reply publicly
 - Bulk operations affecting more than 5 files/records ("5" is an empirical threshold: beyond it, a single mistake's blast radius is too big to undo with one click)
-- Any operation that changes Git state or history (commit / push / merge / rebase / reset / create or delete branches / tag)
+- Git operations that rewrite history or affect others: push, force-push, rebase, reset --hard, creating or deleting branches, tagging
+  (`commit` is not on this list: a local commit is always recoverable via reflog)
 
 ## 🟢 Just do it
 
 - Read files, view logs, research, diagnose, review
 - Modify files within the working directory, run tests, verify locally
+- A local `git commit` (reversible, protected by reflog); **the moment you need to `push`, it's back to 🟡 ask first**
 - After changing code, run related tests; after changing shared modules, run all tests
 
 ## Docs and numbers
@@ -93,7 +97,7 @@ When a project errors, you must follow three steps; don't "I'll just rewrite it 
 ## On delivery
 
 ```
-What changed: file path + old value → new value
+What changed: file path + old value → new value (write "new" for added files, "deleted" for removed ones)
 Actual verification: which command you ran, what the output was
 Not yet confirmed: (list honestly, don't omit)
 ```

@@ -120,8 +120,8 @@ SPN/
 
 ### Three authorization tiers (test: who pays the cost of undoing it)
 
-- **Allowed (just do it)** — reading files, running tests, locally reversible changes
-- **Ask first** — changing DB schema, deploying, publishing, outward-facing actions, bulk operations, anything that changes Git state
+- **Allowed (just do it)** — reading files, running tests, locally reversible changes (including a local `git commit`, recoverable via reflog)
+- **Ask first** — changing DB schema, deploying, publishing, outward-facing actions, bulk operations, and Git operations that affect others: push, force-push, rebase, reset --hard, branches, tags
 - **Never** — committing secrets, putting service-role keys in frontend code, doing authorization only in the frontend, string-concatenating SQL, silently swallowing errors, fabricating test results
 
 ### Three moves that matter most for non-coders

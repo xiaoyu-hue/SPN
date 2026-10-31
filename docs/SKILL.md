@@ -53,6 +53,7 @@ One test only: **who bears the cost of undoing it.** Reversible = the human can 
 ### 🟢 Just do it (no need to ask)
 - Read files, view logs, research, diagnose, review
 - Modify files within the working directory, run tests, verify locally
+- A local `git commit` (reversible, protected by reflog); **the moment you need to `push`, it's back to 🟡 ask first**
 - After changing code, run related tests; after changing shared modules, run all tests
 
 ### 🟡 Ask first (pause for confirmation)
@@ -61,8 +62,9 @@ One test only: **who bears the cost of undoing it.** Reversible = the human can 
 - Add production dependencies
 - Production deployment, public release
 - Outward actions: send email, open PR, reply to issues publicly
-- Bulk operations affecting more than 5 files/records
-- Any operation that changes Git state or history (commit / push / merge / rebase / reset / create or delete branches / tag)
+- Bulk operations affecting more than 5 files/records ("5" is an empirical threshold: beyond it, a single mistake's blast radius is too big to undo with one click)
+- Git operations that rewrite history or affect others: push, force-push, rebase, reset --hard, creating or deleting branches, tagging
+  (`commit` is not on this list: a local commit is recoverable via reflog)
 
 ### 🔴 Never do (hard red lines)
 - Commit `.env`, keys, certificates, tokens to the repo
@@ -109,6 +111,7 @@ The AI can write crypto code, wire up payments, run third-party APIs — but sta
 | Signal | What it means |
 |---|---|
 | Gives only one option, no tradeoffs | It didn't really think through alternatives |
+| Only agrees: "sure, works, no problem" without naming the cost | It's echoing you, not helping you decide |
 | Full of jargon that's still roundabout after translation | It may not be clear itself |
 | After an error, jumps straight to a fallback instead of finding the root cause | It's covering up the problem |
 | Claims tests passed but won't paste the command output | Demand it paste the output |
@@ -128,7 +131,7 @@ The last one matters most: AIs fabricate library names and APIs that look real. 
 
 Report format:
 ```
-What changed: [file path] + old value → new value
+What changed: [file path] + old value → new value (write "new" for added files, "deleted" for removed ones)
 Actual verification: which command ran, what the output was
 Not yet confirmed: [list honestly]
 ```
@@ -206,6 +209,6 @@ These rules obey their own principles:
 
 - These rules are optimized for scenarios where **the human can't read code**. Developers who can read code should follow their own team conventions; items like "translate jargon" and "try before asking" are redundant for professionals.
 - The SQL and commands in `02` use Supabase / Postgres as examples; Firebase, Cloudflare D1, and other backends need adjustment (adaptation notes at the end of that doc).
-- Security incidents and platform free-tier figures cited here were verified in 2026-10 and will drift over time; re-check before relying on them.
+- Security incidents and platform free-tier figures cited in `02` were verified in 2026-10 and will drift over time; re-check before relying on them (that doc is not inlined into this package; open the link to read it).
 - These rules are not a substitute for a professional security audit. Apps handling others' genuinely sensitive data (medical, financial, identity) should still seek professional review.
 - All eight references are available in both English (`docs/references/`) and Chinese (`references/`).

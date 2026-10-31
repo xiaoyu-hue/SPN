@@ -128,7 +128,7 @@ Finally report in a short checklist: what's done, verification evidence, remaini
 ```
 Report this change in this format:
 
-What changed: [file path] + old value → new value
+What changed: [file path] + old value → new value (write "new" for added files, "deleted" for removed ones)
 Actual verification: which command ran, what the output was
 Not yet confirmed: [list honestly]
 

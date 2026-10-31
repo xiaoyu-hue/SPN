@@ -76,6 +76,7 @@ This is the key move that lets someone who can't code make correct calls. Don't 
 | Signal | What it means |
 |---|---|
 | Gives only one option, no tradeoffs | it didn't really think about alternatives |
+| Only agrees: "sure, works, no problem" without naming the cost | it's echoing you, not helping you decide |
 | Full of jargon that's still confusing after translation | it may not be clear itself |
 | Says "this is simple" but can't state the cost | be wary |
 | Gives a fallback fix right after an error instead of finding the root cause | it's covering up the problem |
