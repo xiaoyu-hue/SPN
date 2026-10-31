@@ -8,8 +8,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 - `README.md`（简体中文，规范源）、`CHANGELOG.md`
 - `AGENTS.md`、`SKILL.md`（通用规则，AI 实际加载执行）
-- `references/` 目录下的全部文件（通用规则详解，共 6 篇）
-- `templates/` 目录下的全部文件（通用工作流模板，随仓库一同以 CC BY 4.0 提供）
+- `references/` 目录下的全部文件（通用规则详解，共 8 篇）
 - `SECURITY.md`、`CONTRIBUTING.md`
 - `docs/` 目录下的全部文件（英文版，与中文版内容对应）
 - `skills/` 目录下的全部文件（可分发的技能包，含 `SKILL.md`、`AGENTS.md` 及随包说明）

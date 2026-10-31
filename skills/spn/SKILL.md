@@ -198,8 +198,8 @@ AI 会话一定会失忆，这是硬限制。**HANDOFF.md 是最轻量的跨会�
 | 要上线了 | [references/02-上线前安全自查.md](https://github.com/xiaoyu-hue/SPN/blob/main/references/02-上线前安全自查.md)（含英文版） |
 | 写 README / 选许可证 / 数字怎么不写死 | [references/03-文档、局限披露与事实维护.md](https://github.com/xiaoyu-hue/SPN/blob/main/references/03-文档、局限披露与事实维护.md) |
 | 不知道怎么跟 AI 说 | [references/04-提示词库.md](https://github.com/xiaoyu-hue/SPN/blob/main/references/04-提示词库.md) |
-| 做不可逆/花钱/发布决定前必过的决策审查 | [templates/决策审查清单.md](https://github.com/xiaoyu-hue/SPN/blob/main/templates/决策审查清单.md)（含英文版） |
-| 代码变动后保持文档与事实一致的同步规范 | [templates/文档同步规范.md](https://github.com/xiaoyu-hue/SPN/blob/main/templates/文档同步规范.md)（含英文版） |
+| 做不可逆/花钱/发布决定前必过的决策审查 | [references/07-决策审查清单.md](https://github.com/xiaoyu-hue/SPN/blob/main/references/07-决策审查清单.md)（含英文版） |
+| 代码变动后保持文档与事实一致的同步规范 | [references/08-文档同步规范.md](https://github.com/xiaoyu-hue/SPN/blob/main/references/08-文档同步规范.md)（含英文版） |
 
 `AGENTS.md`（本技能包内附，亦见仓库根目录）是可直接拷进任何项目的精简版，内容与本文件一致但更短，且是 AI 实际加载执行的版本。
 
@@ -211,4 +211,4 @@ AI 会话一定会失忆，这是硬限制。**HANDOFF.md 是最轻量的跨会�
 - `02-上线前安全自查.md` 中的 SQL 与命令以 Supabase / Postgres 为例，Firebase、Cloudflare D1 等其他后端需自行调整（适配思路见该文结尾附录）
 - 文中引用的安全事件与平台免费额度核实于 2026-10，会随时间变化，使用前请复核
 - 本规则不能替代专业安全审计。涉及他人真实敏感数据（医疗、金融、身份信息）的应用，仍建议寻求专业审查
-- 参考资料 `01`–`06` 均已有英文版（见 `docs/`）
+- 参考资料 `01`–`08` 均已有英文版（见 `docs/`）

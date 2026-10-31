@@ -91,7 +91,7 @@
 ## 6. Relationship to the rest of the system
 
 - **AGENTS.md**: references this spec; a required check before release.
-- **Decision Review Checklist (DECISION_REVIEW.md)**: before release, run the three decision questions first (especially "breaking change" and "version strategy").
+- **Decision Review Checklist (`references/07-decision-review.md`)**: before release, run the three decision questions first (especially "breaking change" and "version strategy").
 - **CHANGELOG / decision records (ADR)**: record major changes first, then sync the descriptions this doc covers.
 - **README / each doc**: the user-visible output of changes, synced with the version number.
 

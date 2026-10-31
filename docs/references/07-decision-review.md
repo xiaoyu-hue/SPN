@@ -105,6 +105,6 @@ Filled in by the Agent / owner before execution, kept with the PR or commit:
 
 - **AGENTS.md**: embeds this checklist's core (the three decision questions, "ask first if irreversible") into rules the AI must follow — loaded automatically when the AI enters the repo.
 - **CHANGELOG / decision records (ADR)**: after a decision is made, write down "why we did it" for future review.
-- **Doc Sync spec (DOC_SYNC)**: after release / changes, keep doc descriptions consistent with code facts.
+- **Doc Sync spec (`references/08-doc-sync.md`)**: after release / changes, keep doc descriptions consistent with code facts.
 
 > One line: **small things just do; big things get the three questions first; after deciding, write it down.**

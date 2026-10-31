@@ -29,6 +29,12 @@
 ### 生态整合
 - `references/06-生态与整合.md`（含 `docs/references/06` 英文镜像）—— 策展式索引：同类项目、技能集合、安全/文档工具、插件与 MCP，每条标注 star / 许可证 / 整合档位；遵循「引用不复制、保留原许可证、不稀释定位」原则，不复制任何第三方代码
 
+### 结构重整与 README 重构
+- `templates/` 两份工作流模板移至 `references/07-决策审查清单.md` / `references/08-文档同步规范.md`（含 `docs/references/` 英文镜像），与现有 6 篇规则并列；编号连续、genre 一致；移除空 `templates/` 目录
+- 根 `README.md` 全面重构：新增徽章与目录、按「使用者 / 开发者」双视角重组导航、新增「工作流模板」与「致敬与致谢」段，保留全部规则实质内容；`docs/README.md` 同步重构（英文镜像，含 Acknowledgments）
+- 全仓库导航引用同步：`SKILL.md` / `skills/spn/SKILL.md` / `CONTRIBUTING.md` / `LICENSE-DOCS.md` 中 `templates/` 引用改为 `references/07`·`08`，「共 6 篇」更新为「共 8 篇」
+- `references/07`·`08` 已确认不触发 doc-lint（仅含 SemVer 示例，不命中「3+ 连续数字 / vX.Y.Z」规则）
+
 ---
 
 ## [1.0.0] - 2026-10-31

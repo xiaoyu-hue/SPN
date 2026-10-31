@@ -1,16 +1,41 @@
-# SPN · 零基础 AI 协作规则
+# SPN · 零基础 × AI 协作规则
 
-SPN（Self-precipitation，自我析出）是一套面向**零编程基础用户**的 AI 协作规则：在 AI 给出的众多选项中，让属于你自己的判断沉淀、成形。
+> **Self-precipitation（自我析出）**：在 AI 给出的众多选项里，让属于你自己的判断沉淀、成形。
+> 核心信条：**代码是 AI 写的，判断是你做的。**
 
-核心理念只有一句话：**代码是 AI 写的，判断是你做的。**
+[![文档许可 CC BY 4.0](https://img.shields.io/badge/docs-CC%20BY%204.0-blue)](./LICENSE-DOCS.md)
+[![代码许可 MIT](https://img.shields.io/badge/code-MIT-green)](./LICENSE)
+[![语言 中文 / English](https://img.shields.io/badge/lang-中文%20%2F%20English-orange)](./docs/README.md)
+[![doc-lint](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-lint.yml/badge.svg)](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-lint.yml)
+[![doc-quality](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-quality.yml/badge.svg)](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-quality.yml)
+[![secret-scan](https://github.com/xiaoyu-hue/SPN/actions/workflows/secret-scan.yml/badge.svg)](https://github.com/xiaoyu-hue/SPN/actions/workflows/secret-scan.yml)
 
 [English](./docs/README.md) · 简体中文
 
 ---
 
+## 目录
+
+- [这是什么](#这是什么)
+- [适用人群](#适用人群)
+- [快速开始](#快速开始)
+- [按角色查阅](#按角色查阅)
+- [仓库结构](#仓库结构)
+- [核心规则速览](#核心规则速览)
+- [工作流模板](#工作流模板)
+- [与常见模板的区别](#与常见模板的区别)
+- [三条最值得记住的](#三条最值得记住的)
+- [规则从何而来](#规则从何而来)
+- [致敬与致谢](#致敬与致谢)
+- [已知局限](#已知局限)
+- [许可证](#许可证)
+- [贡献](#贡献)
+
+---
+
 ## 这是什么
 
-一套给不懂代码、但希望借助 AI 把想法做成真实产品的人使用的协作规则。
+SPN（Self-precipitation，自我析出）是一套面向**零编程基础用户**的 AI 协作规则：在 AI 给出的众多选项里，让属于你自己的判断沉淀、成形。
 
 AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效率提升，对不懂代码的人是风险——你无法判断它写的是否正确、是否偷偷扩大了改动范围。而**安全边界是唯一不产生可见结果的部分**：数据库表锁着还是敞着，页面长得一模一样。
 
@@ -22,19 +47,28 @@ AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效
 - 担心 AI"乱改""乱上线""泄露密钥"的非技术使用者
 - 想要一套可直接复制、立即生效的协作基线
 
-如果你本身就是专业开发者，本规则的部分内容（如术语翻译、先试再问）可能显得冗余，请遵循你所在团队的规范。
+> 如果你本身就是专业开发者，本规则的部分内容（如术语翻译、先试再问）可能显得冗余，请遵循你所在团队的规范。
 
 ## 快速开始
 
-**最简做法：复制 `AGENTS.md`**
+### 给使用者：三步上手
 
-将仓库根目录的 `AGENTS.md` 复制到你的项目根目录。支持 AGENTS.md 的工具（Cursor、Codex、Copilot、Gemini CLI、Aider、Windsurf 等）会在开工前自动加载它。
+1. **复制 `AGENTS.md`** 到你的项目根目录。支持 AGENTS.md 的工具（Cursor、Codex、Copilot、Gemini CLI、Aider、Windsurf 等）会在开工前自动加载它。
+2. **按需查阅 `references/`**：遇到具体问题（要上线、写 README、不知道怎么表达需求）时，翻对应的篇章。
+3. **上线 / 做不可逆决定前**，先过一遍 `references/07-决策审查清单.md`，把"坏处 / 不做的后果 / 什么情况下会后悔"想清楚再动手。
 
-> 注意：Claude Code 在存在自身配置文件时默认不读取 AGENTS.md，需要导入或单独开启。稳妥做法是以 AGENTS.md 作为共享基线，再为个别工具补一个薄薄的专属文件（例如在 `CLAUDE.md` 中写 `@AGENTS.md`）。
+> 关于加载：`Claude Code` 在存在自身配置文件时默认不读取 AGENTS.md，需要导入或单独开启。稳妥做法是以 AGENTS.md 作为共享基线，再为个别工具补一个薄薄的专属文件（例如在 `CLAUDE.md` 中写 `@AGENTS.md`）。
 
-**按需查阅**
+### 给开发者：本地预览与 CI
 
-| 你想做的事 | 对应的文件（中文，根目录） |
+- 克隆仓库后，`skills/spn/` 是一个自包含、可安装的技能包，详见 [`skills/spn/INSTALL.md`](./skills/spn/INSTALL.md)。
+- 本仓库的文档与质量保障已落地为 CI：密钥扫描 **gitleaks**、死链检查 **lychee**、术语一致 **vale**、数字写死检查 **doc-lint**（详见 `.github/workflows/`）。
+- 想修改规则：请回到**根目录**（规范源）编辑，再由发布流程同步到 `docs/`（英文镜像）与 `skills/spn/`（发布包）。
+- 想引入本规则到自己的 Agent：直接加载 `skills/spn/`，或把根目录 `AGENTS.md` 拷进项目。
+
+## 按角色查阅
+
+| 你想做什么 | 看这里（根目录，简体中文） |
 |---|---|
 | 理解判断归属、"先试再问"的判据 | `references/01-协作哲学与判断归属.md` |
 | 准备上线 | `references/02-上线前安全自查.md` |
@@ -42,8 +76,10 @@ AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效
 | 不知道怎么跟 AI 表达需求 | `references/04-提示词库.md` |
 | 看真实场景的"好/坏协作"对照 | `references/05-协作示例画廊.md` |
 | 想了解同类项目 / 优秀 skill / 插件怎么整合 | `references/06-生态与整合.md` |
+| 做不可逆/花钱/发布决定前必过的审查 | `references/07-决策审查清单.md` |
+| 代码或文档变动后保持描述与事实一致 | `references/08-文档同步规范.md` |
 
-> 以上参考资料及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 的**英文完整版**均可在 [`docs/`](./docs/) 找到；可直接套用的**通用工作流模板**（决策审查清单、文档同步规范）见 [`templates/`](./templates/)（英文版 [`docs/templates/`](./docs/templates/)）。
+> 以上所有文件及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 的**英文完整版**均可在 [`docs/`](./docs/) 找到。
 
 ## 仓库结构
 
@@ -56,36 +92,27 @@ SPN/
 ├── README.md              ← 本文件（简体中文，规范源）
 ├── AGENTS.md              ← 通用规则，所有人均可使用（AI 实际加载执行）
 ├── SKILL.md               ← 技能入口与完整说明（规范源）
-├── references/            ← 通用规则详解（共 6 篇，规范源）
-├── templates/             ← 通用工作流模板（决策审查 / 文档同步，含英文版 docs/templates/）
-├── docs/                  ← 英文完整镜像（README + AGENTS + SKILL + references + templates）★发布副本
+├── references/            ← 通用规则详解（共 8 篇，规范源）
+│   ├── 01-协作哲学与判断归属.md
+│   ├── 02-上线前安全自查.md
+│   ├── 03-文档、局限披露与事实维护.md
+│   ├── 04-提示词库.md
+│   ├── 05-协作示例画廊.md
+│   ├── 06-生态与整合.md
+│   ├── 07-决策审查清单.md        ← 工作流模板：决策前反问
+│   └── 08-文档同步规范.md        ← 工作流模板：发布前同步
+├── docs/                  ← 英文完整镜像（README + AGENTS + SKILL + references）★发布副本
 ├── skills/spn/            ← 自包含、可安装的技能包（含 INSTALL.md）★发布副本
 ├── personal/              ← 作者自用层，可跳过（非通用规则，已脱敏）
 └── LICENSE-DOCS.md        ← 文档 CC BY 4.0 许可
 ```
-
-`personal/` **不是**这套规则的一部分，只是作者把自用上下文放在同一仓库中，便于一次推送、统一版本，也让规则中的案例能追溯到出处。
 
 - 只想使用规则：只看根目录，忽略 `personal/`。
 - 想看英文版：全部内容已镜像到 `docs/`。
 - 想把规则直接加载进 AI Agent：用 `skills/spn/`，详见 [`skills/spn/INSTALL.md`](./skills/spn/INSTALL.md)。
 - 想复制一份自己的：复制 `personal/` 改成你的内容，`AGENTS.md` 继承根目录通用规则，只叠加你自己的上下文。详见 `personal/README.md`。
 
-## 规则从何而来
-
-这不是模板。每条规则背后都是一个真实发生的问题，来自一个零基础用户借助 AI 完成多个上线项目的过程：
-
-| 真实发生的问题 | AI 做了什么 | 人做了什么 |
-|---|---|---|
-| 第一次把项目弄上线 | 推荐了多个静态部署平台 | 它给的是候选清单，不是命令；平台由人选定 |
-| 两种视觉风格能否融合 | 表示无法保证能融合 | 想要就直接试——试出来后成了整个项目的视觉基调 |
-| 给加密应用划定安全边界 | 顺利写出了密钥协商、签名代码 | 但"未经审计""不建议用于敏感场景"的声明，由人自己写进 README |
-
-共同点：**AI 提供能力与方案，人负责拍板与划边界。**
-
-完整叙事与"先试再问 vs 先问再试"的判据，见 `references/01-协作哲学与判断归属.md`。
-
-## 核心内容
+## 核心规则速览
 
 ### 三档授权（判据：撤销成本由谁承担）
 
@@ -109,6 +136,15 @@ SPN/
 
 配套的**调试三步法**：描述报错 → 用通俗语言解释原因 → 给出修复步骤，禁止没有定位根因就直接重写。
 
+## 工作流模板
+
+两份可直接套用到任意项目的通用工作流模板（已去除项目专属痕迹）：
+
+- **`references/07-决策审查清单.md`** —— 做决定之前的反问工具：决策三问（坏处 / 不做的后果 / 后悔条件）+ 五层追问 + 反悔场景速查 + 拍板记录模板。与「做完之后写记录」的 ADR / CHANGELOG 互补。
+- **`references/08-文档同步规范.md`** —— 代码 / CI / 功能变化后，让「文档描述」与「代码事实」保持一致的「唯一真源原则」+ 同步清单 + SemVer 判定 + 发布前验证 + 同步检查模板。
+
+> 英文版见 [`docs/references/07-decision-review.md`](./docs/references/07-decision-review.md) 与 [`docs/references/08-doc-sync.md`](./docs/references/08-doc-sync.md)。
+
 ## 与常见 AGENTS.md 模板的区别
 
 | 常见模板 | 这套规则 |
@@ -125,22 +161,39 @@ SPN/
 2. 能不能一键还原？能就试，不能就问。这一条能解决大多数"要不要先问"的犹豫。
 3. AI 说"已完成"不等于真完成。用"自收五条"卡住它（见 `AGENTS.md`）。
 
+## 规则从何而来
+
+这不是模板。每条规则背后都是一个真实发生的问题，来自一个零基础用户借助 AI 完成多个上线项目的过程：
+
+| 真实发生的问题 | AI 做了什么 | 人做了什么 |
+|---|---|---|
+| 第一次把项目弄上线 | 推荐了多个静态部署平台 | 它给的是候选清单，不是命令；平台由人选定 |
+| 两种视觉风格能否融合 | 表示无法保证能融合 | 想要就直接试——试出来后成了整个项目的视觉基调 |
+| 给加密应用划定安全边界 | 顺利写出了密钥协商、签名代码 | 但"未经审计""不建议用于敏感场景"的声明，由人自己写进 README |
+
+共同点：**AI 提供能力与方案，人负责拍板与划边界。**
+
+完整叙事与"先试再问 vs 先问再试"的判据，见 `references/01-协作哲学与判断归属.md`。
+
+## 致敬与致谢
+
+SPN 站在许多开源规范、工具与社区的肩膀上。以下内容为本仓库**直接引用、对齐或受其启发**，均按其各自许可证使用，且**未复制其源代码**（遵循 `references/06` 的"引用不复制"原则）：
+
+- **Anthropic Agent Skills** — `skills/spn/` 的 `SKILL.md` 采用其官方 Agent Skills 规范（frontmatter + 描述式触发）。规范见 [`anthropics/skills`](https://github.com/anthropics/skills)。
+- **知识共享（Creative Commons）** — 全部文档采用 **CC BY 4.0**（署名 4.0 国际）许可，许可文本由 CC 官方发布。
+- **Keep a Changelog / Semantic Versioning** — `CHANGELOG.md` 与版本号遵循其约定。
+- **策展式生态索引（`references/06`）** — 其中列出的同类项目、技能集合、安全与文档工具、插件与 MCP，均为本仓库调研与延伸阅读的源头，详见该文。
+- **CI 工具链** — 密钥扫描 [`gitleaks`](https://github.com/gitleaks/gitleaks)、死链检查 [`lychee`](https://github.com/lycheeverse/lychee)、术语检查 [`vale`](https://github.com/errata-ai/vale) 为本仓库的质量保障提供支撑。
+
+> 本仓库自身的规则内容（含 `references/07`、`08` 两份工作流模板）为作者原创，以 CC BY 4.0 共享；如使用了你的成果，欢迎在 issue 中告知以便补正署名。
+
 ## 已知局限
 
 - 本规则针对"人不懂代码"的场景优化。专业开发者使用会嫌冗余，应遵循各自团队规范。
 - `references/02-上线前安全自查.md` 中的 SQL 与命令以 Supabase / Postgres 为例，Firebase、Cloudflare D1 等其他后端需自行调整。
 - 文中引用的安全事件与平台免费额度核实于 2026 年 10 月，会随时间变化，使用前请复核。
 - **本规则不能替代专业安全审计。** 涉及他人真实敏感数据（医疗、金融、身份信息）的应用，仍建议寻求专业审查。
-- 参考资料 `01`–`06` 及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 均已提供英文版，见 `docs/`；`personal/` 仍仅中文。
-
-## 贡献
-
-欢迎提交 issue 与 pull request。
-
-- Bug 与想法：写清"你做了什么、期望什么、实际发生了什么"。
-- 结构性改动（架构、依赖、安全相关）请先开 issue 对齐方向。
-- 中英文均可，英文写得简单也没关系。
-- 通用规则与作者自用规则的分界、如何新增一条规则，见 `CONTRIBUTING.md`。
+- 参考资料 `01`–`08` 及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 均已提供英文版，见 `docs/`；`personal/` 仍仅中文。
 
 ## 许可证
 
@@ -153,4 +206,13 @@ SPN/
 
 在署名的前提下，你可以自由使用、转载、修改本仓库文档，并可用于商业或非商业用途；代码依据 MIT 许可证使用。完整条款见对应许可证文件。
 
-> 说明：`LICENSE`（MIT）会被 GitHub 自动识别并在仓库侧栏显示徽章；文档采用的 CC BY 4.0 以 `LICENSE-DOCS.md` 为准。
+> 说明：`LICENSE`（MIT）会被 GitHub 自动识别并在仓库侧栏显示徽章；文档采用的 CC BY 4.0 以 `LICENSE-DOCS.md` 为准（GitHub 侧栏仅自动识别 CC0-1.0，不识别 CC BY 4.0）。
+
+## 贡献
+
+欢迎提交 issue 与 pull request。
+
+- Bug 与想法：写清"你做了什么、期望什么、实际发生了什么"。
+- 结构性改动（架构、依赖、安全相关）请先开 issue 对齐方向。
+- 中英文均可，英文写得简单也没关系。
+- 通用规则与作者自用规则的分界、如何新增一条规则，见 `CONTRIBUTING.md`。
