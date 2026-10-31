@@ -13,6 +13,7 @@ SPN/
 ├── references/      ← 通用规则（共 8 篇）
 ├── docs/            ← 英文完整镜像
 ├── skills/spn/      ← 可安装技能包（含 INSTALL.md）
+├── scripts/         ← 发布与校验脚本（release.py / check_links.py）
 └── personal/        ← 作者自用的一层，⚠️ 不是通用规则的一部分
 ```
 

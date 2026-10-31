@@ -23,6 +23,8 @@ build/
 .out/
 node_modules/
 coverage/
+__pycache__/
+*.pyc
 
 # ===== 本地临时交接文件（不随仓库发布） =====
 HANDOFF.local.md

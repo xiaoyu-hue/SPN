@@ -22,13 +22,14 @@ jobs:
           # references/ 与英文镜像 docs/ 下的对应文件。
           # references/03（根目录中文版与 docs/ 英文版均为同一份教学文档）专门讲"别写死数字"，
           # 整篇都是反面示例，中英文版一并排除；SKILL.md 等里"写死值 → 相对描述"的教学句式（含 →）也排除。
+          # 链接里的版本号（badge / releases/tag / blob）属于可追溯的引用，不算写死，故排除含 http(s):// 的行。
           fail=0
           for f in README.md AGENTS.md SKILL.md references/*.md docs/README.md docs/AGENTS.md docs/SKILL.md docs/SECURITY.md docs/CONTRIBUTING.md docs/references/*.md; do
             [ -f "$f" ] || continue
             case "$f" in
               *"references/03"*) continue ;;
             esac
-            matches=$(grep -nE '[0-9]{3,}[[:space:]]*(项测试|个模块|条测试|测试|模块|时间线|工具|书)|v[0-9]+\.[0-9]+\.[0-9]+' "$f" | grep -vE '❌|而不是|v1\.0\.0|→' || true)
+            matches=$(grep -nE '[0-9]{3,}[[:space:]]*(项测试|个模块|条测试|测试|模块|时间线|工具|书)|v[0-9]+\.[0-9]+\.[0-9]+' "$f" | grep -vE '❌|而不是|→|https?://' || true)
             if [ -n "$matches" ]; then
               echo "::error file=$f::发现疑似写死的数字，请改为相对描述或标注'截至某版本'："
               echo "$matches"
@@ -40,3 +41,21 @@ jobs:
             exit 1
           fi
           echo "OK: 未发现写死数字"
+
+      - name: 检查技能包快照与根目录一致
+        run: |
+          # skills/spn/AGENTS.md 是根目录 AGENTS.md 的发布快照（仅多一段说明注释）。
+          # 规则只允许在根目录改，改完同步到技能包，避免两份副本各说各话。
+          python3 - <<'PY'
+          import re
+          import sys
+
+          root = open("AGENTS.md", encoding="utf-8").read()
+          snap = open("skills/spn/AGENTS.md", encoding="utf-8").read()
+          snap = re.sub(r"\A<!--.*?-->\n\n", "", snap, count=1, flags=re.S)
+          if root != snap:
+              print("::error file=skills/spn/AGENTS.md::与根目录 AGENTS.md 不同步")
+              print("修复：把根目录 AGENTS.md 内容重新复制到 skills/spn/AGENTS.md（保留首行快照注释）")
+              sys.exit(1)
+          print("OK: 技能包快照与根目录一致")
+          PY

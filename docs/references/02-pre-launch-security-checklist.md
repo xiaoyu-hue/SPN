@@ -151,7 +151,7 @@ Precedent for rule 6: in July 2025, Replit's agent deleted a user's production d
 
 ## 8. Non-coder friendly: let the AI run the checks for you (no terminal / no SQL)
 
-> Added after v1.0.0 to resolve a contradiction: this list asks you to run SQL / curl / grep, but the audience "can't read code." **You don't need to know how** — have the AI run them in your project environment and just read what it reports back.
+> This section resolves a contradiction: this list asks you to run SQL / curl / grep, but the audience "can't read code." **You don't need to know how** — have the AI run them in your project environment and just read what it reports back.
 
 Send this to your AI (replace the brackets):
 ```

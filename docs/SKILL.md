@@ -170,7 +170,7 @@ See [`references/03-documentation-disclosure-maintenance.md`](references/03-docu
 - **Three-perspective analysis**: for important decisions, require the AI to analyze from **full rebuttal → switch to support → neutral comparison**, not just hand you one conclusion.
 - **Debug three-step**: on error the AI must **describe the error → explain the cause in plain language → give fix steps**; no rewriting blindly before the root cause is found.
 
-These two were added later by the maintainer and were missing from the original v1.0.0; they are now fixed into `AGENTS.md`.
+Both are now fixed into `AGENTS.md` and take effect as soon as an Agent loads it.
 
 ---
 

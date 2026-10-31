@@ -66,6 +66,8 @@ If you're a professional developer, parts of this (e.g. "translate the jargon," 
 - Documentation and quality gates are enforced in CI: secret scan **gitleaks**, dead-link check **lychee**, terminology **vale**, and hardcoded-number check **doc-lint** (see `.github/workflows/`).
 - To change the rules: edit the **root directory** (the source of truth), then let the publish flow sync to `docs/` (English) and `skills/spn/` (package).
 - To bring the rules into your own Agent: load `skills/spn/`, or copy the root `AGENTS.md` into your project.
+- **To cut a release**: log the change under `[Unreleased]` in `CHANGELOG.md`, then run `python3 scripts/release.py <version>` to preview the diff; add `--yes` once it looks right. The script syncs the badges, version strings, and package links, runs the checks, then tags and creates the Release.
+- **To check links**: `python3 scripts/check_links.py` verifies every relative link and anchor across the repo.
 
 ## Look things up as needed
 
@@ -102,6 +104,7 @@ SPN/
 │   └── 08-doc-sync.md               ← workflow template: pre-release sync
 ├── docs/                  ← English edition: full mirror (README + AGENTS + SKILL + references)
 ├── skills/spn/            ← self-contained, installable skill package (Chinese)
+├── scripts/               ← release.py (one-command release) / check_links.py (link self-check)
 ├── personal/              ← the author's own layer, safe to skip
 └── LICENSE-DOCS.md        ← CC BY 4.0 terms for all documentation
 ```

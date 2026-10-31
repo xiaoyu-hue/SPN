@@ -66,6 +66,8 @@ AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效
 - 本仓库的文档与质量保障已落地为 CI：密钥扫描 **gitleaks**、死链检查 **lychee**、术语一致 **vale**、数字写死检查 **doc-lint**（详见 `.github/workflows/`）。
 - 想修改规则：请回到**根目录**（规范源）编辑，再由发布流程同步到 `docs/`（英文镜像）与 `skills/spn/`（发布包）。
 - 想引入本规则到自己的 Agent：直接加载 `skills/spn/`，或把根目录 `AGENTS.md` 拷进项目。
+- **想发版**：先在 `CHANGELOG.md` 的 `[Unreleased]` 写下改动，再执行 `python3 scripts/release.py <版本号>`（预览 diff），确认无误后加 `--yes`。脚本会自动同步徽章、版本号、技能包链接，跑完校验再打 tag、建 Release。
+- **想自查链接**：`python3 scripts/check_links.py`，检查全仓库 Markdown 的相对链接与锚点。
 
 ## 按角色查阅
 
@@ -104,6 +106,7 @@ SPN/
 │   └── 08-文档同步规范.md        ← 工作流规范：发布前同步
 ├── docs/                  ← 英文完整镜像（README + AGENTS + SKILL + references）★发布副本
 ├── skills/spn/            ← 自包含、可安装的技能包（含 INSTALL.md）★发布副本
+├── scripts/               ← release.py（一键发版）/ check_links.py（链接自检）
 ├── personal/              ← 作者自用层，可跳过（非通用规则，已脱敏）
 └── LICENSE-DOCS.md        ← 文档 CC BY 4.0 许可
 ```

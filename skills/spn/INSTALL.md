@@ -1,76 +1,131 @@
-# 安装 SPN 技能包（skills/spn/）
+# 安装 SPN 技能包
 
-本目录是一个**自包含、可被 AI Agent 直接加载**的技能包。核心规则已内联在 `SKILL.md` 中，深度参考文档通过 GitHub 链接引用（离线不影响核心规则使用）。
+本目录是一个**自包含、可直接被 AI Agent 加载**的技能包。核心规则完整内联在 `SKILL.md`，深度参考按版本号锁定到 GitHub，离线时不影响核心规则。
 
-## 方式一：作为 Agent Skills 安装（推荐，Claude Code / Cursor / Codex / Windsurf 等）
+## 包里有什么
 
-把整个 `spn/` 目录放到 Agent 的 skills 目录下即可，不同工具路径略有差异：
+| 文件 | 作用 | 谁读它 |
+|---|---|---|
+| `SKILL.md` | 技能本体：元数据 + 完整规则（约 200 行） | Agent（识别到 `spn` 技能时加载） |
+| `AGENTS.md` | 精简版规则，可直接拷进项目根目录 | Agent（开工前自动加载） |
+| `INSTALL.md` | 本文件，给人看 | 你 |
+
+`SKILL.md` 已通过 Agent Skills 官方校验器（`agentskills validate`）。
+
+## 先选一种方式
+
+| 你的情况 | 用哪种 | 用时 |
+|---|---|---|
+| 用 Claude Code / CodeBuddy 等支持 skills 目录的工具 | **方式一** | 1 分钟 |
+| 用支持 `AGENTS.md` 的工具（Cursor、Codex、Aider、Windsurf 等） | **方式二** | 30 秒 |
+| 用 Gemini CLI 或 GitHub Copilot | **方式三** | 1 分钟 |
+| 不确定自己的工具支持什么 | **方式二**（最通用） | 30 秒 |
+
+---
+
+## 方式一：作为 Agent Skills 安装
+
+把整个 `spn/` 目录放进工具的技能目录。**目录名必须保持 `spn`**（技能规范要求 `name` 与父目录同名，否则校验不通过）。
+
+**Claude Code**
 
 ```bash
-# Claude Code（项目级，放在仓库里随项目走）
+# 用户级：所有项目生效
+cp -r skills/spn ~/.claude/skills/spn
+
+# 项目级：随项目走，团队共享
 mkdir -p .claude/skills
 cp -r skills/spn .claude/skills/spn
-
-# Claude Code（用户级，对所有项目生效）
-# macOS / Linux:
-cp -r skills/spn ~/.claude/skills/spn
-# Windows (PowerShell):
-# Copy-Item -Recurse skills/spn $env:USERPROFILE\.claude\skills\spn
-
-# Cursor（项目级）
-mkdir -p .cursor/skills
-cp -r skills/spn .cursor/skills/spn
 ```
 
-放入后，Agent 在对话中识别到 `spn` 技能即可自动遵循其中的协作规则。
+Windows PowerShell：
+
+```powershell
+Copy-Item -Recurse skills\spn "$env:USERPROFILE\.claude\skills\spn"
+```
+
+**CodeBuddy**
+
+```bash
+cp -r skills/spn ~/.codebuddy/skills/spn
+```
+
+**其它工具**：路径通常是 `~/.<工具名>/skills/` 或项目内 `.<工具名>/skills/`，以该工具文档为准。
 
 ## 方式二：作为 AGENTS.md 规则基线（最通用）
 
-`AGENTS.md` 是 Agent 实际加载执行的精简规则。把它拷进**任意项目根目录**，支持 AGENTS.md 的工具（Cursor、Codex、Copilot、Gemini CLI、Aider、Windsurf 等）会在开工前自动加载：
+`AGENTS.md` 是 Agent 实际加载执行的精简规则。拷进**任意项目的根目录**即可：
 
 ```bash
 cp skills/spn/AGENTS.md 你的项目/AGENTS.md
 ```
 
-> 提示：Claude Code 在自身配置文件存在时默认不读 AGENTS.md，需要手动导入。稳妥做法是用 AGENTS.md 作共享基线，再写一层薄的工具专属文件（例如在 `CLAUDE.md` 里写 `@AGENTS.md`）。
+支持 AGENTS.md 的工具（Cursor、Codex、Copilot、Gemini CLI、Aider、Windsurf 等）会在开工前自动加载。
 
-## 方式三：CodeBuddy / WorkBuddy
+> **Claude Code 特别说明**：存在 `CLAUDE.md` 时，Claude Code 默认不读 `AGENTS.md`。稳妥做法是以 `AGENTS.md` 作为共享基线，再写一层薄的专属文件：
+>
+> ```bash
+> echo "@AGENTS.md" > CLAUDE.md
+> ```
 
-将 `skills/spn/` 整体放入本工具的技能目录（如 `~/.codebuddy/skills/spn/`），工具即可识别并调用该技能。
+## 方式三：Gemini CLI / GitHub Copilot 的专属文件
 
-## 方式四：Gemini CLI / GitHub Copilot 的薄适配文件
-
-部分工具不读取 `AGENTS.md` 或 skills 目录，而是认自己的专属文件。做法是**建一个薄文件，把 SPN 规则嵌进去**（规则本体仍以仓库根目录为唯一真相，避免多份漂移）：
-
-### Gemini CLI
-项目根建 `GEMINI.md`，内容即为 `skills/spn/AGENTS.md`：
+这两个工具认自己的文件名。**建薄文件指向规则本体**，不要让规则出现第二份：
 
 ```bash
+# Gemini CLI
 cp skills/spn/AGENTS.md GEMINI.md
-```
 
-### GitHub Copilot
-仓库建 `.github/copilot-instructions.md`，内容同上：
-
-```bash
+# GitHub Copilot
 mkdir -p .github
 cp skills/spn/AGENTS.md .github/copilot-instructions.md
 ```
-
-> 这类「薄适配文件」只负责把规则喂给对应工具。要改规则，改根目录源，再重新 `cp` 覆盖即可。
 
 ---
 
 ## 验证是否生效
 
-在加载了该技能的会话里说一句：「我不懂代码，但想用 AI 做个网页应用，先别写代码，按 SPN 的规则来。」
+新开一个会话，说这句：
 
-若它先让你确认目标与验收标准、遇到不懂的词主动翻译、对删库/上线/付费等要求先问你——说明规则已生效。
+> 我不懂代码，但想用 AI 做个网页应用。先别写代码，按 SPN 的规则来。
 
-## 更新
+**三条可观察的行为**，出现两条以上说明已生效：
 
-本技能包的规范源在仓库根目录（`https://github.com/xiaoyu-hue/SPN`）。升级时重新执行上面的 `cp` 命令覆盖即可。
+1. 它先问清目标与"做完的标志"，而不是直接开写
+2. 你问到不懂的词时，它主动翻译成大白话
+3. 提到删除、上线、付费时，它停下来等你确认
+
+如果它直接开始写代码，说明规则没被加载——检查文件是否放对了位置。
+
+## 升级
+
+技能包版本与仓库 tag 一一对应（见 `SKILL.md` 的 `metadata.version`）。升级时重新拷一次覆盖：
+
+```bash
+cp -r skills/spn ~/.claude/skills/spn   # 覆盖旧版本
+```
+
+想固定在某一个版本，从 Release 页下载对应 tag 的仓库快照，别用 `main`。
+
+## 卸载
+
+删掉目录即可，本技能包不写入任何全局配置、不联网、不留残留：
+
+```bash
+rm -rf ~/.claude/skills/spn
+```
+
+## 常见问题
+
+**Q：`references/` 点不开？**
+链接锁定到发布 tag 且需要联网。核心规则已内联在 `SKILL.md`，离线只影响"点开看细节"。
+
+**Q：能不能改规则？**
+可以。改**仓库根目录**的 `AGENTS.md` / `references/`，再同步到技能包——两份副本的一致性由 CI 强制检查（`doc-lint`）。直接改包内副本会导致 CI 失败。
+
+**Q：为什么技能包里的 `AGENTS.md` 顶部多一行注释？**
+那是"发布快照"标记，提醒改规则请回根目录。CI 比对时会自动忽略这一行。
 
 ## 许可证
 
-技能包内全部内容随仓库以 **CC BY 4.0** 提供（见仓库 `LICENSE-DOCS.md`）。可自由使用、再分发、修改，需署名。
+技能包内全部内容随仓库以 **CC BY 4.0**（知识共享署名 4.0 国际许可协议）提供，可自由使用、再分发、修改，需署名。详见仓库 `LICENSE-DOCS.md`。
