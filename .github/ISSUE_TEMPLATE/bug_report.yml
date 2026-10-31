@@ -1,0 +1,32 @@
+name: 报告问题 / Bug
+description: 规则或参考资料里写得不对、有歧义、命令已过时
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: where
+    attributes:
+      label: 出问题的文件
+      options:
+        - AGENTS.md
+        - SKILL.md
+        - references/01（协作哲学）
+        - references/02（上线前安全自查）
+        - references/03（文档与局限披露）
+        - references/04（提示词库）
+        - README / 其他
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 你做了什么、期望什么、实际发生了什么
+      description: 按"做了什么 / 期望 / 实际"三行写，越具体越好
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: 你建议的修正方向（可选）
+    validations:
+      required: false

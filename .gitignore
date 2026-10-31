@@ -1,0 +1,29 @@
+# ===== 操作系统 / 编辑器 =====
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+*.sublime-*
+
+# ===== 密钥 / 敏感文件（绝不可提交） =====
+.env
+.env.*
+*.key
+*.pem
+*.p12
+secrets.json
+credentials.json
+
+# ===== 构建产物 / 依赖 =====
+dist/
+build/
+.next/
+.out/
+node_modules/
+coverage/
+
+# ===== 本地临时交接文件（不随仓库发布） =====
+HANDOFF.local.md
+*.local.md

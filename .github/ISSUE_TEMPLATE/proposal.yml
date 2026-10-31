@@ -1,0 +1,29 @@
+name: 提案 / 改进建议
+description: 想加一条规则、改结构、补翻译、或调整许可证
+title: "[Proposal] "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: layer
+    attributes:
+      label: 这条改动属于哪一层？
+      options:
+        - 通用层（AGENTS.md / SKILL.md / references/）
+        - 个人层（personal/）
+        - 仓库治理（许可证 / CI / 模板等）
+        - 不确定
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: 为什么要改？对应了哪类真实发生的问题？
+      description: 本仓库原则：每条规则对应一类真实问题，不预先堆砌
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 具体改什么？
+    validations:
+      required: false

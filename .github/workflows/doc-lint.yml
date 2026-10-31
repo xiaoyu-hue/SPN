@@ -1,0 +1,38 @@
+name: doc-lint
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 检查文档是否写死会变化的数字
+        run: |
+          # 本仓库核心原则：会随代码变化的数字（测试数、版本号、条目数、模块数）
+          # 不要手写进文档，否则一改代码就失真。
+          # 这里只扫描两个最常被直接拷走、必须保持干净的文件：README.md 与 AGENTS.md。
+          # references/03 故意用"573 项测试"等作为反面教学示例，故不在扫描范围。
+          fail=0
+          for f in README.md AGENTS.md; do
+            [ -f "$f" ] || continue
+            # 跳过：含 ❌ 的教学示例行、反面示例（"而不是…"）、项目自身版本号（v1.0.0）
+            matches=$(grep -nE '[0-9]{3,}[[:space:]]*(项测试|个模块|条测试|测试|模块|时间线|工具|书)|v[0-9]+\.[0-9]+\.[0-9]+' "$f" | grep -vE '❌|而不是|v1\.0\.0' || true)
+            if [ -n "$matches" ]; then
+              echo "::error file=$f::发现疑似写死的数字，请改为相对描述或标注'截至某版本'："
+              echo "$matches"
+              fail=1
+            fi
+          done
+          if [ "$fail" = "1" ]; then
+            echo "文档校验未通过，请修正后再推送。"
+            exit 1
+          fi
+          echo "OK: 未发现写死数字"
