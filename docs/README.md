@@ -46,6 +46,7 @@ Drop the root `AGENTS.md` into your project directory. Tools that support AGENTS
 | Not sure how to phrase a request | [`references/04-prompt-library.md`](references/04-prompt-library.md) |
 | See real good/bad collaboration examples | [`references/05-collaboration-examples.md`](references/05-collaboration-examples.md) |
 | Curated external projects / Skills / plugins | [`references/06-ecosystem-and-integrations.md`](references/06-ecosystem-and-integrations.md) |
+| Reusable workflow templates | [`templates/DECISION_REVIEW.md`](templates/DECISION_REVIEW.md) · [`templates/DOC_SYNC.md`](templates/DOC_SYNC.md) |
 | Full rules, ready to load into an agent | [`../skills/spn/`](../skills/spn/) |
 
 ## Repository structure
@@ -58,7 +59,8 @@ SPN/
 ├── AGENTS.md              ← universal rules, for everyone (what the AI actually loads)
 ├── SKILL.md               ← skill entry point and full documentation (Chinese)
 ├── references/            ← universal rules in detail (6 docs, Chinese)
-├── docs/                  ← English edition: full mirror (README + AGENTS + SKILL + references)
+├── templates/             ← general workflow templates (decision review / doc sync)
+├── docs/                  ← English edition: full mirror (README + AGENTS + SKILL + references + templates)
 ├── skills/spn/            ← self-contained, installable skill package (Chinese)
 ├── personal/              ← the author's own layer, safe to skip
 └── LICENSE-DOCS.md        ← CC BY 4.0 terms for all documentation

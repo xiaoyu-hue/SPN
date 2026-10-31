@@ -11,12 +11,13 @@ SPN/
 ├── AGENTS.md        ← 通用规则，所有人用（AI 实际加载执行）
 ├── SKILL.md         ← 技能入口 / 完整版说明
 ├── references/      ← 通用规则（共 6 篇）
+├── templates/       ← 通用工作流模板（决策审查 / 文档同步）
 ├── docs/            ← 英文完整镜像
 ├── skills/spn/      ← 可安装技能包（含 INSTALL.md）
 └── personal/        ← 作者自用的一层，⚠️ 不是通用规则的一部分
 ```
 
-- **通用层**（`AGENTS.md` / `SKILL.md` / `references/`）：给所有人用，应保持与技术栈无关、与"个人情况"无关。
+- **通用层**（`AGENTS.md` / `SKILL.md` / `references/` / `templates/`）：给所有人用，应保持与技术栈无关、与"个人情况"无关。
 - **个人层**（`personal/`）：只放"只对该作者成立"的上下文（他的项目、他的技术栈、他的待办）。处理一般任务时跳过。
 
 ---

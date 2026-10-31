@@ -43,7 +43,7 @@ AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效
 | 看真实场景的"好/坏协作"对照 | `references/05-协作示例画廊.md` |
 | 想了解同类项目 / 优秀 skill / 插件怎么整合 | `references/06-生态与整合.md` |
 
-> 以上四篇参考资料及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 的**英文完整版**均可在 [`docs/`](./docs/) 找到。
+> 以上参考资料及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 的**英文完整版**均可在 [`docs/`](./docs/) 找到；可直接套用的**通用工作流模板**（决策审查清单、文档同步规范）见 [`templates/`](./templates/)（英文版 [`docs/templates/`](./docs/templates/)）。
 
 ## 仓库结构
 
@@ -57,7 +57,8 @@ SPN/
 ├── AGENTS.md              ← 通用规则，所有人均可使用（AI 实际加载执行）
 ├── SKILL.md               ← 技能入口与完整说明（规范源）
 ├── references/            ← 通用规则详解（共 6 篇，规范源）
-├── docs/                  ← 英文完整镜像（README + AGENTS + SKILL + references）★发布副本
+├── templates/             ← 通用工作流模板（决策审查 / 文档同步，含英文版 docs/templates/）
+├── docs/                  ← 英文完整镜像（README + AGENTS + SKILL + references + templates）★发布副本
 ├── skills/spn/            ← 自包含、可安装的技能包（含 INSTALL.md）★发布副本
 ├── personal/              ← 作者自用层，可跳过（非通用规则，已脱敏）
 └── LICENSE-DOCS.md        ← 文档 CC BY 4.0 许可

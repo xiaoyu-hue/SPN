@@ -7,6 +7,7 @@
 
 ### 新增
 - `docs/` — 英文完整镜像：README、AGENTS、SKILL、SECURITY、CONTRIBUTING 及全部 4 篇 references 的英文版，与中文版结构一一对应
+- `templates/` — 通用工作流模板（已去除 sonder520 项目专属痕迹，可作任意项目可复用模板）：`决策审查清单`（DECISION_REVIEW，不可逆/花钱/发布/影响走向决定前的「决策三问 + 五层追问 + 反悔场景速查 + 拍板记录模板」）、`文档同步规范`（DOC_SYNC，「唯一真源原则」+ 同步清单 + SemVer 判定 + 发布前验证 + 同步检查模板）；英文镜像见 `docs/templates/`
 - `skills/spn/` — 自包含、可安装的技能包（Anthropic Agent Skills 格式）：带 frontmatter 的 `SKILL.md`、可直接加载的 `AGENTS.md` 副本、各平台安装说明 `INSTALL.md`；深度参考走 GitHub 链接避免重复
 
 ### 修复
