@@ -12,7 +12,7 @@ SPDX-License-Identifier: CC-BY-4.0
 - `CODE_OF_CONDUCT.md`、`CODE_OF_CONDUCT.en.md`
 - `AGENTS.md`、`GLOBAL.md`
 - `docs/` 目录下的全部文件
-- 本文件（`LICENSE-DOCS`）本身
+- 本文件（`LICENSE-DOCS.md`）本身
 
 以下内容**不适用**本许可：
 
