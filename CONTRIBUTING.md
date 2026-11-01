@@ -15,7 +15,8 @@ SPN/
 ├── skills/
 │   ├── spn/         ← 可安装技能包（中文，含 INSTALL.md）
 │   └── spn-en/      ← 可安装技能包（英文）
-├── scripts/         ← 发布与校验脚本（release.py / check_links.py）
+├── scripts/         ← 发布与校验脚本（见下方「第五节」）
+├── FACTS.md         ← 带时效的事实登记表（给 CI 读）
 └── personal/        ← 作者自用的一层，⚠️ 不是通用规则的一部分
 ```
 
@@ -58,7 +59,48 @@ SPN/
 
 ---
 
-## 五、许可证分层
+## 五、改了这里，就必须同步那里（否则 CI 会红）
+
+**根目录是唯一规范源。** `docs/`（英文镜像）与 `skills/`（可安装技能包）都是**发布副本**——
+不要直接编辑它们，改了也会被覆盖，而且会让"用户装到的规则"和"仓库显示的规则"分叉。
+
+| 你改了规范源 | 必须同步到 | 谁来同步 |
+|---|---|---|
+| `AGENTS.md` | `skills/spn/AGENTS.md` | **自动**（`sync_snapshots.py`） |
+| `docs/AGENTS.md` | `skills/spn-en/AGENTS.md` | **自动** |
+| `SKILL.md` | `skills/spn/SKILL.md` | **自动** |
+| `docs/SKILL.md` | `skills/spn-en/SKILL.md` | **自动** |
+| `references/01`–`08`（中） | `docs/references/*`（英） | **手工**（翻译）
+
+一行命令搞定自动部分：
+
+```bash
+python3 scripts/sync_snapshots.py --apply   # 写入
+python3 scripts/sync_snapshots.py --check   # 只校验，CI 每次都跑这一步
+```
+
+> 包专属措辞（版本头、"30 秒版本"、引用段的提示语）写死在 `scripts/sync_snapshots.py` 的
+> `HEADER_*` / `SECTION_*` 常量里。**如果你改了源里被它引用的那几句话，脚本会报错而不是静默漏替换**——
+> 按报错提示同步更新常量即可。
+
+### scripts/ 里都有什么
+
+| 脚本 | 干什么 | 什么时候跑 |
+|---|---|---|
+| `release.py` | 一键发版（默认 dry-run，`--yes` 才写盘推送） | 发版时，手工执行 |
+| `sync_snapshots.py` | 规范源 → 发布副本，含一致性校验 | 每次提交（CI）+ 发版时 |
+| `doc_lint.py` | 抓入口文件里写死、会失真的数字 | 每次提交（CI） |
+| `check_facts.py` | 提醒 `FACTS.md` 里已登记的事实过期了 | 每次提交（CI，非阻塞） |
+| `check_links.py` | 全仓库相对链接与锚点自检 | 每次提交 + 发版时 |
+| `run_tests.py` | scripts/ 的单元测试 | 每次提交（CI，三系统） |
+| `validate_skills.py` | 校验技能包是否符合 Agent Skills 规范 | 每次提交（CI） |
+
+**如果你给 scripts/ 加了功能，必须同步加测试**（`AGENTS.md` 第 92 行对本仓库同样生效）。
+新增的时效性数据（调研数字、平台额度、价格）登记进 `FACTS.md`，不要散落在文档里。
+
+---
+
+## 六、许可证分层
 
 - 代码（脚本、CI 配置）→ **MIT**（`LICENSE`）
 - 文档（规则、提示词、参考资料）→ **CC BY 4.0**（`LICENSE-DOCS.md`）
@@ -67,17 +109,32 @@ SPN/
 
 ---
 
-## 六、翻译
+## 七、翻译
 
-参考资料 `01`–`08` 及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 的英文完整版已统一放在 `docs/`；`personal/` 仍仅中文。翻译请保持"大白话优先、术语括号解释、如实披露"的原文风格。
+参考资料 `01`–`08` 及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 的英文完整版已统一放在 `docs/`；`personal/` 仍仅中文。
 翻译请保持"大白话优先、术语括号解释、如实披露"的原文风格。
 
 ---
 
-## 七、提交前的自检
+## 八、提交前的自检
+
+提交前请过一遍下面几项，本地能跑的全跑一遍再推送，会比等 CI 红更快：
+
+```bash
+python3 scripts/run_tests.py           # scripts/ 的单元测试
+python3 scripts/sync_snapshots.py --check   # 发布副本是否与源一致
+python3 scripts/doc_lint.py            # 有没有写死的失真数字
+python3 scripts/check_links.py         # 链接与锚点
+python3 scripts/check_facts.py         # 有没有该复核的事实
+```
+
+检查清单：
 
 - [ ] 改动落在正确的层（通用 / 个人）
 - [ ] 没有把同一段内容重复写多遍
-- [ ] 文档里的数字没有写死（或已标注"截至某版本"）
+- [ ] **只改了规范源，没有直接编辑 `docs/` 或 `skills/` 的发布副本**
+- [ ] 已执行 `sync_snapshots.py --apply`（如改了 `AGENTS.md` / `SKILL.md`）
+- [ ] 文档里的数字没有写死（时效性数据已登记进 `FACTS.md`）
+- [ ] 改动了 `scripts/` 就补了对应的测试
 - [ ] 如改动涉及安全红线，已先开 issue 对齐
 - [ ] PR 说明写清：你做了什么、为什么、期望效果

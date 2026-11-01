@@ -6,7 +6,7 @@
 
 ## Why you must do this
 
-This isn't theoretical risk — it has happened at scale (all publicly reported, verified 2026-10):
+This isn't theoretical risk — it has happened at scale (all publicly reported; **exact counts, ratios and their verification dates are logged in `FACTS.md`, which CI checks for staleness**):
 
 - **CVE-2025-48757**: scanning 1,645 AI-generated apps, 170 had Supabase tables readable/writable unauthenticated, exposing emails, addresses, third-party API keys
 - **UpGuard survey**: ~16,000 Supabase-hosted projects with varying degrees of personal-data exposure — names, addresses, phones, and some passwords and auth tokens
@@ -175,7 +175,7 @@ The parts you only need to click (zero terminal):
 
 ## 9. Adapting to other backends (Supabase / Neon / Cloudflare D1)
 
-The SQL and commands here use Supabase / Postgres. Other backends differ in mechanism, but **the items to check are identical** (RLS equivalent, secrets never in frontend, privilege test, rate limiting). Tradeoffs of three common backends (verified 2026-10; will go stale, re-check before relying):
+The SQL and commands here use Supabase / Postgres. Other backends differ in mechanism, but **the items to check are identical** (RLS equivalent, secrets never in frontend, privilege test, rate limiting). Tradeoffs of three common backends (quotas and prices change often — they're logged in `FACTS.md` with verification dates; re-check before relying on them):
 
 | Option | Free quota | First wall you hit |
 |---|---|---|

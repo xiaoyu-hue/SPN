@@ -5,13 +5,12 @@
     python3 scripts/release.py 1.0.1          # 预览：只打印将要改的内容，不写盘、不推送
     python3 scripts/release.py 1.0.1 --yes    # 真正发布：写盘 → 校验 → 提交 → 打 tag → 推送 → 建 Release
 
-它做六件事（顺序固定，任何一步失败即中止）：
+它做五件事（顺序固定，任何一步失败即中止）：
     1. 把 CHANGELOG.md 的 [Unreleased] 内容提升为 [新版本] - 日期，并留一个空的 [Unreleased]
     2. 同步中英 README 的版本徽章、Release 链接、页脚版本号
-    3. 同步三个 SKILL.md 的 metadata.version
-    4. 把 skills/spn/SKILL.md 里的 GitHub 链接从旧 tag 改到新 tag（保证技能包可复现）
-    5. 用根目录 AGENTS.md 刷新技能包内的快照
-    6. 跑 doc-lint 规则模拟 + 链接检查，全绿才提交
+    3. 同步 SKILL.md 的 metadata.version（仅规范源两份：根目录与 docs/）
+    4. 由 sync_snapshots.py 生成两个技能包的 SKILL.md 正文（链接锁定到新 tag）与 AGENTS.md 快照
+    5. 跑 doc-lint 规则模拟 + 链接检查，全绿才提交
 
 设计取舍：
     - 默认 dry-run。发布是不可逆动作（公开 tag、公开 Release），必须先看一眼 diff。
@@ -32,52 +31,17 @@ import tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 BADGE_FILES = ["README.md", "docs/README.md"]
-SKILL_FILES = ["SKILL.md", "docs/SKILL.md", "skills/spn/SKILL.md", "skills/spn-en/SKILL.md"]
+# 技能包副本（skills/spn/SKILL.md、skills/spn-en/SKILL.md）的版本号与正文
+# 已由 sync_snapshots.py 统一生成，这里只处理真正独立的规范源文件。
+SKILL_FILES = ["SKILL.md", "docs/SKILL.md"]
 
-# 技能包三件套：(包内 SKILL.md, 包内 AGENTS.md 快照, 快照来源, 快照注释)
-# 规范要求 name 与父目录同名，所以中英两个包只能分别叫 spn / spn-en。
-PACKAGES = [
-    (
-        "skills/spn/SKILL.md",
-        "skills/spn/AGENTS.md",
-        "AGENTS.md",
-        "<!-- 发布快照：本文件同步自仓库根目录 AGENTS.md。修改规则请改根目录源，再同步到此。 -->\n\n",
-    ),
-    (
-        "skills/spn-en/SKILL.md",
-        "skills/spn-en/AGENTS.md",
-        "docs/AGENTS.md",
-        "<!-- Release snapshot: synced from docs/AGENTS.md in the repository root. "
-        "Edit the source there, then re-sync here. -->\n\n",
-    ),
-]
+# 技能包副本（skills/spn/SKILL.md、skills/spn-en/SKILL.md）的版本号与正文
+# 这里不再手写 PACKAGES —— 两份同步逻辑各写一遍正是当初 SKILL.md 正文漏同步的原因。
 
-# 与 .github/workflows/doc-lint.yml 保持一致
-LINT_FILES = ["README.md", "AGENTS.md", "SKILL.md"]
-
-
-def _listdir(rel_dir: str) -> list:
-    full = os.path.join(ROOT, rel_dir)
-    if not os.path.isdir(full):
-        return []
-    return [f"{rel_dir}/{n}" for n in sorted(os.listdir(full)) if n.endswith(".md")]
-
-
-LINT_FILES += _listdir("references")
-LINT_FILES += [
-    "docs/README.md",
-    "docs/AGENTS.md",
-    "docs/SKILL.md",
-    "docs/SECURITY.md",
-    "docs/CONTRIBUTING.md",
-]
-LINT_FILES += _listdir("docs/references")
-
-HARDCODE_RE = re.compile(
-    r"[0-9]{3,}[ \t]*(项测试|个模块|条测试|测试|模块|时间线|工具|书)|v[0-9]+\.[0-9]+\.[0-9]+"
-)
-LINT_EXCLUDE_RE = re.compile(r"❌|而不是|→|https?://")
 SEMVER_RE = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+$")
+
+# 数字写死检查由 scripts/doc_lint.py 单独实现，发版时直接复用同一个入口——
+# 复制一份正则到本文件，就是它后来与 CI 行为漂移、名存实亡的原因。
 
 
 def die(msg: str) -> None:
@@ -85,9 +49,30 @@ def die(msg: str) -> None:
     sys.exit(1)
 
 
-def sh(*args: str, check: bool = True) -> subprocess.CompletedProcess:
+def remote_tag_exists(tag: str) -> bool:
+    """查远端是否已有同名 tag。
+
+    两个健壮性处理（都是被现实教过的）：
+      - 加超时：网络挂起时发版脚本会卡死，而使用者看不出是卡了还是坏了。
+      - 失败时给中文原因：直接抛 subprocess traceback 对不看代码的人是灾难，
+        必须说清"连不上远端"以及下一步该做什么。
+    """
+    r = sh(
+        "git", "ls-remote", "--tags", "origin", f"refs/tags/{tag}",
+        check=False, timeout=30,
+    )
+    if r.returncode != 0:
+        die(
+            "查不到远端仓库，无法确认 tag 是否被占用。\n"
+            "  先运行 git remote -v 看看 origin 是否配好；\n"
+            "  如果是网络问题，修复后重来即可（本次没有改动任何文件）。"
+        )
+    return bool(r.stdout.strip())
+
+
+def sh(*args: str, check: bool = True, timeout: int | None = None) -> subprocess.CompletedProcess:
     return subprocess.run(
-        args, cwd=ROOT, text=True, capture_output=True, check=check
+        args, cwd=ROOT, text=True, capture_output=True, check=check, timeout=timeout
     )
 
 
@@ -128,28 +113,6 @@ def bump_skill(text: str, old: str, new: str) -> str:
     return re.sub(rf'version:[ \t]*"{re.escape(old)}"', f'version: "{new}"', text)
 
 
-def pin_links(text: str, old: str, new: str) -> str:
-    """技能包内的 GitHub 链接锁定到本次 tag，保证安装到的内容可复现。"""
-    text = text.replace(f"blob/v{old}/", f"blob/v{new}/")
-    text = text.replace("blob/main/", f"blob/v{new}/")
-    return text
-
-
-def lint_problems() -> list:
-    problems = []
-    for rel in LINT_FILES:
-        path = os.path.join(ROOT, rel)
-        if not os.path.isfile(path):
-            continue
-        if "references/03" in rel:
-            continue  # 教学文档，整篇是反面示例
-        with open(path, encoding="utf-8") as f:
-            for lineno, line in enumerate(f, 1):
-                if HARDCODE_RE.search(line) and not LINT_EXCLUDE_RE.search(line):
-                    problems.append(f"{rel}:{lineno} 疑似写死数字：{line.strip()[:80]}")
-    return problems
-
-
 def changelog_section(text: str, version: str) -> str:
     m = re.search(rf"^## \[{re.escape(version)}\][^\n]*\n(.*?)(?=^## \[|\Z)", text, re.S | re.M)
     return (m.group(1).strip() if m else "").strip()
@@ -181,7 +144,7 @@ def main() -> int:
         die("工作区不干净，先提交或丢弃改动")
     if sh("git", "tag", "-l", tag).stdout.strip():
         die(f"本地已存在 tag {tag}")
-    if sh("git", "ls-remote", "--tags", "origin", f"refs/tags/{tag}").stdout.strip():
+    if remote_tag_exists(tag):
         die(f"远端已存在 tag {tag}")
 
     # 计算目标内容
@@ -191,9 +154,16 @@ def main() -> int:
         plan[f] = bump_readme(read(f), old, version)
     for f in SKILL_FILES:
         plan[f] = bump_skill(read(f), old, version)
-    for skill_md, snapshot_md, source_md, notice in PACKAGES:
-        plan[skill_md] = pin_links(plan[skill_md], old, version)
-        plan[snapshot_md] = notice + read(source_md)
+
+    # 发布副本（技能包的 SKILL.md 正文 + AGENTS.md 快照）统一由 sync_snapshots 生成，
+    # 避免"版本号在这里改、正文在别处改"的两处逻辑各写一遍。
+    sys.path.insert(0, os.path.join(ROOT, "scripts"))
+    import sync_snapshots  # noqa: E402
+
+    try:
+        plan.update(sync_snapshots.plan(version))
+    except ValueError as exc:
+        die(f"发布副本生成失败：{exc}")
 
     changed = {f: c for f, c in plan.items() if c != read(f)}
     if not changed:
@@ -221,13 +191,16 @@ def main() -> int:
     print(f"✓ 已写入 {len(changed)} 个文件")
 
     # 校验
-    problems = lint_problems()
+    import doc_lint  # noqa: E402
+
+    problems = doc_lint.problems_of(diff_files=list(changed))
     if problems:
         print("\n✗ doc-lint 未通过：")
         for p in problems:
             print("  " + p)
         die("请修正后重新执行（文件已写入，可用 git checkout 撤销）")
     print("✓ doc-lint 通过：未发现写死数字")
+
 
     sys.path.insert(0, os.path.join(ROOT, "scripts"))
     import check_links  # noqa: E402
@@ -254,9 +227,28 @@ def main() -> int:
     sh("git", "tag", "-a", tag, "-m", f"SPN {tag}\n\n{section}")
     print(f"✓ 已创建附注 tag {tag}")
 
-    sh("git", "push", "origin", "main")
-    sh("git", "push", "origin", tag)
-    print(f"✓ 已推送 main 与 {tag}")
+    # 推送失败是常态（远端有新提交、权限不足、网络断了），此时本地已经提交并打好 tag，
+    # 使用者需要知道"现在是什么状态、怎么收拾"，而不是看一段 traceback。
+    for ref in ("main", tag):
+        r = sh("git", "push", "origin", ref, check=False, timeout=120)
+        if r.returncode == 0:
+            print(f"✓ 已推送 {ref}")
+            continue
+        print(f"\n✗ 推送 {ref} 失败：")
+        detail = (r.stderr.strip() or r.stdout.strip()).replace("\n", "\n  ")
+        print("  " + detail)
+        print(
+            f"\n当前状态：本地已提交并且 tag {tag} 已建好，但没推到远端——远端还停在旧版本。\n"
+            f"\n最常见的两个原因：\n"
+            f"  1. 远端有你本地没有的提交 → 先 git pull --rebase 再重新推送\n"
+            f"  2. 没有推送权限或没登录 → 检查权限后重试\n"
+            f"\n重推这两步就行：\n"
+            f"    git push origin main\n    git push origin {tag}\n"
+            f"\n想彻底撤销这次发版尝试（⚠ 会丢弃本地那次 release 提交，"
+            f"执行前确认没有其他重要改动）：\n"
+            f"    git tag -d {tag} && git reset --hard HEAD~1\n"
+        )
+        sys.exit(1)
 
     rel = sh(
         "gh", "release", "create", tag,

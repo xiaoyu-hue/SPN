@@ -20,30 +20,60 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKIP_DIRS = {".git", "node_modules", ".github"}
 
 LINK_RE = re.compile(r"\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
-INLINE_CODE_RE = re.compile(r"`[^`]*`")
+INLINE_CODE_RE = re.compile(r"`([^`]*)`")
 
 
 def slugify(text: str) -> str:
-    """按 GitHub 规则生成标题锚点：小写、去标点、空格转连字符。"""
+    """按 GitHub 规则生成标题锚点，并保持同一文件内的重复标题计数。
+
+    GitHub 的实际规则（本函数逐条对齐）：
+      1. 转小写；删除所有标点符号（保留 - 与 _ ）
+      2. 空格转连字符
+      3. **同一文件内第二个起重复标题加 -1 / -2 后缀**
+         ——漏掉这条会在别人项目里误报"锚点缺失"，而本脚本被发版流程调用，
+           误报会直接阻塞发版。
+      4. 连续连字符会折叠成一个
+    """
     text = text.strip().lower()
-    text = re.sub(r"[`*_~]", "", text)
+    text = INLINE_CODE_RE.sub(r"\1", text)          # `code` → code
+    text = re.sub(r"<[^>]*>", "", text)             # 行内 HTML 标签
+    text = re.sub(r"[`*_~]", "", text)              # 强调符号
+    emoji = (
+        r"[\U0001F000-\U0001FAFF\u2600-\u27BF"
+        r"\uFE0F\u200D]"
+    )
+    text = re.sub(emoji, "", text)                  # emoji 不进锚点
     kept = []
     for ch in text:
         if ch.isalnum() or ch in (" ", "-", "_"):
             kept.append(ch)
         elif ch.isspace():
             kept.append(" ")
-    return "".join(kept).replace(" ", "-")
+        # 其余标点一律丢弃，与 GitHub 一致
+    slug = "".join(kept).replace(" ", "-")
+    slug = re.sub(r"-+", "-", slug).strip("-")      # 折叠连续连字符
+    return slug
 
 
 def headings_of(path: str) -> set:
-    anchors = set()
+    """返回文件内所有标题锚点集合，重复标题会带上 -1 / -2 后缀。
+
+    返回 set 而非 dict：调用方只关心"这个锚点存在吗"。
+    """
+    anchors: set = set()
+    seen: dict = {}
     try:
         with open(path, encoding="utf-8") as f:
             for line in f:
                 m = re.match(r"^(#{1,6})\s+(.*?)\s*$", line)
-                if m:
-                    anchors.add(slugify(m.group(2)))
+                if not m:
+                    continue
+                base = slugify(m.group(2))
+                if not base:
+                    continue
+                count = seen.get(base, 0)
+                seen[base] = count + 1
+                anchors.add(base if count == 0 else f"{base}-{count}")
     except OSError:
         pass
     return anchors

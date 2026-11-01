@@ -7,7 +7,7 @@
 ## 1. Integration principles (read first)
 
 1. **Reference, don't copy**: every entry below is an external link plus a usage note. To use a project's capability, install it into your Agent per its official docs — don't copy it into SPN.
-2. **Keep the original license**: each entry notes its license (stars and licenses were verified via `gh api` on 2026-10-31). When using third-party components, honor their license: MIT / Apache-2.0 usually only require keeping the copyright and license notice; **GPL-family licenses are strong copyleft — never copy wholesale**.
+2. **Keep the original license**: each entry notes its license (stars and licenses are a **point-in-time snapshot**; verification records live in `FACTS.md`). When using third-party components, honor their license: MIT / Apache-2.0 usually only require keeping the copyright and license notice; **GPL-family licenses are strong copyleft — never copy wholesale**.
 3. **Don't dilute the positioning**: SPN is a "non-technical users × AI collaboration rules" knowledge pack. These resources are extensions and corroboration only; they are not merged into the core rules.
 4. **Data is a snapshot**: star counts reflect popularity on the research date only, not a quality guarantee.
 
@@ -19,7 +19,9 @@
 | [daoyi2026/vibe-coding-zero-to-ship](https://github.com/daoyi2026/vibe-coding-zero-to-ship) | 94 | MIT | Truly isomorphic: for non-technical builders, stresses "irreversible actions left to the user"; a single runnable Skill | ② link |
 | [Protocol-Wealth/pw-learnai-core](https://github.com/Protocol-Wealth/pw-learnai-core) | 0 | Apache-2.0 | "AI Operator" graded learning path with AGENTS.md / CHANGELOG loop | ② link |
 
-> Note: besides SPN, only ai-4u and daoyi2026 currently occupy this niche, both extremely early. SPN leads on documentation depth and engineering; treat them as peers to cross-link, not to merge.
+> Note: when I looked (2026-10-31, recorded in `FACTS.md`) I found only **ai-4u** and **daoyi2026** in this niche, both very early.
+> **This reflects my search, not a market census** — GitHub may well have projects I missed. Found one? Open an issue and I'll add it.
+> SPN leads on documentation depth and engineering; treat them as peers to cross-link, not to merge.
 
 ## 3. Skill collections (marketplaces & specs)
 

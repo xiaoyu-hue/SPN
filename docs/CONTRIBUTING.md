@@ -52,7 +52,52 @@ The same passage (e.g. the three real cases, the pre-done self-check five) shoul
 
 ---
 
-## 5. License layering
+## 5. Change here → sync there (or CI turns red)
+
+**The repository root is the single source of truth.** `docs/` (the English mirror) and
+`skills/` (the installable packages) are **release copies**. Don't edit them directly —
+your change will be overwritten, and worse, it will fork "what users install" from
+"what the repository shows".
+
+| You edited the source | Must be synced to | Who syncs it |
+|---|---|---|
+| `AGENTS.md` | `skills/spn/AGENTS.md` | **automatically** (`sync_snapshots.py`) |
+| `docs/AGENTS.md` | `skills/spn-en/AGENTS.md` | **automatically** |
+| `SKILL.md` | `skills/spn/SKILL.md` | **automatically** |
+| `docs/SKILL.md` | `skills/spn-en/SKILL.md` | **automatically** |
+| `references/01`–`08` (Chinese) | `docs/references/*` (English) | **manually** (it's a translation) |
+
+One command handles everything automatic:
+
+```bash
+python3 scripts/sync_snapshots.py --apply   # write the copies
+python3 scripts/sync_snapshots.py --check   # verify only; CI runs this every push
+```
+
+> The package-specific wording (version banner, "30-second version", the note above the
+> reference table) lives in the `HEADER_*` / `SECTION_*` constants in
+> `scripts/sync_snapshots.py`. **If you change a sentence it anchors on, the script fails
+> loudly instead of silently skipping the replacement** — update the constant as told.
+
+### What's in `scripts/`
+
+| Script | What it does | When it runs |
+|---|---|---|
+| `release.py` | One-command release (dry-run by default; `--yes` actually writes and pushes) | manually, at release time |
+| `sync_snapshots.py` | Source → release copies, plus consistency check | every push (CI) + release |
+| `doc_lint.py` | Catches hardcoded numbers that will go stale | every push (CI) |
+| `check_facts.py` | Flags registered facts in `FACTS.md` that are due for re-verification | every push (CI, non-blocking) |
+| `check_links.py` | Relative links and anchors across the repo | every push + release |
+| `run_tests.py` | Unit tests for `scripts/` | every push (CI, on three OSes) |
+| `validate_skills.py` | Validates skill packages against the Agent Skills spec | every push (CI) |
+
+**If you add functionality to `scripts/`, add tests too** — `AGENTS.md` rule 92 applies to
+this repository as well. Any time-sensitive figure (survey numbers, platform quotas, prices)
+belongs in `FACTS.md`, not scattered through the docs.
+
+---
+
+## 6. License layering
 
 - Code (scripts, CI config) → **MIT** (`LICENSE`)
 - Documentation (rules, prompts, references) → **CC BY 4.0** (`LICENSE-DOCS.md`)
@@ -61,16 +106,31 @@ By contributing, you agree your contribution is published under the same layered
 
 ---
 
-## 6. Translation
+## 7. Translation
 
-All references (01–06), plus `AGENTS.md`, `SKILL.md`, `SECURITY.md`, and `CONTRIBUTING.md`, now have English versions under `docs/`. Translations should preserve the original style: plain-language-first, bracket-explained jargon, honest disclosure.
+All references (01–08), plus `AGENTS.md`, `SKILL.md`, `SECURITY.md`, and `CONTRIBUTING.md`, now have English versions under `docs/`. Translations should preserve the original style: plain-language-first, bracket-explained jargon, honest disclosure.
 
 ---
 
-## 7. Pre-submit self-check
+## 8. Pre-submit self-check
+
+Run these locally before pushing — much faster than waiting for red CI:
+
+```bash
+python3 scripts/run_tests.py                # unit tests for scripts/
+python3 scripts/sync_snapshots.py --check   # are release copies in sync with the source?
+python3 scripts/doc_lint.py                 # any hardcoded numbers that will go stale?
+python3 scripts/check_links.py              # links and anchors
+python3 scripts/check_facts.py              # any facts due for re-verification?
+```
+
+Checklist:
 
 - [ ] The change lands in the correct layer (universal / personal)
 - [ ] No passage is duplicated across files
-- [ ] No hardcoded numbers in the docs (or labeled "as of version X")
+- [ ] **Only source files were edited — not the release copies under `docs/` or `skills/`**
+- [ ] `sync_snapshots.py --apply` was run (if `AGENTS.md` / `SKILL.md` changed)
+- [ ] No hardcoded numbers; time-sensitive figures are registered in `FACTS.md`
+- [ ] Changes to `scripts/` came with tests
 - [ ] If it touches a security red line, an issue was opened first to align
 - [ ] The PR description states: what you did, why, expected effect

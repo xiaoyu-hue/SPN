@@ -190,16 +190,18 @@ These rules obey their own principles:
 
 ## Reference files (universal layer)
 
+> NOTE: `personal/` is the author's own layer, **not part of the general rules** — skip it for normal tasks.
+
 | What you're doing | Read this |
 |---|---|
-| Understand judgment ownership, the try-vs-ask test | [`references/01-collaboration-philosophy.md`](references/01-collaboration-philosophy.md) |
-| About to ship | [`references/02-pre-launch-security-checklist.md`](references/02-pre-launch-security-checklist.md) |
-| Write a README / pick a license / keep numbers from going stale | [`references/03-documentation-disclosure-maintenance.md`](references/03-documentation-disclosure-maintenance.md) |
-| Don't know how to phrase a request to the AI | [`references/04-prompt-library.md`](references/04-prompt-library.md) |
-| See real good/bad collaboration examples | [`references/05-collaboration-examples.md`](references/05-collaboration-examples.md) |
-| Curated external projects / Skills / plugins | [`references/06-ecosystem-and-integrations.md`](references/06-ecosystem-and-integrations.md) |
-| Review before an irreversible / costly / public decision | [`references/07-decision-review.md`](references/07-decision-review.md) |
-| Keep docs consistent with code after changes | [`references/08-doc-sync.md`](references/08-doc-sync.md) |
+| Understand judgment ownership, the try-vs-ask test | [01-collaboration-philosophy](references/01-collaboration-philosophy.md) |
+| About to ship | [02-pre-launch-security-checklist](references/02-pre-launch-security-checklist.md) |
+| Write a README / pick a license / keep numbers from going stale | [03-documentation-disclosure-maintenance](references/03-documentation-disclosure-maintenance.md) |
+| Don't know how to phrase a request to the AI | [04-prompt-library](references/04-prompt-library.md) |
+| See real good/bad collaboration examples | [05-collaboration-examples](references/05-collaboration-examples.md) |
+| Curated external projects / Skills / plugins | [06-ecosystem-and-integrations](references/06-ecosystem-and-integrations.md) |
+| Review before an irreversible / costly / public decision | [07-decision-review](references/07-decision-review.md) |
+| Keep docs consistent with code after changes | [08-doc-sync](references/08-doc-sync.md) |
 
 `AGENTS.md` (root) is the trimmed version you can drop straight into any project; its content matches this file but is shorter, and is the version the AI actually loads and executes.
 

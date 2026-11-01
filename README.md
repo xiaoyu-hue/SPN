@@ -66,8 +66,9 @@ AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效
 - 本仓库的文档与质量保障已落地为 CI：密钥扫描 **gitleaks**、死链检查 **lychee**、术语一致 **vale**、数字写死检查 **doc-lint**（详见 `.github/workflows/`）。
 - 想修改规则：请回到**根目录**（规范源）编辑，再由发布流程同步到 `docs/`（英文镜像）与 `skills/spn/`、`skills/spn-en/`（发布包）。
 - 想引入本规则到自己的 Agent：直接加载 `skills/spn/`，或把根目录 `AGENTS.md` 拷进项目。
-- **想发版**：先在 `CHANGELOG.md` 的 `[Unreleased]` 写下改动，再执行 `python3 scripts/release.py <版本号>`（预览 diff），确认无误后加 `--yes`。脚本会自动同步徽章、版本号、技能包链接，跑完校验再打 tag、建 Release。
-- **想自查链接**：`python3 scripts/check_links.py`，检查全仓库 Markdown 的相对链接与锚点。
+- **想发版**：先在 `CHANGELOG.md` 的 `[Unreleased]` 写下改动，再执行 `python3 scripts/release.py <版本号>`（预览 diff），确认无误后加 `--yes`。脚本会自动同步徽章、版本号、技能包正文与快照，跑完校验再打 tag、建 Release。
+- **改动了 `AGENTS.md` / `SKILL.md`**：跑 `python3 scripts/sync_snapshots.py --apply` 同步到两个技能包（`--check` 只校验，CI 每次提交都跑）。
+- **想自查**：`python3 scripts/check_links.py`（相对链接与锚点）、`python3 scripts/doc_lint.py`（有没有写死、会失真的数字）、`python3 scripts/check_facts.py`（`FACTS.md` 里有没有该复核的事实）、`python3 scripts/run_tests.py`（脚本自身的单元测试）、`python3 scripts/validate_skills.py`（技能包是否符合规范）。
 
 ## 按角色查阅
 
@@ -81,6 +82,7 @@ AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效
 | 想了解同类项目 / 优秀 skill / 插件怎么整合 | `references/06-生态与整合.md` |
 | 做不可逆/花钱/发布决定前必过的审查 | `references/07-决策审查清单.md` |
 | 代码或文档变动后保持描述与事实一致 | `references/08-文档同步规范.md` |
+| 想要按场景取用的小技能包 / 学习怎么写 SKILL.md | `templates/`（见 [`templates/README.md`](./templates/README.md)） |
 
 > 以上所有文件及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 的**英文完整版**均可在 [`docs/`](./docs/) 找到。
 
@@ -108,10 +110,24 @@ SPN/
 ├── skills/
 │   ├── spn/               ← 可安装技能包（中文，含 INSTALL.md）★发布副本
 │   └── spn-en/            ← 可安装技能包（英文）★发布副本
-├── scripts/               ← release.py（一键发版）/ check_links.py（链接自检）
+├── scripts/               ← 发布与校验脚本（见下表）
+├── FACTS.md               ← 带时效的事实登记表（给 CI 读）
+├── templates/             ← 按场景切分的可安装技能包模板 + 写法说明
 ├── personal/              ← 作者自用层，可跳过（非通用规则，已脱敏）
 └── LICENSE-DOCS.md        ← 文档 CC BY 4.0 许可
 ```
+
+### `scripts/` 里都有什么
+
+| 脚本 | 干什么 | 什么时候跑 |
+|---|---|---|
+| `release.py` | 一键发版（默认 dry-run，`--yes` 才写盘推送） | 发版时 |
+| `sync_snapshots.py` | 规范源 → 发布副本，含一致性校验 | 每次提交（CI）+ 发版时 |
+| `doc_lint.py` | 抓入口文件里写死、会失真的数字 | 每次提交（CI） |
+| `check_facts.py` | 提醒 `FACTS.md` 里已登记的事实过期 | 每次提交（CI，非阻塞） |
+| `check_links.py` | 全仓库相对链接与锚点自检 | 每次提交 + 发版时 |
+| `run_tests.py` | 脚本自身的单元测试 | 每次提交（CI，三系统） |
+| `validate_skills.py` | 校验技能包是否符合 Agent Skills 规范 | 每次提交（CI） |
 
 - 只想使用规则：只看根目录，忽略 `personal/`。
 - 想看英文版：全部内容已镜像到 `docs/`。

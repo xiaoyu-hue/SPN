@@ -7,17 +7,17 @@ metadata:
   version: "1.0.0"
 ---
 
-> **What this is**: the installable English skill package of SPN. The core rules are fully inlined below — no network needed.
-> **Version**: `1.0.0` (see `metadata.version`; matches tag `v1.0.0`).
-> **Source of truth**: repository root `https://github.com/xiaoyu-hue/SPN` (latest, open to contributions).
-> **Deep references**: links below are pinned to `v1.0.0` so the copy you installed matches what they point to; offline only affects "clicking through", not the rules in this file.
-
 # SPN · AI Collaboration Rules (Non-Coder Edition)
 
 > SPN = **Self-precipitation**: among the many options the AI hands you, let your own judgment precipitate and take shape.
 > Core creed: **the code is written by the AI; the judgment is made by you.**
 
-> **30-second version**: ① the moment you don't understand a word, stop and make it explain in plain language; ② can it be undone with one click? then try it, otherwise ask; ③ "done" doesn't count — make it paste the command output.
+> **What this is**: the installable skill-package edition of SPN. The core rules are fully inlined here and work offline.
+> **Version**: `1.0.0` (see `metadata.version` in the frontmatter, matching tag `v1.0.0`).
+> **Source of truth**: repository root `https://github.com/xiaoyu-hue/SPN` (latest version, contributions welcome).
+> **Deep references**: links below are pinned to `v1.0.0`, so what you install matches what the links point to; offline you lose the "read more" clicks, never the rules themselves.
+
+> **30-second version**: (1) If you don't understand a word, stop them and make them translate before you decide. (2) Can it be undone with one action? Yes → try it; no → ask first. (3) "Done" doesn't count — make them paste the command output.
 
 ## What these rules solve
 
@@ -34,11 +34,11 @@ These rules keep **the judgment with the human**, without requiring the human to
 
 ## Where these rules come from
 
-Not a template — three real judgments (from one non-coder shipping multiple launched projects). The full narrative is in [01-collaboration-philosophy](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/01-collaboration-philosophy.md):
+Not a template — three real judgments (from one non-coder shipping multiple launched projects). The full narrative and reusable points are in [01-collaboration-philosophy](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/01-collaboration-philosophy.md):
 
-1. **First time shipping a project** — AI gives a candidate list, human makes the pick
-2. **Whether two visual styles can merge** — for reversible things, trying beats asking
-3. **Drawing a security boundary for a crypto app** — capability ≠ guarantee
+1. **First time shipping a project** — AI gives a candidate list, human makes the pick (AI lists options, human decides)
+2. **Whether two visual styles can merge** — for reversible things, trying beats asking (test: can it be undone with one click?)
+3. **Drawing a security boundary for a crypto app** — being able to get it running to some degree, and being able to take responsibility for that degree, are two different things (capability ≠ guarantee)
 
 ---
 
@@ -159,15 +159,15 @@ Template in [04-prompt-library](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/do
 
 ## 8. Don't hardcode numbers in docs
 
-Numbers that change with code (test counts, version numbers, item counts, module counts) **should not be handwritten into docs**, or they go stale the moment code changes — and a stale number hurts trust more than no number.
+Numbers that change with code (test counts, version numbers, item counts, module counts) **should not be handwritten into docs**, or they go stale the moment code changes — and a stale number hurts trust more than no number, because it quietly violates the "disclose limits honestly" principle.
 
 But **don't go vague instead**: "lots of tests" carries no information; "hundreds of tests" does.
 
 Three ways to write it, from rough to good:
 
-1. **Relative description** (recommended first): `573 tests` → `tests have accumulated into the hundreds`
+1. **Relative description** (recommended first): `573 tests` → `tests have accumulated into the hundreds`; `v6.5.1` → `iterated to the sixth major version`
 2. **Single source of truth**: define the number in one file; other docs reference it
-3. **Auto-generated**: version from a manifest / git tag, test count written back by CI
+3. **Auto-generated**: version from package.json / git tag, test count written back by CI
 
 **Start with #1; it's enough for a long time.** Full automation needs CI, and the config itself is maintenance cost.
 
@@ -175,12 +175,12 @@ See [03-documentation-disclosure-maintenance](https://github.com/xiaoyu-hue/SPN/
 
 ---
 
-## 9. Important decisions & debugging
+## 9. Important decisions & debugging (see AGENTS.md for detail)
 
 - **Three-perspective analysis**: for important decisions, require the AI to analyze from **full rebuttal → switch to support → neutral comparison**, not just hand you one conclusion.
 - **Debug three-step**: on error the AI must **describe the error → explain the cause in plain language → give fix steps**; no rewriting blindly before the root cause is found.
 
-Both are fixed into `AGENTS.md` and take effect as soon as an Agent loads it.
+Both are now fixed into `AGENTS.md` and take effect as soon as an Agent loads it.
 
 ---
 
@@ -203,9 +203,9 @@ These rules obey their own principles:
 | What you're doing | Read this |
 |---|---|
 | Understand judgment ownership, the try-vs-ask test | [01-collaboration-philosophy](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/01-collaboration-philosophy.md) |
-| About to ship, run a security self-check | [02-pre-launch-security-checklist](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/02-pre-launch-security-checklist.md) |
+| About to ship | [02-pre-launch-security-checklist](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/02-pre-launch-security-checklist.md) |
 | Write a README / pick a license / keep numbers from going stale | [03-documentation-disclosure-maintenance](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/03-documentation-disclosure-maintenance.md) |
-| Don't know how to phrase a request | [04-prompt-library](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/04-prompt-library.md) |
+| Don't know how to phrase a request to the AI | [04-prompt-library](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/04-prompt-library.md) |
 | See real good/bad collaboration examples | [05-collaboration-examples](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/05-collaboration-examples.md) |
 | Curated external projects / Skills / plugins | [06-ecosystem-and-integrations](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/06-ecosystem-and-integrations.md) |
 | Review before an irreversible / costly / public decision | [07-decision-review](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/07-decision-review.md) |
@@ -217,8 +217,8 @@ These rules obey their own principles:
 
 ## Known limitations (listed honestly)
 
-- These rules are optimized for scenarios where **the human can't read code**. Developers should follow their own team conventions; items like "translate jargon" and "try before asking" are redundant for professionals.
-- The SQL and commands in `02` use Supabase / Postgres as examples; Firebase, Cloudflare D1, and other backends need adjustment.
+- These rules are optimized for scenarios where **the human can't read code**. Developers who can read code should follow their own team conventions; items like "translate jargon" and "try before asking" are redundant for professionals.
+- The SQL and commands in `02` use Supabase / Postgres as examples; Firebase, Cloudflare D1, and other backends need adjustment (adaptation notes at the end of that doc).
 - Security incidents and platform free-tier figures cited in `02` were verified in 2026-10 and will drift over time; re-check before relying on them (that doc is not inlined into this package; open the link to read it).
-- These rules are not a substitute for a professional security audit. Apps handling genuinely sensitive data (medical, financial, identity) should still seek professional review.
+- These rules are not a substitute for a professional security audit. Apps handling others' genuinely sensitive data (medical, financial, identity) should still seek professional review.
 - All eight references are available in both English (`docs/references/`) and Chinese (`references/`).

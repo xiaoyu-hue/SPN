@@ -66,8 +66,9 @@ If you're a professional developer, parts of this (e.g. "translate the jargon," 
 - Documentation and quality gates are enforced in CI: secret scan **gitleaks**, dead-link check **lychee**, terminology **vale**, and hardcoded-number check **doc-lint** (see `.github/workflows/`).
 - To change the rules: edit the **root directory** (the source of truth), then let the publish flow sync to `docs/` (English mirror) and `skills/spn/` + `skills/spn-en/` (packages).
 - To bring the rules into your own Agent: load `skills/spn-en/`, or copy the root `AGENTS.md` into your project.
-- **To cut a release**: log the change under `[Unreleased]` in `CHANGELOG.md`, then run `python3 scripts/release.py <version>` to preview the diff; add `--yes` once it looks right. The script syncs the badges, version strings, and package links, runs the checks, then tags and creates the Release.
-- **To check links**: `python3 scripts/check_links.py` verifies every relative link and anchor across the repo.
+- **To cut a release**: log the change under `[Unreleased]` in `CHANGELOG.md`, then run `python3 scripts/release.py <version>` to preview the diff; add `--yes` once it looks right. The script syncs the badges, version strings, and package bodies, runs the checks, then tags and creates the Release.
+- **Changed `AGENTS.md` / `SKILL.md`?** Run `python3 scripts/sync_snapshots.py --apply` to push it into both skill packages (`--check` verifies only; CI runs that on every push).
+- **Self-checks**: `python3 scripts/check_links.py` (relative links and anchors), `python3 scripts/doc_lint.py` (hardcoded numbers that will drift), `python3 scripts/check_facts.py` (facts due for re-verification), `python3 scripts/run_tests.py` (unit tests for the scripts themselves), `python3 scripts/validate_skills.py` (skill packages vs. the Agent Skills spec).
 
 ## Look things up as needed
 
@@ -106,10 +107,24 @@ SPN/
 ├── skills/
 │   ├── spn/               ← installable skill package (Chinese, with INSTALL.md)
 │   └── spn-en/            ← installable skill package (English)
-├── scripts/               ← release.py (one-command release) / check_links.py (link self-check)
+├── scripts/               ← release and verification scripts (see below)
+├── FACTS.md               ← time-sensitive facts register (read by CI)
+├── templates/             ← per-scenario skill-package templates + how to write them
 ├── personal/              ← the author's own layer, safe to skip
 └── LICENSE-DOCS.md        ← CC BY 4.0 terms for all documentation
 ```
+
+### What's in `scripts/`
+
+| Script | What it does | When it runs |
+|---|---|---|
+| `release.py` | One-command release (dry-run by default; `--yes` actually writes and pushes) | at release time |
+| `sync_snapshots.py` | Source → release copies, plus a consistency check | every push (CI) + release |
+| `doc_lint.py` | Catches hardcoded numbers that will go stale | every push (CI) |
+| `check_facts.py` | Flags registered facts in `FACTS.md` due for re-verification | every push (CI, non-blocking) |
+| `check_links.py` | Relative links and anchors across the repo | every push + release |
+| `run_tests.py` | Unit tests for the scripts themselves | every push (CI, three OSes) |
+| `validate_skills.py` | Validates skill packages against the Agent Skills spec | every push (CI) |
 
 - Only want the rules? Read the root directory and ignore `personal/`.
 - Want the English version? Everything is mirrored under `docs/`.

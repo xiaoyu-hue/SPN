@@ -14,59 +14,21 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - name: 检查发布副本与规范源是否一致
+        # 这是全仓最重要的一道检查：技能包是用户真正加载的东西，
+        # 一旦它与规范源漂移，用户拿到的规则就和仓库显示的不一样。
+        # 修复命令会在失败时打印出来。
+        run: python3 scripts/sync_snapshots.py --check
+
       - name: 检查文档是否写死会变化的数字
         run: |
           # 本仓库核心原则：会随代码变化的数字（测试数、版本号、条目数、模块数）
           # 不要手写进文档，否则一改代码就失真。
-          # 扫描最常被直接拷走、必须保持干净的文件：README.md、AGENTS.md、SKILL.md、
-          # references/ 与英文镜像 docs/ 下的对应文件。
-          # references/03（根目录中文版与 docs/ 英文版均为同一份教学文档）专门讲"别写死数字"，
-          # 整篇都是反面示例，中英文版一并排除；SKILL.md 等里"写死值 → 相对描述"的教学句式（含 →）也排除。
-          # 链接里的版本号（badge / releases/tag / blob）属于可追溯的引用，不算写死，故排除含 http(s):// 的行。
-          fail=0
-          for f in README.md AGENTS.md SKILL.md references/*.md docs/README.md docs/AGENTS.md docs/SKILL.md docs/SECURITY.md docs/CONTRIBUTING.md docs/references/*.md; do
-            [ -f "$f" ] || continue
-            case "$f" in
-              *"references/03"*) continue ;;
-            esac
-            matches=$(grep -nE '[0-9]{3,}[[:space:]]*(项测试|个模块|条测试|测试|模块|时间线|工具|书)|v[0-9]+\.[0-9]+\.[0-9]+' "$f" | grep -vE '❌|而不是|→|https?://' || true)
-            if [ -n "$matches" ]; then
-              echo "::error file=$f::发现疑似写死的数字，请改为相对描述或标注'截至某版本'："
-              echo "$matches"
-              fail=1
-            fi
-          done
-          if [ "$fail" = "1" ]; then
-            echo "文档校验未通过，请修正后再推送。"
-            exit 1
-          fi
-          echo "OK: 未发现写死数字"
+          # 由 scripts/doc_lint.py 统一实现（与历史 grep 版本相比，
+          # 新增了容量/金额/CVE 编号等模式，且不再因为某行含「→」就整行豁免）。
+          python3 scripts/doc_lint.py
 
-      - name: 检查技能包快照与源文件一致
-        run: |
-          # 技能包内的 AGENTS.md 是快照（仅多一行说明注释）。
-          # 规则只允许在源文件改，改完同步到技能包，避免两份副本各说各话。
-          python3 - <<'PY'
-          import re
-          import sys
-
-          PAIRS = [
-              ("AGENTS.md", "skills/spn/AGENTS.md"),
-              ("docs/AGENTS.md", "skills/spn-en/AGENTS.md"),
-          ]
-
-          bad = []
-          for src, snap in PAIRS:
-              a = open(src, encoding="utf-8").read()
-              b = open(snap, encoding="utf-8").read()
-              b = re.sub(r"\A<!--.*?-->\n\n", "", b, count=1, flags=re.S)
-              if a != b:
-                  bad.append((src, snap))
-
-          if bad:
-              for src, snap in bad:
-                  print(f"::error file={snap}::与 {src} 不同步")
-              print("修复：把源文件内容重新复制到快照（保留首行快照注释）")
-              sys.exit(1)
-          print("OK: 两个技能包快照均与源文件一致")
-          PY
+      - name: 检查是否有时效性事实过期未复核
+        # 非阻塞：过期提醒是"该去复核了"，不该为了它拦住一次合入。
+        continue-on-error: true
+        run: python3 scripts/check_facts.py
