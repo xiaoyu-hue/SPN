@@ -21,6 +21,7 @@
 - [Who it's for](#who-its-for)
 - [Quick start](#quick-start)
 - [Look things up as needed](#look-things-up-as-needed)
+- [Skill packages (use by scenario)](#skill-packages-use-by-scenario)
 - [Repository structure](#repository-structure)
 - [Core content](#core-content)
 - [Workflow standards](#workflow-standards)
@@ -84,6 +85,42 @@ If you're a professional developer, parts of this (e.g. "translate the jargon," 
 | Doc-and-code sync after changes | [`references/08-doc-sync.md`](references/08-doc-sync.md) |
 
 > Everything above, plus `AGENTS.md`, `SKILL.md`, `SECURITY.md`, and `CONTRIBUTING.md`, is available in English right here under `docs/`.
+
+## Skill packages (use by scenario)
+
+> The full `AGENTS.md` is an always-on baseline (loaded every session); the packages under `templates/skills/` are **triggered on demand** — the Agent reads the matching body only when a specific scenario appears. Upside: you don't keep every rule in context, and it's easier to share just one slice with someone.
+
+### Five scenario packages
+
+| Package | What it handles | Trigger signals / when to use | From SPN |
+|---|---|---|---|
+| `spn-security-check` | Pre-launch attacker self-audit: unauthorized reads, privilege escalation, secret leakage, UUID vs sequential IDs, missing rate limits | about to ship, deploy to the public web, "is my app secure" / "will it leak data" | `references/02` |
+| `spn-decision-review` | Pre-irreversible / paid / publish decision three-question review + alternatives + sign-off log | choosing a tech, whether to launch, adding a dependency, deleting old features | `references/07` |
+| `spn-handoff` | Cross-session memory: a single `HANDOFF.md` fixes "the session has amnesia" | "this session is ending" / "how do I continue next time" / "read the handoff doc" | `references/04` |
+| `spn-term-translator` | Translate jargon into plain language; protects "people can't own a decision they don't understand" | "what does this word mean" / "explain it in plain language" | `references/04` |
+| `spn-docs-sync` | Final doc proofread before release: single-source-of-truth principle | just changed features / about to release / "docs say something different from reality" | `references/08` |
+
+Each package follows SPN's own principles: no overclaiming (each states what it can't cover), never decides for the human, honesty first, and security statements are written by the human. Full list and the `_skeleton` starter are in [`templates/README.md`](../templates/README.md).
+
+### How to use
+
+**Option 1: Install as an Agent Skill** (recommended, about 1 minute)
+
+Copy the whole package directory into your Agent's skills directory. With CodeBuddy:
+
+```bash
+cp -r templates/skills/spn-security-check ~/.codebuddy/skills/spn-security-check
+```
+
+Other tools usually use `~/.<tool>/skills/` or project-level `.<tool>/skills/` (e.g. Claude Code uses `~/.claude/skills/`); check the tool's docs.
+
+**Option 2: No install (minimal)**
+
+Just paste a package's `SKILL.md` body (minus the `---` frontmatter) straight into the chat. Same effect. Good for a one-off use or to peek at how it's written.
+
+**Verify it loaded**: open a fresh session and say the trigger (e.g. "I'm about to ship, run SPN's security self-check"). If the AI starts enumerating attacks and distinguishes "found nothing" from "no problem" — the skill is loaded.
+
+> Want to write your own? Copy `templates/skills/_skeleton/` to start; writing guide and the `description` trigger phrasing are in [`templates/README.md`](../templates/README.md).
 
 ## Repository structure
 
