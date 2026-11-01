@@ -14,7 +14,25 @@
       content="代码是 AI 写的，判断是你做的。一套写给不懂代码的人的 AI 协作规则与安全边界。"
     />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://xiaoyu-hue.github.io/SPN/" />
+    <meta property="og:image" content="https://xiaoyu-hue.github.io/SPN/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SPN · 零基础 × AI 协作规则" />
+    <meta name="twitter:description" content="代码是 AI 写的，判断是你做的。" />
+    <meta name="twitter:image" content="https://xiaoyu-hue.github.io/SPN/og.png" />
+    <link rel="canonical" href="https://xiaoyu-hue.github.io/SPN/" />
     <title>SPN · 零基础 × AI 协作规则</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "SPN · 零基础 × AI 协作规则",
+      "alternateName": "Self-precipitation",
+      "url": "https://xiaoyu-hue.github.io/SPN/",
+      "description": "代码是 AI 写的，判断是你做的。一套写给不懂代码的人的 AI 协作规则与安全边界。",
+      "inLanguage": "zh-CN"
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -23,7 +41,12 @@
     />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- 骨架加载态：React 挂载前的占位，避免深色页面闪白 -->
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#06070d;">
+        <span style="color:#6b7286;font-size:.9rem;letter-spacing:.15em;">SPN</span>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

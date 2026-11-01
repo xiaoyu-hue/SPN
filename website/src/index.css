@@ -68,6 +68,8 @@ body {
    折射扭曲 = 仅 Chromium 支持，用 @supports 渐进增强，不支持则优雅降级为优质磨砂。 */
 .glass {
   position: relative;
+  isolation: isolate;
+  --glass-blur: 14px;
   border-radius: var(--r);
   border: 1px solid var(--line);
   background: var(--glass-tint);
@@ -77,20 +79,24 @@ body {
     inset 0 -1px 1px rgba(255, 255, 255, 0.10),
     inset 1px 0 1px rgba(255, 255, 255, 0.16),
     inset -1px 0 1px rgba(255, 255, 255, 0.16);
-  overflow: hidden;
 }
 .glass__lens {
   position: absolute;
   inset: 0;
   z-index: 0;
-  -webkit-backdrop-filter: blur(18px) saturate(165%);
-  backdrop-filter: blur(18px) saturate(165%);
+  border-radius: inherit;
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(165%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(165%);
+}
+/* 移动端玻璃减负：blur 成本≈半径平方，9px 约为 18px 的 1/4 负载，保住 60fps */
+@media (max-width: 767px) {
+  .glass { --glass-blur: 9px; }
 }
 /* 折射：边缘把背后内容像透镜一样掰弯；用径向遮罩只作用在边缘，文字区保持清晰 */
 @supports (backdrop-filter: url("#lg-refract")) {
   .glass--refract .glass__lens {
-    -webkit-backdrop-filter: blur(18px) saturate(165%) url("#lg-refract");
-    backdrop-filter: blur(18px) saturate(165%) url("#lg-refract");
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(165%) url("#lg-refract");
+    backdrop-filter: blur(var(--glass-blur)) saturate(165%) url("#lg-refract");
     -webkit-mask-image: radial-gradient(125% 125% at 50% 50%, transparent 58%, #000 92%);
     mask-image: radial-gradient(125% 125% at 50% 50%, transparent 58%, #000 92%);
   }
@@ -138,7 +144,7 @@ body {
   .container-page { padding-inline: 2rem; }
 }
 .section {
-  padding-block: 5.5rem;
+  padding-block: 4.5rem;
 }
 @media (min-width: 768px) {
   .section { padding-block: 7rem; }
@@ -191,6 +197,7 @@ body {
   justify-content: center;
   gap: 0.5rem;
   border-radius: 0.85rem;
+  min-height: 44px;
   padding: 0.7rem 1.2rem;
   font-size: 0.92rem;
   font-weight: 600;
@@ -227,4 +234,116 @@ body {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ============ 底部玻璃标签栏（移动端，拇指可达） ============ */
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: max(0.75rem, env(safe-area-inset-bottom));
+  z-index: 50;
+  width: min(100% - 1.5rem, 30rem);
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  padding: 0.4rem 0.4rem calc(0.4rem + env(safe-area-inset-bottom));
+  border-radius: 1.35rem;
+  border: 1px solid var(--line-strong);
+  background: rgba(10, 12, 20, 0.72);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+}
+.bottom-nav__item {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  min-height: 48px;
+  padding: 0.3rem 0.25rem;
+  border-radius: 0.85rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text-dim);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.bottom-nav__item[aria-current="page"] {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+.bottom-nav__item svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.bottom-nav__item[aria-current="page"] svg {
+  color: var(--brand-soft);
+}
+@media (min-width: 768px) {
+  .bottom-nav { display: none; }
+}
+/* 底部留白：避免内容被 fixed 底部导航遮挡（桌面端归零） */
+.has-bottom-nav { padding-bottom: 6.5rem; }
+@media (min-width: 768px) {
+  .has-bottom-nav { padding-bottom: 0; }
+}
+/* 键盘可达性：清晰可见的焦点环 */
+:focus-visible {
+  outline: 2px solid var(--brand-soft);
+  outline-offset: 2px;
+}
+/* 无障碍：跳转链接（键盘 Tab 到达时才显示） */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 50%;
+  transform: translate(-50%, -300%);
+  z-index: 100;
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.8rem;
+  background: rgba(14, 16, 24, 0.95);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  font-size: 0.9rem;
+  transition: transform 0.2s ease;
+}
+.skip-link:focus {
+  transform: translate(-50%, 0);
+}
+/* 回到顶部（手机端位于底部导航上方） */
+.back-to-top {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(7rem + env(safe-area-inset-bottom));
+  z-index: 49;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: rgba(10, 12, 20, 0.72);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  backdrop-filter: blur(10px) saturate(160%);
+  color: var(--text-dim);
+  box-shadow: 0 12px 30px -14px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease, color 0.2s ease;
+  cursor: pointer;
+}
+.back-to-top--show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.back-to-top:hover { color: #fff; }
+@media (min-width: 768px) {
+  .back-to-top { bottom: 2rem; right: 2rem; }
 }

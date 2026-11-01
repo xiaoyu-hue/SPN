@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>页面不存在 · SPN</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        font-family: "Space Grotesk", "Noto Sans SC", system-ui, sans-serif;
+        background:
+          radial-gradient(42% 42% at 18% 12%, rgba(99,104,200,0.22), transparent 62%),
+          radial-gradient(46% 46% at 82% 18%, rgba(40,120,130,0.16), transparent 60%),
+          radial-gradient(48% 48% at 70% 86%, rgba(190,150,95,0.10), transparent 60%),
+          #06070d;
+        color: #ececf2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        -webkit-font-smoothing: antialiased;
+      }
+      .card {
+        max-width: 26rem;
+        width: 100%;
+        text-align: center;
+        padding: 3rem 2rem;
+        border-radius: 1.35rem;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(255,255,255,0.055);
+        -webkit-backdrop-filter: blur(14px) saturate(165%);
+        backdrop-filter: blur(14px) saturate(165%);
+        box-shadow:
+          0 18px 50px -20px rgba(0,0,0,0.65),
+          inset 0 1px 1px rgba(255,255,255,0.55),
+          inset 0 -1px 1px rgba(255,255,255,0.10);
+      }
+      .code {
+        font-size: 4.5rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        background: linear-gradient(100deg, #fff 0%, #aab4ff 55%, #fff 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      h1 { margin-top: 1rem; font-size: 1.25rem; font-weight: 600; }
+      p { margin-top: 0.75rem; color: #9aa1b4; font-size: 0.95rem; line-height: 1.7; }
+      .btn {
+        display: inline-block;
+        margin-top: 1.75rem;
+        padding: 0.8rem 1.5rem;
+        border-radius: 0.85rem;
+        min-height: 44px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-decoration: none;
+        color: #0a0b12;
+        background: linear-gradient(180deg, #ffffff 0%, #dfe3ff 100%);
+        box-shadow: 0 10px 30px -12px rgba(139,155,255,0.65);
+      }
+      .ghost {
+        margin-left: 0.6rem;
+        color: #ececf2;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.18);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      }
+      @media (max-width: 480px) { .ghost { margin-left: 0; margin-top: 0.6rem; } }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <div class="code">404</div>
+      <h1>这一页不在 SPN 的边界内</h1>
+      <p>就像 AI 不该越过的那条线——这里没有你找的东西。<br />回到官网，30 秒看懂 SPN 是什么。</p>
+      <a class="btn" href="./">返回官网</a>
+      <a class="btn ghost" href="https://github.com/xiaoyu-hue/SPN">GitHub</a>
+    </main>
+  </body>
+</html>

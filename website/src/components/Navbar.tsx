@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Github, BookOpen, Menu, X } from "lucide-react";
+import { Github, BookOpen } from "lucide-react";
 import { SITE } from "@/content";
 
 const LINKS = [
@@ -12,7 +12,6 @@ const LINKS = [
 ];
 
 export function Navbar() {
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -55,17 +54,19 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="flex items-center gap-2">
           <a
-            className="btn btn--ghost"
+            className="btn btn--ghost px-2.5 py-2"
             href={SITE.github}
             target="_blank"
             rel="noreferrer"
+            aria-label="在 GitHub 查看"
           >
-            <Github className="h-4 w-4" /> GitHub
+            <Github className="h-4 w-4" />
+            <span className="hidden sm:inline">GitHub</span>
           </a>
           <a
-            className="btn btn--primary"
+            className="btn btn--primary hidden sm:inline-flex"
             href={`${SITE.github}#快速开始`}
             target="_blank"
             rel="noreferrer"
@@ -73,45 +74,7 @@ export function Navbar() {
             <BookOpen className="h-4 w-4" /> 快速开始
           </a>
         </div>
-
-        <button
-          className="btn btn--ghost px-2.5 py-2 md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="菜单"
-        >
-          {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-        </button>
       </nav>
-
-      {open && (
-        <div className="glass mx-auto mt-2 max-w-6xl rounded-2xl p-3 md:hidden">
-          <div className="grid grid-cols-2 gap-1">
-            {LINKS.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm text-[var(--text-dim)] transition-colors hover:bg-white/5 hover:text-white"
-              >
-                {l.label}
-              </a>
-            ))}
-          </div>
-          <div className="mt-2 flex gap-2">
-            <a className="btn btn--ghost flex-1" href={SITE.github} target="_blank" rel="noreferrer">
-              <Github className="h-4 w-4" /> GitHub
-            </a>
-            <a
-              className="btn btn--primary flex-1"
-              href={`${SITE.github}#快速开始`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <BookOpen className="h-4 w-4" /> 快速开始
-            </a>
-          </div>
-        </div>
-      )}
     </header>
   );
 }
