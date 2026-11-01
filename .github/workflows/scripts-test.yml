@@ -11,6 +11,10 @@ permissions:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    env:
+      # Windows 默认 cp1252 编码不了 ✓/✗ 等符号会导致脚本打印即崩溃，
+      # 统一用 utf-8 输出，避免跨平台随机红叉。
+      PYTHONIOENCODING: utf-8
     strategy:
       # 脚本要能在三种系统上跑：本项目的目标用户大量在 Windows，
       # 一个只在 Linux 通过的发布脚本等于没有脚本。

@@ -18,9 +18,11 @@ import contextlib
 import datetime
 import io
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
@@ -192,16 +194,38 @@ class TestReleaseHelpers(unittest.TestCase):
         self.assertIsNotNone(release.SEMVER_RE.match("1.0.1"))
 
     def test_unreachable_remote_gives_friendly_error(self):
-        """发版的人多半不看代码：traceback 对他没有意义，必须是可执行的下一步。"""
-        buf = io.StringIO()
-        with contextlib.redirect_stdout(buf):
-            with self.assertRaises(SystemExit) as cm:
-                release.remote_tag_exists("v9.9.9")
+        """发版的人多半不看代码：连不上远端时，脚本必须友好报错退出而非抛堆栈。
+
+        这里用 mock 模拟「git ls-remote 失败」，而不是真的去断网——
+        真断网在 CI / 某些网络环境下不可复现，会让测试时绿时红。
+        """
+        fake = subprocess.CompletedProcess(
+            args=["git", "ls-remote"], returncode=128, stdout="", stderr=""
+        )
+        with mock.patch.object(release, "sh", return_value=fake):
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                with self.assertRaises(SystemExit) as cm:
+                    release.remote_tag_exists("v9.9.9")
         self.assertEqual(cm.exception.code, 1)
         out = buf.getvalue()
         self.assertNotIn("Traceback", out, "不该把 Python 堆栈丢给不看代码的人")
         self.assertNotIn("CalledProcessError", out)
         self.assertIn("git remote -v", out, "要给出可执行的下一步")
+
+    def test_remote_tag_exists_parses_stdout(self):
+        """远端可达时，按 ls-remote 的真实输出判定 tag 是否存在（两个分支都要测）。"""
+        present = subprocess.CompletedProcess(
+            args=["git", "ls-remote"], returncode=0,
+            stdout="abc123refs/tags/v1.1.0\n", stderr="",
+        )
+        absent = subprocess.CompletedProcess(
+            args=["git", "ls-remote"], returncode=0, stdout="", stderr=""
+        )
+        with mock.patch.object(release, "sh", return_value=present):
+            self.assertTrue(release.remote_tag_exists("v1.1.0"))
+        with mock.patch.object(release, "sh", return_value=absent):
+            self.assertFalse(release.remote_tag_exists("v1.1.0"))
 
 
 class TestSyncSnapshots(unittest.TestCase):
