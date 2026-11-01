@@ -4,7 +4,7 @@ description: 当用户刚改完功能/CI/依赖、准备发版或写 Release，�
 license: CC-BY-4.0
 metadata:
   author: xiaoyu-hue
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # 文档与版本同步

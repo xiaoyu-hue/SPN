@@ -4,7 +4,7 @@ description: 当用户准备上线、部署到公网、或要把带数据库/登
 license: CC-BY-4.0
 metadata:
   author: xiaoyu-hue
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # 上线前安全自查

@@ -4,7 +4,7 @@ description: 当用户要做一个不可逆、要花钱、要对外发布、或�
 license: CC-BY-4.0
 metadata:
   author: xiaoyu-hue
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # 决策审查（动手之前先反问）

@@ -4,7 +4,7 @@ description: 当用户说"这个词是什么意思""你说的我听不懂""用�
 license: CC-BY-4.0
 metadata:
   author: xiaoyu-hue
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # 术语翻译成人话

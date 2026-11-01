@@ -4,7 +4,7 @@ description: 当用户说"这个会话要结束了""下次怎么接着做""先�
 license: CC-BY-4.0
 metadata:
   author: xiaoyu-hue
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # 跨会话交接（HANDOFF）
