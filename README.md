@@ -3,6 +3,8 @@
 > **Self-precipitation（自我析出）**：在 AI 给出的众多选项里，让属于你自己的判断沉淀、成形。
 > 核心信条：**代码是 AI 写的，判断是你做的。**
 
+**[官网 · 在线预览 →](https://xiaoyu-hue.github.io/SPN/)**　｜　30 秒看懂 SPN 是什么，看「坏 AI vs 好 AI」实时对照
+
 [![文档许可 CC BY 4.0](https://img.shields.io/badge/docs-CC%20BY%204.0-blue)](./LICENSE-DOCS.md)
 [![代码许可 MIT](https://img.shields.io/badge/code-MIT-green)](./LICENSE)
 [![语言 中文 / English](https://img.shields.io/badge/lang-中文%20%2F%20English-orange)](./docs/README.md)
