@@ -4,7 +4,7 @@ description: 当用户说不懂代码却想用 AI 做出网页、应用或工具
 license: CC-BY-4.0
 metadata:
   author: xiaoyu-hue
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # SPN · AI 协作规则（零基础版）
@@ -13,9 +13,9 @@ metadata:
 > 核心信条：**代码是 AI 写的，判断是你做的。**
 
 > **这是什么**：SPN 的可安装技能包版本。核心规则已完整内联在本文件，无需联网即可生效。
-> **版本**：`1.0.0`（见 frontmatter 的 `metadata.version`，与 tag `v1.0.0` 一一对应）。
+> **版本**：`1.1.0`（见 frontmatter 的 `metadata.version`，与 tag `v1.1.0` 一一对应）。
 > **规范源**：仓库根目录 `https://github.com/xiaoyu-hue/SPN`（最新版、可参与贡献）。
-> **深度参考**：下文链接全部锁定到 `v1.0.0`，保证你装到的这份与链接指向的内容完全一致；离线时只影响"点开看细节"，不影响本文件内的规则。
+> **深度参考**：下文链接全部锁定到 `v1.1.0`，保证你装到的这份与链接指向的内容完全一致；离线时只影响"点开看细节"，不影响本文件内的规则。
 
 > **30 秒版本**：① 听不懂就喊停，让它翻译成人话再拍板；② 能不能一键还原？能就试，不能就问；③ 它说"已完成"不算数，要它贴命令输出。
 
@@ -34,7 +34,7 @@ AI 编程工具的默认行为是**优化"演示能跑"**。这对懂代码的�
 
 ## 这些规则从哪来
 
-不是模板，是三个真实判断（来自一个零基础者做出多个上线项目的过程）。完整叙事与可复用点见 [01-协作哲学与判断归属](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/references/01-协作哲学与判断归属.md)：
+不是模板，是三个真实判断（来自一个零基础者做出多个上线项目的过程）。完整叙事与可复用点见 [01-协作哲学与判断归属](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/references/01-协作哲学与判断归属.md)：
 
 1. **第一次把项目弄上线** — AI 给候选清单，人做选择（AI 列选项，人拍板）
 2. **两种视觉风格能不能融合** — 可逆的事，先试比先问更顺（判据：能否一键还原）
@@ -155,7 +155,7 @@ AI 会话一定会失忆，这是硬限制。**HANDOFF.md 是最轻量的跨会�
 - 长会话结束前：「这个会话要结束了，请写交接文档存到 HANDOFF.md」
 - 下次开新会话第一句：「先读 HANDOFF.md」
 
-模板见 [04-提示词库](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/references/04-提示词库.md) G3。
+模板见 [04-提示词库](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/references/04-提示词库.md) G3。
 
 ---
 
@@ -174,7 +174,7 @@ AI 会话一定会失忆，这是硬限制。**HANDOFF.md 是最轻量的跨会�
 
 **先上第 1 条，够用很久。** 全套自动化要配 CI，配置本身也是维护成本。
 
-详见 [03-文档、局限披露与事实维护](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/references/03-文档、局限披露与事实维护.md) 第零节。
+详见 [03-文档、局限披露与事实维护](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/references/03-文档、局限披露与事实维护.md) 第零节。
 
 ---
 
@@ -205,14 +205,14 @@ AI 会话一定会失忆，这是硬限制。**HANDOFF.md 是最轻量的跨会�
 
 | 你在做什么 | 看哪篇 |
 |---|---|
-| 理解判断归属、"先试再问"的判据 | [01-协作哲学与判断归属](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/references/01-协作哲学与判断归属.md) |
-| 准备上线，做安全自查 | [02-上线前安全自查](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/references/02-上线前安全自查.md) |
-| 写 README、选许可证、数字不写死 | [03-文档、局限披露与事实维护](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/references/03-文档、局限披露与事实维护.md) |
-| 不知道怎么跟 AI 表达需求 | [04-提示词库](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/references/04-提示词库.md) |
-| 看真实场景的"好/坏协作"对照 | [05-协作示例画廊](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/references/05-协作示例画廊.md) |
-| 同类项目、优秀 skill、插件怎么整合 | [06-生态与整合](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/references/06-生态与整合.md) |
-| 做不可逆 / 花钱 / 发布决定前必过的审查 | [07-决策审查清单](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/references/07-决策审查清单.md) |
-| 代码或文档变动后，保持描述与事实一致 | [08-文档同步规范](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/references/08-文档同步规范.md) |
+| 理解判断归属、"先试再问"的判据 | [01-协作哲学与判断归属](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/references/01-协作哲学与判断归属.md) |
+| 准备上线，做安全自查 | [02-上线前安全自查](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/references/02-上线前安全自查.md) |
+| 写 README、选许可证、数字不写死 | [03-文档、局限披露与事实维护](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/references/03-文档、局限披露与事实维护.md) |
+| 不知道怎么跟 AI 表达需求 | [04-提示词库](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/references/04-提示词库.md) |
+| 看真实场景的"好/坏协作"对照 | [05-协作示例画廊](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/references/05-协作示例画廊.md) |
+| 同类项目、优秀 skill、插件怎么整合 | [06-生态与整合](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/references/06-生态与整合.md) |
+| 做不可逆 / 花钱 / 发布决定前必过的审查 | [07-决策审查清单](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/references/07-决策审查清单.md) |
+| 代码或文档变动后，保持描述与事实一致 | [08-文档同步规范](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/references/08-文档同步规范.md) |
 
 `AGENTS.md`（本技能包内附）是可拷进任意项目的精简版，与仓库根目录同一份内容，也是 AI 实际加载执行的版本。规则只允许在根目录修改，再同步到本包——这条一致性由 CI 强制检查。
 

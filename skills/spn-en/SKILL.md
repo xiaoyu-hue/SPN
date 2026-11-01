@@ -4,7 +4,7 @@ description: Use when a non-coder wants AI to build an app or site and needs rul
 license: CC-BY-4.0
 metadata:
   author: xiaoyu-hue
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # SPN · AI Collaboration Rules (Non-Coder Edition)
@@ -13,9 +13,9 @@ metadata:
 > Core creed: **the code is written by the AI; the judgment is made by you.**
 
 > **What this is**: the installable skill-package edition of SPN. The core rules are fully inlined here and work offline.
-> **Version**: `1.0.0` (see `metadata.version` in the frontmatter, matching tag `v1.0.0`).
+> **Version**: `1.1.0` (see `metadata.version` in the frontmatter, matching tag `v1.1.0`).
 > **Source of truth**: repository root `https://github.com/xiaoyu-hue/SPN` (latest version, contributions welcome).
-> **Deep references**: links below are pinned to `v1.0.0`, so what you install matches what the links point to; offline you lose the "read more" clicks, never the rules themselves.
+> **Deep references**: links below are pinned to `v1.1.0`, so what you install matches what the links point to; offline you lose the "read more" clicks, never the rules themselves.
 
 > **30-second version**: (1) If you don't understand a word, stop them and make them translate before you decide. (2) Can it be undone with one action? Yes → try it; no → ask first. (3) "Done" doesn't count — make them paste the command output.
 
@@ -34,7 +34,7 @@ These rules keep **the judgment with the human**, without requiring the human to
 
 ## Where these rules come from
 
-Not a template — three real judgments (from one non-coder shipping multiple launched projects). The full narrative and reusable points are in [01-collaboration-philosophy](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/01-collaboration-philosophy.md):
+Not a template — three real judgments (from one non-coder shipping multiple launched projects). The full narrative and reusable points are in [01-collaboration-philosophy](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/docs/references/01-collaboration-philosophy.md):
 
 1. **First time shipping a project** — AI gives a candidate list, human makes the pick (AI lists options, human decides)
 2. **Whether two visual styles can merge** — for reversible things, trying beats asking (test: can it be undone with one click?)
@@ -153,7 +153,7 @@ AI sessions will lose memory — that's a hard limit. **HANDOFF.md is the lighte
 - Before a long session ends: "this session is ending, please write a handoff doc to HANDOFF.md"
 - First line of the next session: "read HANDOFF.md first"
 
-Template in [04-prompt-library](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/04-prompt-library.md) G3.
+Template in [04-prompt-library](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/docs/references/04-prompt-library.md) G3.
 
 ---
 
@@ -171,7 +171,7 @@ Three ways to write it, from rough to good:
 
 **Start with #1; it's enough for a long time.** Full automation needs CI, and the config itself is maintenance cost.
 
-See [03-documentation-disclosure-maintenance](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/03-documentation-disclosure-maintenance.md), section zero.
+See [03-documentation-disclosure-maintenance](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/docs/references/03-documentation-disclosure-maintenance.md), section zero.
 
 ---
 
@@ -202,14 +202,14 @@ These rules obey their own principles:
 
 | What you're doing | Read this |
 |---|---|
-| Understand judgment ownership, the try-vs-ask test | [01-collaboration-philosophy](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/01-collaboration-philosophy.md) |
-| About to ship | [02-pre-launch-security-checklist](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/02-pre-launch-security-checklist.md) |
-| Write a README / pick a license / keep numbers from going stale | [03-documentation-disclosure-maintenance](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/03-documentation-disclosure-maintenance.md) |
-| Don't know how to phrase a request to the AI | [04-prompt-library](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/04-prompt-library.md) |
-| See real good/bad collaboration examples | [05-collaboration-examples](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/05-collaboration-examples.md) |
-| Curated external projects / Skills / plugins | [06-ecosystem-and-integrations](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/06-ecosystem-and-integrations.md) |
-| Review before an irreversible / costly / public decision | [07-decision-review](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/07-decision-review.md) |
-| Keep docs consistent with code after changes | [08-doc-sync](https://github.com/xiaoyu-hue/SPN/blob/v1.0.0/docs/references/08-doc-sync.md) |
+| Understand judgment ownership, the try-vs-ask test | [01-collaboration-philosophy](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/docs/references/01-collaboration-philosophy.md) |
+| About to ship | [02-pre-launch-security-checklist](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/docs/references/02-pre-launch-security-checklist.md) |
+| Write a README / pick a license / keep numbers from going stale | [03-documentation-disclosure-maintenance](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/docs/references/03-documentation-disclosure-maintenance.md) |
+| Don't know how to phrase a request to the AI | [04-prompt-library](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/docs/references/04-prompt-library.md) |
+| See real good/bad collaboration examples | [05-collaboration-examples](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/docs/references/05-collaboration-examples.md) |
+| Curated external projects / Skills / plugins | [06-ecosystem-and-integrations](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/docs/references/06-ecosystem-and-integrations.md) |
+| Review before an irreversible / costly / public decision | [07-decision-review](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/docs/references/07-decision-review.md) |
+| Keep docs consistent with code after changes | [08-doc-sync](https://github.com/xiaoyu-hue/SPN/blob/v1.1.0/docs/references/08-doc-sync.md) |
 
 `AGENTS.md` (bundled with this package) is the trimmed version you can drop into any project; it's the same content as the repository root's English `AGENTS.md`, and the version the AI actually loads. Rules may only be edited at the root and then synced here — CI enforces that.
 

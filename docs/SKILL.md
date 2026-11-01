@@ -4,7 +4,7 @@ description: Use when a non-coder wants AI to build an app or site and needs rul
 license: CC-BY-4.0
 metadata:
   author: xiaoyu-hue
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # SPN · AI Collaboration Rules (Non-Coder Edition)

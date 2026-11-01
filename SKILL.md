@@ -4,7 +4,7 @@ description: 当用户说不懂代码却想用 AI 做出网页、应用或工具
 license: CC-BY-4.0
 metadata:
   author: xiaoyu-hue
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # SPN · AI 协作规则（零基础版）
