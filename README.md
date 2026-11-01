@@ -1,44 +1,69 @@
-# SPN · 零基础 × AI 协作规则
+<p align="center">
+  <img src="https://xiaoyu-hue.github.io/SPN/favicon.svg" width="96" alt="SPN logo" />
+</p>
+
+<h1 align="center">SPN · 零基础 × AI 协作规则</h1>
+
+<p align="center">
+  一套写给「不懂代码、但用 AI 做项目」的人的协作规则与安全基线。<br/>
+  在 AI 给出的众多选项里，让你的判断沉淀、成形。
+</p>
+
+<p align="center">
+  <a href="https://xiaoyu-hue.github.io/SPN/"><img src="https://img.shields.io/badge/官网-xiaoyu--hue.github.io%2FSPN-blue?logo=githubpages&logoColor=white" alt="官网" /></a>
+  <a href="https://github.com/xiaoyu-hue/SPN/stargazers"><img src="https://img.shields.io/github/stars/xiaoyu-hue/SPN?style=social" alt="GitHub stars" /></a>
+  <a href="./LICENSE-DOCS.md"><img src="https://img.shields.io/badge/docs-CC%20BY%204.0-blue" alt="文档许可 CC BY 4.0" /></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/code-MIT-green" alt="代码许可 MIT" /></a>
+  <a href="./docs/README.md"><img src="https://img.shields.io/badge/lang-中文%20%2F%20English-orange" alt="语言 中文 / English" /></a>
+  <img src="https://img.shields.io/badge/version-1.1.0-blue" alt="版本 1.1.0" />
+  <br/>
+  <a href="https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-lint.yml"><img src="https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-lint.yml/badge.svg" alt="doc-lint" /></a>
+  <a href="https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-quality.yml"><img src="https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-quality.yml/badge.svg" alt="doc-quality" /></a>
+  <a href="https://github.com/xiaoyu-hue/SPN/actions/workflows/secret-scan.yml"><img src="https://github.com/xiaoyu-hue/SPN/actions/workflows/secret-scan.yml/badge.svg" alt="secret-scan" /></a>
+</p>
+
+<p align="center">
+  <a href="./docs/README.md">English</a> · 简体中文
+</p>
+
+<p align="center">
+  <a href="https://xiaoyu-hue.github.io/SPN/"><img src="https://xiaoyu-hue.github.io/SPN/og.png" width="920" alt="SPN 官网预览" /></a>
+</p>
 
 > **Self-precipitation（自我析出）**：在 AI 给出的众多选项里，让属于你自己的判断沉淀、成形。
 > 核心信条：**代码是 AI 写的，判断是你做的。**
-
-**[官网 · 在线预览 →](https://xiaoyu-hue.github.io/SPN/)**　｜　30 秒看懂 SPN 是什么，看「坏 AI vs 好 AI」实时对照
-
-[![文档许可 CC BY 4.0](https://img.shields.io/badge/docs-CC%20BY%204.0-blue)](./LICENSE-DOCS.md)
-[![代码许可 MIT](https://img.shields.io/badge/code-MIT-green)](./LICENSE)
-[![语言 中文 / English](https://img.shields.io/badge/lang-中文%20%2F%20English-orange)](./docs/README.md)
-[![版本 1.1.0](https://img.shields.io/badge/version-1.1.0-blue)](https://github.com/xiaoyu-hue/SPN/releases/tag/v1.1.0)
-[![doc-lint](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-lint.yml/badge.svg)](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-lint.yml)
-[![doc-quality](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-quality.yml/badge.svg)](https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-quality.yml)
-[![secret-scan](https://github.com/xiaoyu-hue/SPN/actions/workflows/secret-scan.yml/badge.svg)](https://github.com/xiaoyu-hue/SPN/actions/workflows/secret-scan.yml)
-
-[English](./docs/README.md) · 简体中文
 
 ---
 
 ## 目录
 
-- [这是什么](#这是什么)
-- [适用人群](#适用人群)
+- [一句话认识 SPN](#一句话认识-spn)
+- [为什么需要 SPN（你可能在怕什么）](#为什么需要-spn你可能在怕什么)
+- [核心特性](#核心特性)
+- [官网预览](#官网预览)
 - [快速开始](#快速开始)
-- [按角色查阅](#按角色查阅)
+  - [给使用者：三步上手](#给使用者三步上手)
+  - [给开发者：本地预览与 CI](#给开发者本地预览与-ci)
+- [核心规则速览](#核心规则速览)
+  - [三档授权（判据：撤销成本由谁承担）](#三档授权判据撤销成本由谁承担)
+  - [三档授权速查流程图](#三档授权速查流程图)
+  - [零基础用户的三个关键动作](#零基础用户的三个关键动作)
+  - [标准工作流（五次握手）](#标准工作流五次握手)
+  - [重要决策：三视角分析](#重要决策三视角分析)
+- [文档导航（按角色查阅）](#文档导航按角色查阅)
 - [技能包（按场景取用）](#技能包按场景取用)
 - [仓库结构](#仓库结构)
-- [核心规则速览](#核心规则速览)
-  - [三档授权速查流程图](#三档授权速查流程图)
-- [工作流规范](#工作流规范)
 - [与常见 AGENTS.md 模板的区别](#与常见-agentsmd-模板的区别)
-- [三条最值得记住的](#三条最值得记住的)
 - [规则从何而来](#规则从何而来)
-- [致敬与致谢](#致敬与致谢)
+- [工作流规范](#工作流规范)
 - [已知局限](#已知局限)
-- [许可证](#许可证)
 - [贡献](#贡献)
+- [许可证](#许可证)
+- [致敬与致谢](#致敬与致谢)
 
 ---
 
-## 这是什么
+## 一句话认识 SPN
 
 SPN（Self-precipitation，自我析出）是一套面向**零编程基础用户**的 AI 协作规则：在 AI 给出的众多选项里，让属于你自己的判断沉淀、成形。
 
@@ -46,13 +71,35 @@ AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效
 
 这套规则把**判断权留在人手里**，同时不要求人懂代码。它不追求覆盖所有情况，而是让每条规则对应一类真实发生的问题。
 
-## 适用人群
+## 为什么需要 SPN（你可能在怕什么）
 
-- 不懂代码，但希望借助 AI 完成产品原型、上线小工具的人
-- 担心 AI"乱改""乱上线""泄露密钥"的非技术使用者
-- 想要一套可直接复制、立即生效的协作基线
+| 你可能在怕 | 会发生什么 | SPN 怎么兜住 |
+|---|---|---|
+| **怕 AI 乱改** | 你无法判断它写的是否正确、是否偷偷扩大了改动范围。安全边界是唯一不产生可见结果的部分 | 三档授权把"能不能一键还原"作为唯一判据，拿不准默认先问 |
+| **怕泄露密钥** | "测试一下就行"的一句话，可能把密钥、证书、令牌送进前端或仓库，而你毫无察觉 | "永远不做"里明写：密钥进仓库/进前端一律禁止，权限不能只做在前端 |
+| **怕"说完成"没完成** | AI 一句"已修复、测试通过"，比明确说"没验证"危害更大——你信了，上线才发现问题 | 要求贴出命令与输出，把"完成"定义为"可验证"，而非"AI 说完成" |
 
 > 如果你本身就是专业开发者，本规则的部分内容（如术语翻译、先试再问）可能显得冗余，请遵循你所在团队的规范。
+
+## 核心特性
+
+- **判断权留在人手里** —— 三档授权（照做 / 先问 / 永远不做），判据只有一个：撤销成本由谁承担。
+- **零基础友好** —— "术语必须先翻译才能判断""先试再问"，听不懂的词不当成拍板依据。
+- **安全红线内置** —— 提交密钥、权限只做在前端、拼接 SQL、编造测试结果等，列进"永远不做"。
+- **重要决策三视角** —— 要求 AI 从"全力反驳 → 切换支持 → 中立对比"分析，而不是只给一个结论。
+- **坏 AI vs 好 AI 实时对照** —— [官网预览](#官网预览)把抽象规则变成看得见的场景。
+- **按场景取用的技能包** —— 不必常驻全部规则，遇到具体场景才加载对应正文。
+- **自查脚本 + CI** —— 链接/数字/事实/技能包规范自动校验，改动有人盯着。
+
+## 官网预览
+
+SPN 配套一个**玻璃质感的介绍官网**，把规则变成看得见的体验：
+
+- 🔗 **[https://xiaoyu-hue.github.io/SPN/](https://xiaoyu-hue.github.io/SPN/)**
+- 含「坏 AI vs 好 AI」交互演示、三档授权可视化、移动端适配
+- 文案集中在一个文件，GitHub Pages 推送即自动部署
+
+如果你是第一次接触 SPN，建议**先去官网 30 秒看懂它是什么**，再回来看下面的规则细节。
 
 ## 快速开始
 
@@ -62,7 +109,7 @@ AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效
 2. **按需查阅 `references/`**：遇到具体问题（要上线、写 README、不知道怎么表达需求）时，翻对应的篇章。
 3. **上线 / 做不可逆决定前**，先过一遍 `references/07-决策审查清单.md`，把"坏处 / 不做的后果 / 什么情况下会后悔"想清楚再动手。
 
-> 如果你只需要某一块能力（例如只想要"上线前安全自查"），不必装整份规则——直接用 `templates/skills/` 下的场景技能包，见下文「技能包（按场景取用）」。
+> 如果你只需要某一块能力（例如只想要"上线前安全自查"），不必装整份规则——直接用 `templates/skills/` 下的场景技能包，见下文「[技能包（按场景取用）](#技能包按场景取用)」。
 
 > 关于加载：`Claude Code` 在存在自身配置文件时默认不读取 AGENTS.md，需要导入或单独开启。稳妥做法是以 AGENTS.md 作为共享基线，再为个别工具补一个薄薄的专属文件（例如在 `CLAUDE.md` 中写 `@AGENTS.md`）。
 
@@ -76,7 +123,45 @@ AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效
 - **改动了 `AGENTS.md` / `SKILL.md`**：跑 `python3 scripts/sync_snapshots.py --apply` 同步到两个技能包（`--check` 只校验，CI 每次提交都跑）。
 - **想自查**：`python3 scripts/check_links.py`（相对链接与锚点）、`python3 scripts/doc_lint.py`（有没有写死、会失真的数字）、`python3 scripts/check_facts.py`（`FACTS.md` 里有没有该复核的事实）、`python3 scripts/run_tests.py`（脚本自身的单元测试）、`python3 scripts/validate_skills.py`（技能包是否符合规范）。
 
-## 按角色查阅
+## 核心规则速览
+
+### 三档授权（判据：撤销成本由谁承担）
+
+- **允许（照做就行）** —— 读取文件、运行测试、本地可逆改动（含本地 `commit`，有 reflog 可还原）
+- **需先确认（先问再做）** —— 修改数据库结构、上线发布、对外动作、批量操作、`push` 及任何改写已推送历史的操作
+- **禁止（永远不做）** —— 提交密钥、密钥进入前端、权限只做在前端、拼接 SQL、静默兜底、编造测试结果
+
+### 三档授权速查流程图
+
+> 拿到一个任务，先沿下面这张图走一遍：能不能一键还原？涉及红线项吗？**拿不准就默认「先问」**。
+
+```mermaid
+flowchart TD
+    A[新任务来了] --> B{能一键还原？}
+    B -- 能 --> G[🟢 照做就行<br/>读文件 / 跑测试 / 本地 commit]
+    B -- 不能 --> C{涉及红线项？<br/>密钥 / 前端权限 / 拼接SQL / 编造结果}
+    C -- 不会 --> Y[🟡 先问再做<br/>上线 / 付费 / 对外 / 批量操作 / 改历史]
+    C -- 会 --> R[🔴 永远不做]
+    B -. 拿不准 .-> Y
+```
+
+### 零基础用户的三个关键动作
+
+1. **术语必须先翻译，才能判断** —— 不要用听不懂的词拍板。听不懂不是你的问题，是对方没讲清楚。
+2. **先试再问** —— 判据只有一条：能不能一键还原？能就试，不能就问。
+3. **能力不等于担保** —— AI 能写出加密代码，但"未经审计"这句声明得由你来写。
+
+### 标准工作流（五次握手）
+
+说清目标 → AI 复述验收标准 → 给出方案并说明权衡 → 拆小步逐段交付 → 人验证且 AI 如实说明
+
+### 重要决策：三视角分析
+
+涉及方案选型、是否上线等重要决定时，要求 AI 从"全力反驳 → 切换支持 → 中立对比"三个视角分析，而不是只给一个结论。
+
+配套的**调试三步法**：描述报错 → 用通俗语言解释原因 → 给出修复步骤，禁止没有定位根因就直接重写。
+
+## 文档导航（按角色查阅）
 
 | 你想做什么 | 看这里（根目录，简体中文） |
 |---|---|
@@ -156,6 +241,7 @@ SPN/
 ├── FACTS.md               ← 带时效的事实登记表（给 CI 读）
 ├── templates/             ← 按场景切分的可安装技能包模板 + 写法说明
 ├── personal/              ← 作者自用层，可跳过（非通用规则，已脱敏）
+├── website/               ← 配套介绍官网（Vite + React + 液态玻璃，GitHub Pages 自动部署）
 └── LICENSE-DOCS.md        ← 文档 CC BY 4.0 许可
 ```
 
@@ -177,53 +263,6 @@ SPN/
 - 需要英文技能包：用 `skills/spn-en/`，详见 [`skills/spn-en/INSTALL.md`](./skills/spn-en/INSTALL.md)。
 - 想复制一份自己的：复制 `personal/` 改成你的内容，`AGENTS.md` 继承根目录通用规则，只叠加你自己的上下文。详见 `personal/README.md`。
 
-## 核心规则速览
-
-### 三档授权（判据：撤销成本由谁承担）
-
-- **允许（照做就行）** —— 读取文件、运行测试、本地可逆改动（含本地 `commit`，有 reflog 可还原）
-- **需先确认（先问再做）** —— 修改数据库结构、上线发布、对外动作、批量操作、`push` 及任何改写已推送历史的操作
-- **禁止（永远不做）** —— 提交密钥、密钥进入前端、权限只做在前端、拼接 SQL、静默兜底、编造测试结果
-
-### 三档授权速查流程图
-
-> 拿到一个任务，先沿下面这张图走一遍：能不能一键还原？涉及红线项吗？**拿不准就默认「先问」**。
-
-```mermaid
-flowchart TD
-    A[新任务来了] --> B{能一键还原？}
-    B -- 能 --> G[🟢 照做就行<br/>读文件 / 跑测试 / 本地 commit]
-    B -- 不能 --> C{涉及红线项？<br/>密钥 / 前端权限 / 拼接SQL / 编造结果}
-    C -- 不会 --> Y[🟡 先问再做<br/>上线 / 付费 / 对外 / 批量操作 / 改历史]
-    C -- 会 --> R[🔴 永远不做]
-    B -. 拿不准 .-> Y
-```
-
-### 零基础用户的三个关键动作
-
-1. **术语必须先翻译，才能判断** —— 不要用听不懂的词拍板。听不懂不是你的问题，是对方没讲清楚。
-2. **先试再问** —— 判据只有一条：能不能一键还原？能就试，不能就问。
-3. **能力不等于担保** —— AI 能写出加密代码，但"未经审计"这句声明得由你来写。
-
-### 标准工作流（五次握手）
-
-说清目标 → AI 复述验收标准 → 给出方案并说明权衡 → 拆小步逐段交付 → 人验证且 AI 如实说明
-
-### 重要决策：三视角分析
-
-涉及方案选型、是否上线等重要决定时，要求 AI 从"全力反驳 → 切换支持 → 中立对比"三个视角分析，而不是只给一个结论。
-
-配套的**调试三步法**：描述报错 → 用通俗语言解释原因 → 给出修复步骤，禁止没有定位根因就直接重写。
-
-## 工作流规范
-
-两份可直接套用到任意项目的通用工作流规范（内含可填写的清单与记录模板）：
-
-- **`references/07-决策审查清单.md`** —— 做决定之前的反问工具：决策三问（坏处 / 不做的后果 / 后悔条件）+ 五层追问 + 反悔场景速查 + 拍板记录模板。与「做完之后写记录」的 ADR / CHANGELOG 互补。
-- **`references/08-文档同步规范.md`** —— 代码 / CI / 功能变化后，让「文档描述」与「代码事实」保持一致的「唯一真源原则」+ 同步清单 + SemVer 判定 + 发布前验证 + 同步检查模板。
-
-> 英文版见 [`docs/references/07-decision-review.md`](./docs/references/07-decision-review.md) 与 [`docs/references/08-doc-sync.md`](./docs/references/08-doc-sync.md)。
-
 ## 与常见 AGENTS.md 模板的区别
 
 | 常见模板 | 这套规则 |
@@ -233,12 +272,6 @@ flowchart TD
 | 只写能做什么 | 一半篇幅写**不能做什么、做不到什么** |
 | 直接给结论 | 要求 AI 讲清取舍，由人拍板 |
 | 通用最佳实践 | 每条对应一类真实发生的问题 |
-
-## 三条最值得记住的
-
-1. 不要用听不懂的词拍板。喊停，让它翻译成人话，再决定。
-2. 能不能一键还原？能就试，不能就问。这一条能解决大多数"要不要先问"的犹豫。
-3. AI 说"已完成"不等于真完成。用"自收五条"卡住它（见 `AGENTS.md`）。
 
 ## 规则从何而来
 
@@ -254,17 +287,14 @@ flowchart TD
 
 完整叙事与"先试再问 vs 先问再试"的判据，见 `references/01-协作哲学与判断归属.md`。
 
-## 致敬与致谢
+## 工作流规范
 
-SPN 站在许多开源规范、工具与社区的肩膀上。以下内容为本仓库**直接引用、对齐或受其启发**，均按其各自许可证使用，且**未复制其源代码**（遵循 `references/06` 的"引用不复制"原则）：
+两份可直接套用到任意项目的通用工作流规范（内含可填写的清单与记录模板）：
 
-- **Anthropic Agent Skills** — `skills/spn/` 与 `skills/spn-en/` 的 `SKILL.md` 采用其官方 Agent Skills 规范（frontmatter + 描述式触发）。规范见 [`anthropics/skills`](https://github.com/anthropics/skills)。
-- **知识共享（Creative Commons）** — 全部文档采用 **CC BY 4.0**（署名 4.0 国际）许可，许可文本由 CC 官方发布。
-- **Keep a Changelog / Semantic Versioning** — `CHANGELOG.md` 与版本号遵循其约定。
-- **策展式生态索引（`references/06`）** — 其中列出的同类项目、技能集合、安全与文档工具、插件与 MCP，均为本仓库调研与延伸阅读的源头，详见该文。
-- **CI 工具链** — 密钥扫描 [`gitleaks`](https://github.com/gitleaks/gitleaks)、死链检查 [`lychee`](https://github.com/lycheeverse/lychee)、术语检查 [`vale`](https://github.com/errata-ai/vale) 为本仓库的质量保障提供支撑。
+- **`references/07-决策审查清单.md`** —— 做决定之前的反问工具：决策三问（坏处 / 不做的后果 / 后悔条件）+ 五层追问 + 反悔场景速查 + 拍板记录模板。与「做完之后写记录」的 ADR / CHANGELOG 互补。
+- **`references/08-文档同步规范.md`** —— 代码 / CI / 功能变化后，让「文档描述」与「代码事实」保持一致的「唯一真源原则」+ 同步清单 + SemVer 判定 + 发布前验证 + 同步检查模板。
 
-> 本仓库自身的规则内容（含 `references/07`、`08` 两份工作流规范）为作者原创，以 CC BY 4.0 共享；如使用了你的成果，欢迎在 issue 中告知以便补正署名。
+> 英文版见 [`docs/references/07-decision-review.md`](./docs/references/07-decision-review.md) 与 [`docs/references/08-doc-sync.md`](./docs/references/08-doc-sync.md)。
 
 ## 已知局限
 
@@ -273,6 +303,15 @@ SPN 站在许多开源规范、工具与社区的肩膀上。以下内容为本�
 - 深度参考 `references/02-上线前安全自查.md` 中引用的安全事件与平台免费额度核实于 2026 年 10 月，会随时间变化，使用前请复核。
 - **本规则不能替代专业安全审计。** 涉及他人真实敏感数据（医疗、金融、身份信息）的应用，仍建议寻求专业审查。
 - 参考资料 `01`–`08` 及 `AGENTS.md` / `SKILL.md` / `SECURITY.md` / `CONTRIBUTING.md` 均已提供英文版，见 `docs/`；`personal/` 仍仅中文。
+
+## 贡献
+
+欢迎提交 issue 与 pull request。
+
+- Bug 与想法：写清"你做了什么、期望什么、实际发生了什么"。
+- 结构性改动（架构、依赖、安全相关）请先开 issue 对齐方向。
+- 中英文均可，英文写得简单也没关系。
+- 通用规则与作者自用规则的分界、如何新增一条规则，见 `CONTRIBUTING.md`。
 
 ## 许可证
 
@@ -287,15 +326,18 @@ SPN 站在许多开源规范、工具与社区的肩膀上。以下内容为本�
 
 > 说明：`LICENSE`（MIT）会被 GitHub 自动识别并在仓库侧栏显示徽章；文档采用的 CC BY 4.0 以 `LICENSE-DOCS.md` 为准（GitHub 侧栏仅自动识别 CC0-1.0，不识别 CC BY 4.0）。
 
-## 贡献
+## 致敬与致谢
 
-欢迎提交 issue 与 pull request。
+SPN 站在许多开源规范、工具与社区的肩膀上。以下内容为本仓库**直接引用、对齐或受其启发**，均按其各自许可证使用，且**未复制其源代码**（遵循 `references/06` 的"引用不复制"原则）：
 
-- Bug 与想法：写清"你做了什么、期望什么、实际发生了什么"。
-- 结构性改动（架构、依赖、安全相关）请先开 issue 对齐方向。
-- 中英文均可，英文写得简单也没关系。
-- 通用规则与作者自用规则的分界、如何新增一条规则，见 `CONTRIBUTING.md`。
+- **Anthropic Agent Skills** — `skills/spn/` 与 `skills/spn-en/` 的 `SKILL.md` 采用其官方 Agent Skills 规范（frontmatter + 描述式触发）。规范见 [`anthropics/skills`](https://github.com/anthropics/skills)。
+- **知识共享（Creative Commons）** — 全部文档采用 **CC BY 4.0**（署名 4.0 国际）许可，许可文本由 CC 官方发布。
+- **Keep a Changelog / Semantic Versioning** — `CHANGELOG.md` 与版本号遵循其约定。
+- **策展式生态索引（`references/06`）** — 其中列出的同类项目、技能集合、安全与文档工具、插件与 MCP，均为本仓库调研与延伸阅读的源头，详见该文。
+- **CI 工具链** — 密钥扫描 [`gitleaks`](https://github.com/gitleaks/gitleaks)、死链检查 [`lychee`](https://github.com/lycheeverse/lychee)、术语检查 [`vale`](https://github.com/errata-ai/vale) 为本仓库的质量保障提供支撑。
+
+> 本仓库自身的规则内容（含 `references/07`、`08` 两份工作流规范）为作者原创，以 CC BY 4.0 共享；如使用了你的成果，欢迎在 issue 中告知以便补正署名。
 
 ---
 
-**版本** [`v1.1.0`](https://github.com/xiaoyu-hue/SPN/releases/tag/v1.1.0) · **更新日志** [`CHANGELOG.md`](./CHANGELOG.md) · **许可证** [`CC BY 4.0`](./LICENSE-DOCS.md) / [`MIT`](./LICENSE)
+**版本** [`v1.1.0`](https://github.com/xiaoyu-hue/SPN/releases/tag/v1.1.0) · **更新日志** [`CHANGELOG.md`](./CHANGELOG.md) · **许可证** [`CC BY 4.0`](./LICENSE-DOCS.md) / [`MIT`](./LICENSE) · **官网** [`在线预览 →`](https://xiaoyu-hue.github.io/SPN/)
