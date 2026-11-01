@@ -1,0 +1,230 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  /* 设计令牌：深墨场景 + 雾蓝主色 + 单一暖砂强调，刻意避开“紫蓝渐变 + 白底”的 AI 味 */
+  --ink: #06070d;
+  --text: #ececf2;
+  --text-dim: #9aa1b4;
+  --text-faint: #6b7286;
+  --line: rgba(255, 255, 255, 0.10);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --brand: #8b9bff;
+  --brand-soft: #aab4ff;
+  --sand: #e7c39a;
+  --glass-tint: rgba(255, 255, 255, 0.055);
+  --glass-tint-2: rgba(255, 255, 255, 0.03);
+  --r: 1.35rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink font-sans antialiased;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* ============ 背景场景：玻璃需要“背后有东西”才像玻璃 ============ */
+.bg-scene {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: var(--ink);
+  overflow: hidden;
+}
+.bg-scene::before {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  background:
+    radial-gradient(38% 38% at 16% 10%, rgba(99, 104, 200, 0.20), transparent 62%),
+    radial-gradient(42% 42% at 84% 16%, rgba(40, 120, 130, 0.16), transparent 60%),
+    radial-gradient(48% 48% at 72% 88%, rgba(190, 150, 95, 0.10), transparent 60%),
+    radial-gradient(40% 40% at 22% 92%, rgba(120, 92, 185, 0.10), transparent 60%);
+  filter: blur(46px);
+  animation: drift 26s ease-in-out infinite alternate;
+}
+/* 细微颗粒：把“扁平感”变成“有质感”，是告别 AI 味的关键细节 */
+.bg-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* ============ 分层液态玻璃系统 ============
+   结构：.glass(染色+边框+内高光) > .glass__lens(背景模糊/折射) + .glass__content(内容)
+   跨浏览器核心 = 模糊+饱和+内高光边（全浏览器可用）；
+   折射扭曲 = 仅 Chromium 支持，用 @supports 渐进增强，不支持则优雅降级为优质磨砂。 */
+.glass {
+  position: relative;
+  border-radius: var(--r);
+  border: 1px solid var(--line);
+  background: var(--glass-tint);
+  box-shadow:
+    0 18px 50px -20px rgba(0, 0, 0, 0.65),
+    inset 0 1px 1px rgba(255, 255, 255, 0.55),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.10),
+    inset 1px 0 1px rgba(255, 255, 255, 0.16),
+    inset -1px 0 1px rgba(255, 255, 255, 0.16);
+  overflow: hidden;
+}
+.glass__lens {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  -webkit-backdrop-filter: blur(18px) saturate(165%);
+  backdrop-filter: blur(18px) saturate(165%);
+}
+/* 折射：边缘把背后内容像透镜一样掰弯；用径向遮罩只作用在边缘，文字区保持清晰 */
+@supports (backdrop-filter: url("#lg-refract")) {
+  .glass--refract .glass__lens {
+    -webkit-backdrop-filter: blur(18px) saturate(165%) url("#lg-refract");
+    backdrop-filter: blur(18px) saturate(165%) url("#lg-refract");
+    -webkit-mask-image: radial-gradient(125% 125% at 50% 50%, transparent 58%, #000 92%);
+    mask-image: radial-gradient(125% 125% at 50% 50%, transparent 58%, #000 92%);
+  }
+}
+/* 斜向光泽：让表面像被抛光而非哑光（避免“只是半透明方块”） */
+.glass--sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.38) 0%,
+    rgba(255, 255, 255, 0.06) 26%,
+    transparent 54%
+  );
+  mix-blend-mode: screen;
+}
+.glass__content {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+/* 关掉透明度的用户：玻璃退化为近不透明面板，保证可读 */
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: rgba(14, 16, 24, 0.94);
+  }
+  .glass__lens {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* ============ 排版 / 区块 ============ */
+.container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1180px;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 640px) {
+  .container-page { padding-inline: 2rem; }
+}
+.section {
+  padding-block: 5.5rem;
+}
+@media (min-width: 768px) {
+  .section { padding-block: 7rem; }
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--brand-soft);
+}
+.section-title {
+  margin-top: 1.1rem;
+  font-family: "Space Grotesk", "Noto Sans SC", system-ui, sans-serif;
+  font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: #fff;
+}
+.lead {
+  margin-top: 1rem;
+  max-width: 46rem;
+  color: var(--text-dim);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+.text-accent {
+  color: var(--sand);
+}
+.text-gradient {
+  background: linear-gradient(100deg, #ffffff 0%, var(--brand-soft) 55%, #ffffff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 7s linear infinite;
+}
+
+/* ============ 按钮（手写，不套模板组件，避免雷同） ============ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.85rem;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.btn:active { transform: translateY(0) scale(0.985); }
+.btn--primary {
+  color: #0a0b12;
+  background: linear-gradient(180deg, #ffffff 0%, #dfe3ff 100%);
+  box-shadow: 0 10px 30px -12px rgba(139, 155, 255, 0.65);
+}
+.btn--primary:hover { transform: translateY(-2px); box-shadow: 0 16px 38px -12px rgba(139, 155, 255, 0.8); }
+.btn--ghost {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--line-strong);
+  backdrop-filter: blur(8px);
+}
+.btn--ghost:hover { transform: translateY(-2px); background: rgba(255, 255, 255, 0.09); border-color: rgba(255, 255, 255, 0.28); }
+
+/* ============ 自定义滚动条 ============ */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #20242f; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #2c3140; }
+
+/* ============ 降级：尊重减少动效 ============ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
