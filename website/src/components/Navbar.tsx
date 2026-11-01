@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Github, BookOpen } from "lucide-react";
 import { SITE } from "@/content";
+import { Logo } from "@/components/Logo";
 
 const LINKS = [
   { href: "#pain", label: "痛点" },
@@ -31,9 +32,7 @@ export function Navbar() {
         }}
       >
         <a href="#top" className="flex items-center gap-2.5">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand to-sand text-sm font-bold text-ink">
-            S
-          </span>
+          <Logo size={32} className="shrink-0" />
           <span className="text-base font-semibold text-white">
             {SITE.name}
             <span className="ml-1.5 hidden text-xs font-normal text-[var(--text-faint)] sm:inline">
