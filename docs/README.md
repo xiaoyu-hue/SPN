@@ -15,7 +15,7 @@
   <a href="../LICENSE-DOCS.md"><img src="https://img.shields.io/badge/docs-CC%20BY%204.0-blue" alt="docs CC BY 4.0" /></a>
   <a href="../LICENSE"><img src="https://img.shields.io/badge/code-MIT-green" alt="code MIT" /></a>
   <a href="./README.md"><img src="https://img.shields.io/badge/lang-中文%20%2F%20English-orange" alt="lang 中文 / English" /></a>
-  <img src="https://img.shields.io/badge/version-1.1.0-blue" alt="version 1.1.0" />
+  <img src="https://img.shields.io/badge/version-1.2.0-blue" alt="version 1.2.0" />
   <br/>
   <a href="https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-lint.yml"><img src="https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-lint.yml/badge.svg" alt="doc-lint" /></a>
   <a href="https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-quality.yml"><img src="https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-quality.yml/badge.svg" alt="doc-quality" /></a>
@@ -94,10 +94,13 @@ These rules keep **the judgment with the human**, without requiring the human to
 
 ## Website preview
 
+> 🌐 SPN's website is **officially live as of [v1.2.0](https://github.com/xiaoyu-hue/SPN/releases/tag/v1.2.0)**, with **one-click Chinese / English switching** that remembers your choice.
+
 SPN ships a **glass-textured intro website** that turns the rules into a visible experience:
 
 - 🔗 **[https://xiaoyu-hue.github.io/SPN/](https://xiaoyu-hue.github.io/SPN/)**
 - Includes a "bad AI vs. good AI" interactive demo, a visualization of the three authorization tiers, and mobile adaptation
+- **Bilingual (中 / EN)**: one-click toggle in the top nav; the entire site (nav, pain points, core rules, interactive demo, quick start, skill packages, install, footer) is translated
 - All copy lives in one file; pushing to GitHub Pages deploys automatically
 
 If this is your first contact with SPN, **spend 30 seconds on the website to get what it is**, then come back for the rule details.
@@ -362,4 +365,4 @@ SPN stands on the shoulders of many open-source specs, tools, and communities. T
 
 ---
 
-**Version** [`v1.1.0`](https://github.com/xiaoyu-hue/SPN/releases/tag/v1.1.0) · **Changelog** [`CHANGELOG.md`](../CHANGELOG.md) · **License** [`CC BY 4.0`](../LICENSE-DOCS.md) / [`MIT`](../LICENSE) · **Website** [`Preview →`](https://xiaoyu-hue.github.io/SPN/)
+**Version** [`v1.2.0`](https://github.com/xiaoyu-hue/SPN/releases/tag/v1.2.0) · **Changelog** [`CHANGELOG.md`](../CHANGELOG.md) · **License** [`CC BY 4.0`](../LICENSE-DOCS.md) / [`MIT`](../LICENSE) · **Website** [`Preview →`](https://xiaoyu-hue.github.io/SPN/)

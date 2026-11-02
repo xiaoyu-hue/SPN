@@ -15,7 +15,7 @@
   <a href="./LICENSE-DOCS.md"><img src="https://img.shields.io/badge/docs-CC%20BY%204.0-blue" alt="文档许可 CC BY 4.0" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/code-MIT-green" alt="代码许可 MIT" /></a>
   <a href="./docs/README.md"><img src="https://img.shields.io/badge/lang-中文%20%2F%20English-orange" alt="语言 中文 / English" /></a>
-  <img src="https://img.shields.io/badge/version-1.1.0-blue" alt="版本 1.1.0" />
+  <img src="https://img.shields.io/badge/version-1.2.0-blue" alt="版本 1.2.0" />
   <br/>
   <a href="https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-lint.yml"><img src="https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-lint.yml/badge.svg" alt="doc-lint" /></a>
   <a href="https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-quality.yml"><img src="https://github.com/xiaoyu-hue/SPN/actions/workflows/doc-quality.yml/badge.svg" alt="doc-quality" /></a>
@@ -94,10 +94,13 @@ AI 编程工具的默认行为是优化"演示能跑"。对懂代码的人是效
 
 ## 官网预览
 
+> 🌐 SPN 官网已于 **[v1.2.0](https://github.com/xiaoyu-hue/SPN/releases/tag/v1.2.0) 正式上线**，支持**中文 / English 一键切换**，并记住你的语言选择。
+
 SPN 配套一个**玻璃质感的介绍官网**，把规则变成看得见的体验：
 
 - 🔗 **[https://xiaoyu-hue.github.io/SPN/](https://xiaoyu-hue.github.io/SPN/)**
 - 含「坏 AI vs 好 AI」交互演示、三档授权可视化、移动端适配
+- **中 / EN 双语**：导航栏一键切换，全站文案（导航、痛点、核心规则、互动演示、三步上手、技能包、安装、页脚）同步翻译
 - 文案集中在一个文件，GitHub Pages 推送即自动部署
 
 如果你是第一次接触 SPN，建议**先去官网 30 秒看懂它是什么**，再回来看下面的规则细节。
@@ -364,4 +367,4 @@ SPN 站在许多开源规范、工具与社区的肩膀上。以下内容为本�
 
 ---
 
-**版本** [`v1.1.0`](https://github.com/xiaoyu-hue/SPN/releases/tag/v1.1.0) · **更新日志** [`CHANGELOG.md`](./CHANGELOG.md) · **许可证** [`CC BY 4.0`](./LICENSE-DOCS.md) / [`MIT`](./LICENSE) · **官网** [`在线预览 →`](https://xiaoyu-hue.github.io/SPN/)
+**版本** [`v1.2.0`](https://github.com/xiaoyu-hue/SPN/releases/tag/v1.2.0) · **更新日志** [`CHANGELOG.md`](./CHANGELOG.md) · **许可证** [`CC BY 4.0`](./LICENSE-DOCS.md) / [`MIT`](./LICENSE) · **官网** [`在线预览 →`](https://xiaoyu-hue.github.io/SPN/)
