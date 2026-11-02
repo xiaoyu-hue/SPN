@@ -41,6 +41,7 @@
 - [为什么需要 SPN（你可能在怕什么）](#为什么需要-spn你可能在怕什么)
 - [核心特性](#核心特性)
 - [官网预览](#官网预览)
+- [官网技术栈与架构](#官网技术栈与架构)
 - [快速开始](#快速开始)
   - [给使用者：三步上手](#给使用者三步上手)
   - [给开发者：本地预览与 CI](#给开发者本地预览与-ci)
@@ -100,6 +101,29 @@ SPN 配套一个**玻璃质感的介绍官网**，把规则变成看得见的体
 - 文案集中在一个文件，GitHub Pages 推送即自动部署
 
 如果你是第一次接触 SPN，建议**先去官网 30 秒看懂它是什么**，再回来看下面的规则细节。
+
+## 官网技术栈与架构
+
+SPN 官网是一个**手写液态玻璃质感**的纯静态站点：零后端、零数据库，由 GitHub Pages 自动部署。
+
+**技术栈**
+
+![React](https://img.shields.io/badge/React-18-61dafb?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-5-646cff?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3-38bdf8?logo=tailwindcss&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer%20Motion-11-0055ff?logo=framer&logoColor=white)
+![lucide-react](https://img.shields.io/badge/lucide--react-000?logo=lucide&logoColor=white)
+
+**架构要点**
+
+- **构建**：Vite + React 18 + TypeScript，纯静态单页应用（SPA），无服务端依赖。
+- **玻璃质感**：手写分层 CSS（`.glass` 染色 + 模糊 + 高光边 + 折射），不依赖现成玻璃库，刻意避开千篇一律的「AI 味」。
+- **内容集中**：所有站点文案收口在 `src/content.ts`，改字不改码，避免文案随迭代漂移。
+- **部署**：推送到 `main` 即由 `.github/workflows/deploy.yml` 自动构建并发布到 GitHub Pages。
+- **移动端**：底栏导航 + 44px 触控目标 + 安全区适配，对齐大厂移动端规范。
+
+源码见 [`website/`](./website/)；线上预览见 [官网预览](#官网预览)。
 
 ## 快速开始
 
