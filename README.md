@@ -140,6 +140,17 @@ SPN 官网是一个**手写液态玻璃质感**的纯静态站点：零后端、
 
 > 关于加载：`Claude Code` 在存在自身配置文件时默认不读取 AGENTS.md，需要导入或单独开启。稳妥做法是以 AGENTS.md 作为共享基线，再为个别工具补一个薄薄的专属文件（例如在 `CLAUDE.md` 中写 `@AGENTS.md`）。
 
+### 两种 AGENTS.md：完整版与精简版
+
+> 仓库根目录提供两份规则，内容一致、详略不同，按场景自由选择。
+
+| 版本 | 文件 | 适合 |
+|---|---|---|
+| 完整版 | [`AGENTS.md`](./AGENTS.md) | 第一次建立信任、需要逐项解释与例子、作为规范源 |
+| 精简版 | [`AGENTS.minimal.md`](./AGENTS.minimal.md) | 常驻加载、省上下文、长会话抗遗忘、给 AI 当短基线 |
+
+**怎么切换**：在你的项目里二选一放进根目录即可——把 `AGENTS.minimal.md` 复制覆盖为 `AGENTS.md` 就是精简版，保留原 `AGENTS.md` 就是完整版。下级目录的 AGENTS.md 只能补充，不能弱化根规则的强约束。
+
 ### 给开发者：本地预览与 CI
 
 - 克隆仓库后，`skills/spn/` 是一个自包含、可安装的技能包，详见 [`skills/spn/INSTALL.md`](./skills/spn/INSTALL.md)。
