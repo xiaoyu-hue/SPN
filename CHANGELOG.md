@@ -11,6 +11,7 @@
 - **AGENTS.md 精简版（`AGENTS.minimal.md`）**：与完整版规则一致，仅保留硬性约束、砍掉解释与例子，用于轻量加载 / 省上下文 / 抗长会话遗忘。原 `AGENTS.md` 保持不变，两者可自由切换（详见 README「两种 AGENTS.md」小节）
 - **规则安装器（`scripts/install.py`）**：自动探测当前 AI 工具并把规则放到其强制读取位置（Claude / CodeBuddy / Cursor / Gemini / Copilot），直接解决「AI 根本没读规则」的加载确定性（L1）
 - **合规检查（`scripts/spn_compliance.py` + `compliance.yml`）**：扫描 git diff 中的「永远不做」红线模式（密钥泄露、RLS 形同虚设、SQL 拼接、危险删除），接入 CI 自动拦截（L3）
+- **README 一键体检小节**：新增「一键体检（新人最快上手）」，把 `install.py --dry-run` 与 `spn_compliance.py` 合成一条可反复跑的开工前自检命令（中 / 英 README 对称）
 
 ## [1.2.0] - 2026-11-02
 

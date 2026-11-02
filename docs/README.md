@@ -288,6 +288,17 @@ Wired into `.github/workflows/compliance.yml`, it runs on every PR / push. The s
 
 > Automated checks only catch known patterns, not "semantic bypasses" (e.g. permissions that look right but are actually over-privileged). **L4 — pasting command output at delivery and a human check — remains the last line of defense.**
 
+### One-click health check (the fastest start for newcomers)
+
+Run both commands together: first confirm the rules are "installed in the right place", then scan for any red-line violations. Scan and report only — no files are touched:
+
+```bash
+python3 scripts/install.py --dry-run     # report where the rules would be installed (writes nothing)
+python3 scripts/spn_compliance.py        # scan uncommitted changes for "never do" red lines
+```
+
+> To actually install, drop `--dry-run`. The health check is safe to re-run anytime — run it before each session, or whenever you suspect the AI skipped a rule.
+
 ## Repository structure
 
 SPN uses a **universal layer + personal layer** structure, plus an English edition and a ready-to-load skill package:
