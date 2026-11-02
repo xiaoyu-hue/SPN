@@ -58,12 +58,12 @@ export function Hero() {
               <span className="h-2.5 w-2.5 rounded-full bg-allow/70" />
               <span className="ml-2">{t.hero.chatTitle}</span>
             </div>
-            <p className="mt-4 text-sm text-[var(--text-dim)]">
+            <p className="mt-4 text-[0.95rem] leading-relaxed text-[var(--text)]">
               <span className="text-[var(--text-faint)]">{t.hero.chatYou}</span>
               {t.hero.chatUser}
             </p>
-            <p className="mt-2 rounded-xl bg-ask/10 p-3 text-sm text-amber-100/90 ring-1 ring-ask/25">
-              <span className="font-medium text-ask">{t.hero.chatAi}</span>
+            <p className="mt-2 rounded-xl bg-ask/[0.14] p-3 text-[0.95rem] leading-relaxed text-[#f7e6c0] ring-1 ring-ask/30">
+              <span className="font-semibold text-[#ffd56b]">{t.hero.chatAi}</span>
               {t.hero.chatAiText}
             </p>
             <p className="mt-3 text-xs text-[var(--text-faint)]">{t.hero.chatNote}</p>

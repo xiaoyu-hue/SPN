@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Github, BookOpen } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { LangToggle } from "@/components/LangToggle";
+import { Glass } from "@/components/Glass";
 import { useI18n } from "@/i18n";
 
 export function Navbar() {
@@ -17,10 +18,15 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
-      <nav
-        className="glass mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-4 py-2.5 transition-shadow"
+      {/* 用 Glass 组件渲染，自带 .glass__lens 背景模糊层；否则和其余玻璃卡不同，导航会“透字”。
+          sheen=false 保持原导航无斜高光的扁平观感；滚动后不透明度提到 0.82 进一步压住穿透。 */}
+      <Glass
+        as="nav"
+        sheen={false}
+        className="mx-auto max-w-6xl rounded-2xl transition-shadow"
+        contentClassName="flex items-center justify-between px-4 py-2.5"
         style={{
-          background: scrolled ? "rgba(10,12,20,0.72)" : "rgba(255,255,255,0.04)",
+          background: scrolled ? "rgba(10,12,20,0.82)" : "rgba(255,255,255,0.04)",
           boxShadow: scrolled ? "0 14px 40px -18px rgba(0,0,0,0.7)" : undefined,
         }}
       >
@@ -70,7 +76,7 @@ export function Navbar() {
             </a>
           </span>
         </div>
-      </nav>
+      </Glass>
     </header>
   );
 }

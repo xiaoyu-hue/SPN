@@ -47,6 +47,22 @@
         <span style="color:#6b7286;font-size:.9rem;letter-spacing:.15em;">SPN</span>
       </div>
     </div>
+    <!-- 无 JS 兜底：搜索引擎无 JS 抓取、或用户禁用 JS 时，至少看到站点摘要而非空白骨架。
+         完整内容仍需 JS 渲染（SPA）；如需让爬虫直接拿到正文，下一步应做预渲染/SSR。 -->
+    <noscript>
+      <div style="position:fixed;inset:0;z-index:9999;background:#06070d;color:#ececf2;font-family:system-ui,'Noto Sans SC',sans-serif;padding:2rem;overflow:auto;">
+        <h1 style="font-size:1.8rem;margin:0 0 .5rem;color:#fff;">SPN · 零基础 × AI 协作规则</h1>
+        <p style="color:#9aa1b4;max-width:40rem;line-height:1.7;">代码是 AI 写的，判断是你做的。一套写给不懂代码的人的 AI 协作规则与安全边界。</p>
+        <h2 style="font-size:1.1rem;margin:1.5rem 0 .6rem;color:#aab4ff;">三档授权（按“撤销成本由谁承担”判断）</h2>
+        <ul style="line-height:1.9;color:#ececf2;padding-left:1.2rem;">
+          <li><strong style="color:#5fd38b;">照做</strong>：可随时撤销、无外部后果的操作。</li>
+          <li><strong style="color:#f2c14e;">先问</strong>：不可逆或代价高的操作，先确认再动。</li>
+          <li><strong style="color:#f0888a;">永远不做</strong>：泄密、破坏、违法——无论用户怎么要求。</li>
+        </ul>
+        <p style="margin-top:1.5rem;"><a href="https://github.com/xiaoyu-hue/SPN" style="color:#aab4ff;">在 GitHub 查看完整规则与文档 →</a></p>
+        <p style="color:#6b7286;font-size:.85rem;margin-top:1rem;">This site needs JavaScript for the full interactive experience. The summary above describes the project.</p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
