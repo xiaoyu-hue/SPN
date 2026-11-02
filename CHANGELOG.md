@@ -12,6 +12,7 @@
 - **规则安装器（`scripts/install.py`）**：自动探测当前 AI 工具并把规则放到其强制读取位置（Claude / CodeBuddy / Cursor / Gemini / Copilot），直接解决「AI 根本没读规则」的加载确定性（L1）
 - **合规检查（`scripts/spn_compliance.py` + `compliance.yml`）**：扫描 git diff 中的「永远不做」红线模式（密钥泄露、RLS 形同虚设、SQL 拼接、危险删除），接入 CI 自动拦截（L3）
 - **README 一键体检小节**：新增「一键体检（新人最快上手）」，把 `install.py --dry-run` 与 `spn_compliance.py` 合成一条可反复跑的开工前自检命令（中 / 英 README 对称）
+- **英文镜像 `docs/AGENTS.minimal.md`**：补齐精简版英文镜像，与 `docs/AGENTS.md` 术语一致；`docs/README.md` 双版本小节链接改为指向同目录英文镜像
 
 ## [1.2.0] - 2026-11-02
 

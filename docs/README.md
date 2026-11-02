@@ -147,7 +147,7 @@ Source in [`website/`](../website/); live preview in [Website preview](#website-
 | Version | File | Best for |
 |---|---|---|
 | Full | [`AGENTS.md`](./AGENTS.md) | First-time trust, needs step-by-step explanations and examples, used as the source of truth |
-| Minimal | [`AGENTS.minimal.md`](../AGENTS.minimal.md) | Always-on loading, smaller context, resisting mid-session forgetting, a short baseline for the AI |
+| Minimal | [`AGENTS.minimal.md`](./AGENTS.minimal.md) | Always-on loading, smaller context, resisting mid-session forgetting, a short baseline for the AI |
 
 **How to switch**: in your own project, drop in either one as the root file — copy `AGENTS.minimal.md` over `AGENTS.md` to use the minimal version; keep the original `AGENTS.md` for the full version. A subdirectory's AGENTS.md may only add to, never weaken, the strong constraints of the root rules.
 
