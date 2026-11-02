@@ -140,6 +140,17 @@ Source in [`website/`](../website/); live preview in [Website preview](#website-
 
 > On loading: `Claude Code` doesn't read AGENTS.md by default when its own config file exists — you need to import it. A safe pattern is to use AGENTS.md as the shared baseline, then add a thin tool-specific file (e.g. put `@AGENTS.md` inside `CLAUDE.md`).
 
+### Two flavors of AGENTS.md: full and minimal
+
+> The repo root ships two rule sets — identical in content, different in detail. Pick by scenario.
+
+| Version | File | Best for |
+|---|---|---|
+| Full | [`AGENTS.md`](./AGENTS.md) | First-time trust, needs step-by-step explanations and examples, used as the source of truth |
+| Minimal | [`AGENTS.minimal.md`](../AGENTS.minimal.md) | Always-on loading, smaller context, resisting mid-session forgetting, a short baseline for the AI |
+
+**How to switch**: in your own project, drop in either one as the root file — copy `AGENTS.minimal.md` over `AGENTS.md` to use the minimal version; keep the original `AGENTS.md` for the full version. A subdirectory's AGENTS.md may only add to, never weaken, the strong constraints of the root rules.
+
 ### For developers: local preview and CI
 
 - After cloning, `skills/spn-en/` is the self-contained, installable skill package for English — see [`skills/spn-en/INSTALL.md`](../skills/spn-en/INSTALL.md).
@@ -238,6 +249,44 @@ Just paste a package's `SKILL.md` body (minus the `---` frontmatter) straight in
 **Verify it loaded**: open a fresh session and say the trigger (e.g. "I'm about to ship, run SPN's security self-check"). If the AI starts enumerating attacks and distinguishes "found nothing" from "no problem" — the skill is loaded.
 
 > Want to write your own? Copy `templates/skills/_skeleton/` to start; writing guide and the `description` trigger phrasing are in [`templates/README.md`](../templates/README.md).
+
+## Making the rules actually take effect (load reliability + automated enforcement)
+
+> A great rule unread by the AI counts as zero. SPN's biggest gap isn't "not strict enough" — it's "the AI never loaded it, or loaded it but didn't obey." The two tools below close **L1 (load reliability)** and **L3 (automated enforcement)**.
+
+### L1 load reliability: `scripts/install.py`
+
+Drops the rules into the location your current AI tool **forces itself to read**, instead of hoping it "might read" them:
+
+```bash
+python3 scripts/install.py                 # auto-detect the tool and install
+python3 scripts/install.py --minimal       # use the minimal baseline
+python3 scripts/install.py --tool claude   # specify the tool
+python3 scripts/install.py --dry-run       # report only, write nothing
+```
+
+| Tool | Where it's installed |
+|---|---|
+| Claude Code | append `@AGENTS.md` to root `CLAUDE.md` (it doesn't read AGENTS.md by default) |
+| CodeBuddy | copy `skills/spn` to `~/.codebuddy/skills/spn` |
+| Cursor | copy `AGENTS.md` to root + write a `.cursor/rules` entry |
+| Gemini CLI | copy as `GEMINI.md` |
+| Copilot | copy as `.github/copilot-instructions.md` |
+
+Verify the load: open a fresh session and ask the AI to repeat the "three opening sentences" — if it can, it loaded.
+
+### L3 automated enforcement: `scripts/spn_compliance.py` + CI
+
+Rules are advisory; the AI may ignore them. This script auto-catches hard violations of "never do" (secret leaks, no-op RLS, SQL concatenation, dangerous deletes) in CI / pre-commit, turning red lines from a slogan into a machine-blocked gate:
+
+```bash
+python3 scripts/spn_compliance.py                 # scan uncommitted changes
+python3 scripts/spn_compliance.py --base main    # scan main..HEAD
+```
+
+Wired into `.github/workflows/compliance.yml`, it runs on every PR / push. The script only scans files that "look like app code" and skips SPN's own docs and tooling dirs to avoid false positives.
+
+> Automated checks only catch known patterns, not "semantic bypasses" (e.g. permissions that look right but are actually over-privileged). **L4 — pasting command output at delivery and a human check — remains the last line of defense.**
 
 ## Repository structure
 

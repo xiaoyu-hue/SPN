@@ -251,6 +251,44 @@ cp -r templates/skills/spn-security-check ~/.codebuddy/skills/spn-security-check
 
 > 想自己写一个场景技能包？复制 `templates/skills/_skeleton/` 起步，写法与 `description` 触发句式见 [`templates/README.md`](./templates/README.md)。
 
+## 让规则真正生效（加载确定性 + 自动兜底）
+
+> 规则写得好，AI 没读 = 0。SPN 最大的坑不是「写得不够狠」，而是「AI 根本没加载、或读了不守」。下面两套工具分别堵 **L1（加载确定性）** 与 **L3（自动兜底）**。
+
+### L1 加载确定性：`scripts/install.py`
+
+自动把规则放到当前 AI 工具**强制读取**的位置，而不是指望它「可能读到」：
+
+```bash
+python3 scripts/install.py                 # 自动探测当前工具并安装
+python3 scripts/install.py --minimal       # 用精简版基线
+python3 scripts/install.py --tool claude   # 指定工具
+python3 scripts/install.py --dry-run       # 只报告，不写文件
+```
+
+| 工具 | 安装位置 |
+|---|---|
+| Claude Code | 项目根 `CLAUDE.md` 追加 `@AGENTS.md`（它默认不读 AGENTS.md） |
+| CodeBuddy | 复制 `skills/spn` 到 `~/.codebuddy/skills/spn` |
+| Cursor | 复制 `AGENTS.md` 到根 + 写 `.cursor/rules` 入口 |
+| Gemini CLI | 复制为 `GEMINI.md` |
+| Copilot | 复制为 `.github/copilot-instructions.md` |
+
+验证加载：新开会话让 AI 复述「开工前三句话」，能复述即生效。
+
+### L3 自动兜底：`scripts/spn_compliance.py` + CI
+
+规则是建议性的，AI 可能不守。本脚本在 CI / 提交前自动抓「永远不做」的硬违规（密钥泄露、RLS 形同虚设、SQL 拼接、危险删除），把红线从口号变成机器可拦的关卡：
+
+```bash
+python3 scripts/spn_compliance.py                 # 扫未提交改动
+python3 scripts/spn_compliance.py --base main    # 扫 main..HEAD
+```
+
+已接入 `.github/workflows/compliance.yml`，每次 PR / push 自动跑。脚本只扫「看起来像应用代码」的文件，并跳过 SPN 自身的文档与工具目录，避免误报。
+
+> 自动检查只能抓已知模式，抓不了「语义绕过」（例如权限看似正确实则越权）。**L4（交付时贴命令输出、人核对）仍是最后一道关**，别因为 CI 绿了就放松。
+
 ## 仓库结构
 
 SPN 采用**通用层 + 个人层**两层结构，并配有英文镜像与可直接加载的技能包。

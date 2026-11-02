@@ -1,0 +1,24 @@
+name: spn-compliance
+
+on:
+  pull_request:
+  push:
+    branches: ["**"]
+
+permissions:
+  contents: read
+
+jobs:
+  compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: SPN 合规检查（扫描「永远不做」红线）
+        run: |
+          BASE=${{ github.event_name == 'pull_request' && github.base_ref || 'main' }}
+          python3 scripts/spn_compliance.py --base "$BASE"
