@@ -18,7 +18,7 @@ export const zh = {
     intro:
       "SPN（Self-precipitation，自我析出）是一套写给不懂代码的人的 AI 协作规则：在 AI 给出的众多选项里，让你的判断沉淀、成形。AI 提供能力与方案，你负责拍板与划边界。",
     github: "https://github.com/xiaoyu-hue/SPN",
-    version: "v1.1.0",
+    version: "v1.2.0",
     licenseSlash: "代码 MIT / 文档 CC BY 4.0",
     licenseDot: "代码 MIT · 文档 CC BY 4.0",
   },
@@ -312,7 +312,7 @@ export const en: Content = {
     intro:
       "SPN (Self-precipitation) is a set of AI collaboration rules written for people who don't code: among the many options an AI offers, your judgment settles and takes shape. The AI provides capability and solutions; you make the call and set the boundaries.",
     github: "https://github.com/xiaoyu-hue/SPN",
-    version: "v1.1.0",
+    version: "v1.2.0",
     licenseSlash: "Code MIT / Docs CC BY 4.0",
     licenseDot: "Code MIT · Docs CC BY 4.0",
   },
