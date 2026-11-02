@@ -10,11 +10,13 @@ import { Install } from "@/components/Install";
 import { Footer } from "@/components/Footer";
 import { BottomNav } from "@/components/BottomNav";
 import { BackToTop } from "@/components/BackToTop";
+import { LangProvider, useI18n } from "@/i18n";
 
-export default function App() {
+function Shell() {
+  const { t } = useI18n();
   return (
     <>
-      <a href="#main" className="skip-link">跳到主要内容</a>
+      <a href="#main" className="skip-link">{t.skip}</a>
       <div className="bg-scene" aria-hidden="true" />
       <RefractionFilter />
       <Navbar />
@@ -33,5 +35,13 @@ export default function App() {
       <BottomNav />
       <BackToTop />
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <LangProvider>
+      <Shell />
+    </LangProvider>
   );
 }

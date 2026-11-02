@@ -1,20 +1,19 @@
 import { Reveal } from "@/components/effects/Reveal";
 import { Glass } from "@/components/Glass";
-import { ONBOARDING } from "@/content";
+import { useI18n } from "@/i18n";
 
 export function HowItWorks() {
+  const { t } = useI18n();
   return (
     <section id="start" className="section container-page">
       <Reveal>
-        <span className="eyebrow">三步上手</span>
-        <h2 className="section-title">把规则交给 AI，只要三件事</h2>
-        <p className="lead">
-          不是“学一套方法论”，而是“把文件放进项目、按场景取用”。零基础上手，懂中文就行。
-        </p>
+        <span className="eyebrow">{t.start.eyebrow}</span>
+        <h2 className="section-title">{t.start.title}</h2>
+        <p className="lead">{t.start.lead}</p>
       </Reveal>
 
       <div className="mt-10 grid gap-5 md:grid-cols-3">
-        {ONBOARDING.map((s, i) => (
+        {t.start.steps.map((s, i) => (
           <Reveal key={s.step} delay={i * 0.08}>
             <Glass refract className="h-full p-6">
               <div className="flex items-center gap-3">

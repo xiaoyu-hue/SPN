@@ -1,7 +1,7 @@
 import { Pencil, KeyRound, CheckCircle2 } from "lucide-react";
 import { Reveal } from "@/components/effects/Reveal";
 import { Glass } from "@/components/Glass";
-import { PAINS } from "@/content";
+import { useI18n } from "@/i18n";
 
 const ICONS: Record<string, typeof Pencil> = {
   edit: Pencil,
@@ -10,19 +10,17 @@ const ICONS: Record<string, typeof Pencil> = {
 };
 
 export function PainPoints() {
+  const { t } = useI18n();
   return (
     <section id="pain" className="section container-page">
       <Reveal>
-        <span className="eyebrow">为什么需要 SPN</span>
-        <h2 className="section-title">不懂代码，用 AI 也有三怕</h2>
-        <p className="lead">
-          AI 编程工具默认优化“演示能跑”。对懂代码的人是效率，对不懂代码的人是风险——
-          你无法判断它写的是否正确、是否偷偷扩大了改动范围。
-        </p>
+        <span className="eyebrow">{t.pain.eyebrow}</span>
+        <h2 className="section-title">{t.pain.title}</h2>
+        <p className="lead">{t.pain.lead}</p>
       </Reveal>
 
       <div className="mt-10 grid gap-5 md:grid-cols-3">
-        {PAINS.map((p, i) => {
+        {t.pain.items.map((p, i) => {
           const Icon = ICONS[p.icon] ?? Pencil;
           return (
             <Reveal key={p.title} delay={i * 0.08}>

@@ -1,18 +1,11 @@
 import { useEffect, useState } from "react";
 import { Github, BookOpen } from "lucide-react";
-import { SITE } from "@/content";
 import { Logo } from "@/components/Logo";
-
-const LINKS = [
-  { href: "#pain", label: "痛点" },
-  { href: "#rules", label: "核心规则" },
-  { href: "#demo", label: "互动演示" },
-  { href: "#start", label: "三步上手" },
-  { href: "#skills", label: "技能包" },
-  { href: "#install", label: "安装" },
-];
+import { LangToggle } from "@/components/LangToggle";
+import { useI18n } from "@/i18n";
 
 export function Navbar() {
+  const { t } = useI18n();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -34,15 +27,15 @@ export function Navbar() {
         <a href="#top" className="flex items-center gap-2.5">
           <Logo size={32} className="shrink-0" />
           <span className="text-base font-semibold text-white">
-            {SITE.name}
+            {t.site.name}
             <span className="ml-1.5 hidden text-xs font-normal text-[var(--text-faint)] sm:inline">
-              {SITE.tagline}
+              {t.site.tagline}
             </span>
           </span>
         </a>
 
-        <div className="hidden items-center gap-1 md:flex">
-          {LINKS.map((l) => (
+        <div className="hidden items-center gap-1 lg:flex">
+          {t.nav.links.map((l) => (
             <a
               key={l.href}
               href={l.href}
@@ -54,23 +47,24 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
+          <LangToggle />
           <a
             className="btn btn--ghost px-2.5 py-2"
-            href={SITE.github}
+            href={t.site.github}
             target="_blank"
             rel="noreferrer"
-            aria-label="在 GitHub 查看"
+            aria-label={t.nav.githubAria}
           >
             <Github className="h-4 w-4" />
             <span className="hidden sm:inline">GitHub</span>
           </a>
           <a
-            className="btn btn--primary hidden sm:inline-flex"
-            href={`${SITE.github}#快速开始`}
+            className="btn btn--primary hidden whitespace-nowrap sm:inline-flex"
+            href={`${t.site.github}${t.nav.quickStartHref}`}
             target="_blank"
             rel="noreferrer"
           >
-            <BookOpen className="h-4 w-4" /> 快速开始
+            <BookOpen className="h-4 w-4" /> {t.nav.quickStart}
           </a>
         </div>
       </nav>

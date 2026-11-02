@@ -1,10 +1,10 @@
 import { Reveal } from "@/components/effects/Reveal";
 import { Glass } from "@/components/Glass";
-import { INSTALL } from "@/content";
+import { useI18n } from "@/i18n";
 import { Copy, Check } from "lucide-react";
 import { useState } from "react";
 
-function CodeBlock({ code }: { code: string }) {
+function CodeBlock({ code, copyAria }: { code: string; copyAria: string }) {
   const [copied, setCopied] = useState(false);
   return (
     <div className="relative">
@@ -18,7 +18,7 @@ function CodeBlock({ code }: { code: string }) {
           setTimeout(() => setCopied(false), 1500);
         }}
         className="absolute right-2.5 top-2.5 rounded-md bg-white/10 p-1.5 text-white/70 transition-colors hover:bg-white/20 hover:text-white"
-        aria-label="复制"
+        aria-label={copyAria}
       >
         {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
       </button>
@@ -27,37 +27,31 @@ function CodeBlock({ code }: { code: string }) {
 }
 
 export function Install() {
-  const tools = [
-    INSTALL.tools.codebuddy,
-    INSTALL.tools.cursor,
-    INSTALL.tools.claude,
-  ];
+  const { t } = useI18n();
   return (
     <section id="install" className="section container-page">
       <Reveal>
-        <span className="eyebrow">安装指引</span>
-        <h2 className="section-title">按你用的工具，复制一条命令</h2>
-        <p className="lead">
-          推荐把技能包放进工具的 skills 目录；临时用一次，直接把 SKILL.md 正文贴给 AI 也行。
-        </p>
+        <span className="eyebrow">{t.install.eyebrow}</span>
+        <h2 className="section-title">{t.install.title}</h2>
+        <p className="lead">{t.install.lead}</p>
       </Reveal>
 
       <Reveal delay={0.05} className="mt-10 grid gap-5 lg:grid-cols-2">
-        {tools.map((t) => (
-          <Glass key={t.name} refract className="p-5">
-            <div className="text-sm font-semibold text-white">{t.name}</div>
+        {t.install.tools.map((tool) => (
+          <Glass key={tool.name} refract className="p-5">
+            <div className="text-sm font-semibold text-white">{tool.name}</div>
             <div className="mt-3">
-              <CodeBlock code={t.cmd} />
+              <CodeBlock code={tool.cmd} copyAria={t.install.copyAria} />
             </div>
           </Glass>
         ))}
 
         <Glass className="p-5 lg:col-span-2">
           <div className="text-xs font-medium uppercase tracking-wider text-brand-soft">
-            {INSTALL.minimal.label}
+            {t.install.minimal.label}
           </div>
           <p className="mt-2 text-sm leading-relaxed text-[var(--text-dim)]">
-            {INSTALL.minimal.desc}
+            {t.install.minimal.desc}
           </p>
         </Glass>
       </Reveal>
@@ -65,10 +59,10 @@ export function Install() {
       <Reveal delay={0.08} className="mt-5">
         <Glass className="p-5">
           <div className="text-xs font-medium uppercase tracking-wider text-sand">
-            怎么验证生效
+            {t.install.verifyTitle}
           </div>
           <p className="mt-2 text-sm leading-relaxed text-[var(--text-dim)]">
-            {INSTALL.verify}
+            {t.install.verify}
           </p>
         </Glass>
       </Reveal>

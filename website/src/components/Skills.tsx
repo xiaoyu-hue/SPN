@@ -1,22 +1,20 @@
 import { Reveal } from "@/components/effects/Reveal";
 import { Glass } from "@/components/Glass";
-import { SKILLS } from "@/content";
+import { useI18n } from "@/i18n";
 import { Sparkles, Zap } from "lucide-react";
 
 export function Skills() {
+  const { t } = useI18n();
   return (
     <section id="skills" className="section container-page">
       <Reveal>
-        <span className="eyebrow">技能包</span>
-        <h2 className="section-title">不是一本手册，是一组可触发的“专家”</h2>
-        <p className="lead">
-          每个技能包是一个具体场景下的护栏：说出触发信号，AI 就切换成对应的审查者。
-          以下是已内置的几个。
-        </p>
+        <span className="eyebrow">{t.skills.eyebrow}</span>
+        <h2 className="section-title">{t.skills.title}</h2>
+        <p className="lead">{t.skills.lead}</p>
       </Reveal>
 
       <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {SKILLS.map((s, i) => (
+        {t.skills.items.map((s, i) => (
           <Reveal key={s.name} delay={(i % 3) * 0.07}>
             <Glass className="flex h-full flex-col p-6">
               <div className="flex items-center gap-2">
@@ -27,7 +25,7 @@ export function Skills() {
               <div className="mt-auto flex items-start gap-2 pt-4 text-xs text-[var(--text-faint)]">
                 <Zap className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sand" />
                 <span>
-                  <span className="text-[var(--text-dim)]">触发：</span>
+                  <span className="text-[var(--text-dim)]">{t.skills.triggerPrefix}</span>
                   {s.trigger}
                 </span>
               </div>

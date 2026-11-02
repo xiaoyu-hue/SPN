@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { BookOpen, PlayCircle, Rocket, Download } from "lucide-react";
+import { useI18n } from "@/i18n";
 
 const TABS = [
-  { href: "#rules", label: "规则", icon: BookOpen },
-  { href: "#demo", label: "演示", icon: PlayCircle },
-  { href: "#start", label: "上手", icon: Rocket },
-  { href: "#install", label: "安装", icon: Download },
-];
+  { href: "#rules", key: "rules", icon: BookOpen },
+  { href: "#demo", key: "demo", icon: PlayCircle },
+  { href: "#start", key: "start", icon: Rocket },
+  { href: "#install", key: "install", icon: Download },
+] as const;
 
 export function BottomNav() {
+  const { t } = useI18n();
   const [active, setActive] = useState<string>("#rules");
 
   useEffect(() => {
@@ -20,27 +22,27 @@ export function BottomNav() {
       },
       { rootMargin: "-45% 0px -45% 0px" }
     );
-    TABS.forEach((t) => {
-      const el = document.getElementById(t.href.slice(1));
+    TABS.forEach((tab) => {
+      const el = document.getElementById(tab.href.slice(1));
       if (el) obs.observe(el);
     });
     return () => obs.disconnect();
   }, []);
 
   return (
-    <nav aria-label="底部导航" className="bottom-nav">
-      {TABS.map((t) => {
-        const Icon = t.icon;
-        const on = active === t.href;
+    <nav aria-label={t.bottomNav.aria} className="bottom-nav">
+      {TABS.map((tab) => {
+        const Icon = tab.icon;
+        const on = active === tab.href;
         return (
           <a
-            key={t.href}
-            href={t.href}
+            key={tab.href}
+            href={tab.href}
             aria-current={on ? "page" : undefined}
             className="bottom-nav__item"
           >
             <Icon />
-            {t.label}
+            {t.bottomNav[tab.key]}
           </a>
         );
       })}
