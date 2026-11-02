@@ -58,14 +58,17 @@ export function Navbar() {
             <Github className="h-4 w-4" />
             <span className="hidden sm:inline">GitHub</span>
           </a>
-          <a
-            className="btn btn--primary hidden whitespace-nowrap sm:inline-flex"
-            href={`${t.site.github}${t.nav.quickStartHref}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <BookOpen className="h-4 w-4" /> {t.nav.quickStart}
-          </a>
+          {/* 主按钮仅桌面展示：span 外壳不受 .btn 的 display 覆盖影响 */}
+          <span className="hidden sm:inline-flex">
+            <a
+              className="btn btn--primary whitespace-nowrap"
+              href={`${t.site.github}${t.nav.quickStartHref}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <BookOpen className="h-4 w-4" /> {t.nav.quickStart}
+            </a>
+          </span>
         </div>
       </nav>
     </header>

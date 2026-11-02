@@ -7,7 +7,7 @@ export function LangToggle() {
     <button
       type="button"
       onClick={() => setLang(lang === "zh" ? "en" : "zh")}
-      className="btn btn--ghost px-2.5 py-2 font-mono text-xs tracking-wide"
+      className="btn btn--ghost min-w-11 justify-center px-2.5 py-2 font-mono text-sm tracking-wide"
       aria-label={t.langToggle.aria}
       title={t.langToggle.aria}
     >
